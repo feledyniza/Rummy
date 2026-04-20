@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Branch On Input Connection node | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Branch On Input Connection node | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="branch-on-input-connection-node">Branch On Input Connection node</h1>
+
+<p>The Branch On Input Connection node allows you to change the behavior of a <a href="Sub-graphs.html">Sub Graph</a> based on the connected state of an input property in the parent shader graph. Use the Branch On Input Connection node to create a default input for a port.</p>
+<p>For more information, refer to <a href="Sub-Graph-Default-Property-Values.html">Set default inputs for a Sub Graph</a>.</p>
+<p>The node generates branching HLSL source code, but during compilation Unity optimizes the branch out of your shader.</p>
+<h2 id="compatibility">Compatibility</h2>
+<p>The Branch On Input Connection node is supported on the following render pipelines:
+<table>
+<thead>
+<tr>
+<th>Built-In Render Pipeline</th>
+<th>Universal Render Pipeline (URP)</th>
+<th>High Definition Render Pipeline (HDRP)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+    <!-- ALL PIPELINES INCLUDE  -->
+<p>You can only use a Branch on Input Connection node in a <a href="Sub-graphs.html">Sub Graph</a>.</p>
+<h2 id="inputs">Inputs</h2>
+<p>The Branch On Input Connection node has the following input ports: <!-- MULTIPLE INPUT PORTS INCLUDE --></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>Name</strong></th>
+<th style="text-align: left;"><strong>Type</strong></th>
+<th style="text-align: left;"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Input</strong></td>
+<td style="text-align: left;">Property</td>
+<td style="text-align: left;">The property that determines the branching logic in the node, based on its connection state in the parent Shader Graph.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Connected</strong></td>
+<td style="text-align: left;">Dynamic Vector</td>
+<td style="text-align: left;">The value to send to the <strong>Out</strong> port when <strong>Input</strong> is connected in the parent Shader Graph.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NotConnected</strong></td>
+<td style="text-align: left;">Dynamic Vector</td>
+<td style="text-align: left;">The value to send to the <strong>Out</strong> port when <strong>Input</strong> isn't connected in the parent Shader Graph.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="outputs">Outputs</h2>
+<p>The Branch On Input Connection node has one output port: <!-- SINGLE OUTPUT PORT INCLUDE --></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>Name</strong></th>
+<th style="text-align: left;"><strong>Type</strong></th>
+<th style="text-align: left;"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Out</strong></td>
+<td style="text-align: left;">Dynamic Vector</td>
+<td style="text-align: left;">Outputs the value of either <strong>Connected</strong> or <strong>NotConnected</strong>, based on the <strong>Input</strong> property's connection state in the parent Shader Graph.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="related-nodes">Related nodes</h2>
+<!-- OPTIONAL. Any nodes that may be related to this node in some way that's worth mentioning -->
+<p>The following nodes are related or similar to the Branch On Input Connection node:</p>
+<ul>
+<li><a href="Branch-Node.html">Branch node</a></li>
+<li><a href="Sub-graph-Node.html">Subgraph node</a></li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

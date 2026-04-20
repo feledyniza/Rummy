@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Sample Sprite Data Source and Report | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Sample Sprite Data Source and Report | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="sample-sprite-data-source-and-report">Sample Sprite Data Source and Report</h1>
+
+<p>This sample demonstrates how to create a custom data source and report for the Sprite Atlas Analyzer. It shows how to collect sprite mesh information (vertex and triangle counts) and create a filterable report to analyze sprite performance.</p>
+<h2 id="overview">Overview</h2>
+<p>The sample consists of two main parts:</p>
+<h3 id="data-source-components">Data Source Components</h3>
+<ol>
+<li><strong>SpriteDataSource.cs</strong> - Custom data source that implements <code>IReportDataSource</code></li>
+<li><strong>SpriteCaptureData.cs</strong> - Data structures for storing captured sprite information</li>
+</ol>
+<h3 id="report-components">Report Components</h3>
+<ol>
+<li><strong>SpriteMeshSizeReport.cs</strong> - Custom report that inherits from <code>AnalyzerIssueReportBase</code></li>
+<li><strong>SpriteMeshSizeFilteredData.cs</strong> - Data structure for filtered report items</li>
+<li><strong>SpriteMeshSizeReportSettings.cs</strong> - Settings UI for configuring report filters</li>
+<li><strong>SpriteMeshSizeReportSettings.uxml</strong> - UXML layout for the settings UI</li>
+<li><strong>SpriteMeshSizeReport.uss</strong> - Styling for the report UI</li>
+</ol>
+<h2 id="how-to-create-a-custom-data-source">How to Create a Custom Data Source</h2>
+<h3 id="1-create-data-structures">1. Create Data Structures</h3>
+<p>First, define the data structures to store your captured information:</p>
+<pre><code class="lang-csharp">[Serializable]
+class YourCaptureData : ISaveData
+{
+    public List&lt;YourAssetData&gt; assetData = new();
+    public long lastCaptureTime;
+}
+
+[Serializable]
+class YourAssetData
+{
+    public string assetPathGuid;
+    public long fileModifiedTime;
+    public long metaFileModifiedTime;
+    // Add your specific data fields
+}
+</code></pre>
+<h3 id="2-implement-ireportdatasource">2. Implement IReportDataSource</h3>
+<p>Create a class that implements <code>IReportDataSource</code>:</p>
+<pre><code class="lang-csharp">class YourDataSource : IReportDataSource
+{
+    YourCaptureData m_Capture = new();
+    bool m_Cancel;
+    Task&lt;YourCaptureData&gt; m_CaptureTask;
+
+    public event Action&lt;IReportDataSource&gt; onDataSourceChanged;
+    public event Action&lt;IReportDataSource&gt; onCaptureStart;
+    public event Action&lt;IReportDataSource&gt; onCaptureEnd;
+
+    public bool capturing { get; private set; }
+    public string name =&gt; &quot;Your Data Source Name&quot;;
+    public long lastCaptureTime =&gt; m_Capture.lastCaptureTime;
+    public List&lt;YourAssetData&gt; data =&gt; m_Capture.assetData;
+
+    public async void Capture(string[] assetSearchPath)
+    {
+        m_Cancel = false;
+        capturing = true;
+        onCaptureStart?.Invoke(this);
+        m_CaptureTask = CaptureData(m_Capture, assetSearchPath);
+        await m_CaptureTask;
+        m_Capture = m_CaptureTask.Result;
+        capturing = false;
+        onCaptureEnd?.Invoke(this);
+        onDataSourceChanged?.Invoke(this);
+    }
+
+    public void StopCapture() =&gt; m_Cancel = true;
+    public void Dispose() =&gt; m_Cancel = true;
+    public void Save(ISaveFile saveData) =&gt; saveData.AddSaveData(m_Capture);
+    public void Load(ISaveFile saveData) { /* Load implementation */ }
+}
+</code></pre>
+<h3 id="3-implement-data-capture-logic">3. Implement Data Capture Logic</h3>
+<p>Create the asynchronous capture method:</p>
+<pre><code class="lang-csharp">async Task&lt;YourCaptureData&gt; CaptureData(YourCaptureData prevCapture, string[] assetSearchPath)
+{
+    int id = Progress.Start(&quot;Your Data Capture&quot;);
+    var capture = new YourCaptureData();
+
+    // Find assets of your target type
+    string[] guids = AssetDatabase.FindAssets(&quot;t:YourAssetType&quot;, assetSearchPath);
+    HashSet&lt;string&gt; pathVisited = new();
+
+    for (int i = 0; i &lt; guids.Length &amp;&amp; !m_Cancel; ++i)
+    {
+        Progress.Report(id, i, guids.Length, &quot;Capturing data&quot;);
+        var path = AssetDatabase.GUIDToAssetPath(guids[i]);
+
+        if (!pathVisited.Add(path))
+            continue;
+
+        // Check if asset changed since last capture
+        if (!HasAssetChanged(prevCapture, path))
+        {
+            // Reuse existing data
+            continue;
+        }
+
+        // Capture new data
+        var assets = AssetDatabase.LoadAllAssetsAtPath(path);
+        // Process your assets here
+
+        await Task.Delay(10); // Yield control periodically
+    }
+
+    Progress.Remove(id);
+    capture.lastCaptureTime = DateTime.UtcNow.ToFileTimeUtc();
+    return capture;
+}
+</code></pre>
+<h2 id="how-to-create-a-custom-report">How to Create a Custom Report</h2>
+<h3 id="1-create-a-report-class">1. Create a Report Class</h3>
+<p>Create a class that inherits from <code>AnalyzerIssueReportBase</code>:</p>
+<pre><code class="lang-csharp">class YourCustomReport : AnalyzerIssueReportBase
+{
+    MultiColumnListView m_ReportContent;
+    YourDataSource m_DataSource;
+    List&lt;YourFilteredData&gt; m_Filtered = new();
+
+    public YourCustomReport() : base(new[] { typeof(YourDataSource) })
+    {
+        SetReportListItemName(&quot;Your Report Name&quot;);
+        SetReportListemCount(&quot;0&quot;);
+        SetupReportContent();
+    }
+
+    public override VisualElement reportContent =&gt; m_ReportContent;
+    public override VisualElement settingsContent =&gt; m_Settings; // or null
+    public override string reportTitle =&gt; &quot;Your Report Title&quot;;
+}
+</code></pre>
+<h3 id="2-handle-data-source-changes">2. Handle Data Source Changes</h3>
+<p>Override <code>OnReportDataSourceChanged</code> to process data:</p>
+<pre><code class="lang-csharp">protected override async void OnReportDataSourceChanged(IReportDataSource reportDataSource)
+{
+    if (reportDataSource is YourDataSource dataSource)
+    {
+        m_DataSource = dataSource;
+        await FilterData(dataSource);
+    }
+}
+</code></pre>
+<h3 id="3-implement-data-filtering">3. Implement Data Filtering</h3>
+<p>Create asynchronous filtering logic:</p>
+<pre><code class="lang-csharp">async Task FilterData(YourDataSource dataSource)
+{
+    m_Filtered = new();
+    var task = Task.Run(() =&gt;
+    {
+        for (int i = 0; i &lt; dataSource?.data?.Count; ++i)
+        {
+            var assetData = dataSource.data[i];
+            // Apply your filtering logic here
+            if (ShouldIncludeInReport(assetData))
+            {
+                m_Filtered.Add(new YourFilteredData()
+                {
+                    // Map your data
+                });
+            }
+        }
+    });
+
+    isFilteringReport = true;
+    await task;
+    m_ReportContent.itemsSource = m_Filtered;
+    m_ReportContent.Rebuild();
+    isFilteringReport = false;
+    SetReportListemCount($&quot;{m_Filtered.Count}&quot;);
+}
+</code></pre>
+<h3 id="4-setup-report-ui">4. Setup Report UI</h3>
+<p>Configure the MultiColumnListView:</p>
+<pre><code class="lang-csharp">void SetupReportContent()
+{
+    var columns = new[]
+    {
+        new Column()
+        {
+            title = &quot;Name&quot;,
+            width = Length.Pixels(100),
+            makeCell = () =&gt; new Label(),
+            bindingPath = &quot;name&quot;
+        },
+        // Add more columns as needed
+    };
+
+    m_ReportContent = new MultiColumnListView();
+    m_ReportContent.showAlternatingRowBackgrounds = AlternatingRowBackground.ContentOnly;
+    m_ReportContent.selectionChanged += OnSelectionChanged;
+
+    // Setup column binding
+    for (int i = 0; i &lt; columns.Length; ++i)
+    {
+        var bindingPath = columns[i].bindingPath;
+        columns[i].bindCell = (e, k) =&gt;
+        {
+            var label = e.Q&lt;Label&gt;();
+            label.SetBinding(&quot;text&quot;, new DataBinding()
+            {
+                dataSourcePath = new PropertyPath(bindingPath)
+            });
+            e.dataSource = m_Filtered[k];
+        };
+        m_ReportContent.columns.Add(columns[i]);
+    }
+}
+</code></pre>
+<h3 id="5-create-settings-ui-optional">5. Create Settings UI (Optional)</h3>
+<p>If your report needs configurable settings:</p>
+<pre><code class="lang-csharp">public class YourReportSettings : VisualElement
+{
+    const string k_Uxml = &quot;your-uxml-guid&quot;;
+
+    public event Action&lt;SettingsType&gt; onApplyClickedEvent;
+
+    public YourReportSettings(SettingsType initialSettings)
+    {
+        var path = AssetDatabase.GUIDToAssetPath(new GUID(k_Uxml));
+        var uxml = AssetDatabase.LoadAssetAtPath&lt;VisualTreeAsset&gt;(path);
+        uxml.CloneTree(this);
+
+        // Setup UI elements and event handlers
+    }
+}
+</code></pre>
+<h2 id="key-features-demonstrated">Key Features Demonstrated</h2>
+<h3 id="data-source-features">Data Source Features</h3>
+<ul>
+<li><strong>Asynchronous Data Capture</strong>: Non-blocking data collection with progress reporting</li>
+<li><strong>Incremental Updates</strong>: Only recapture data when assets have changed</li>
+<li><strong>Save/Load Support</strong>: Persist captured data across sessions</li>
+<li><strong>Progress Reporting</strong>: Visual feedback during long-running operations</li>
+</ul>
+<h3 id="report-features">Report Features</h3>
+<ul>
+<li><strong>Custom Data Source Integration</strong>: Works with your custom data source</li>
+<li><strong>Asynchronous Filtering</strong>: Non-blocking data processing</li>
+<li><strong>Multi-Column Display</strong>: Flexible columnar data presentation</li>
+<li><strong>Interactive Selection</strong>: Object inspection integration</li>
+<li><strong>Configurable Settings</strong>: User-customizable report parameters</li>
+<li><strong>Real-time Updates</strong>: Automatic refresh when data changes</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

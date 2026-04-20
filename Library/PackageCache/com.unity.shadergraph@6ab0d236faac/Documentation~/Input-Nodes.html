@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Input nodes | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Input nodes | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="input-nodes">Input nodes</h1>
+
+<p>Supply shaders with essential data such as constants, mesh attributes, gradients, matrices, deformation, PBR parameters, scene details, and texture sampling options.</p>
+<h2 id="basic">Basic</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Topic</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Boolean-Node.html">Boolean</a></td>
+<td>Defines a constant Boolean value in the shader.</td>
+</tr>
+<tr>
+<td><a href="Color-Node.html">Color</a></td>
+<td>Defines a constant Vector 4 value in the shader using a Color field.</td>
+</tr>
+<tr>
+<td><a href="Constant-Node.html">Constant</a></td>
+<td>Defines a Float of a mathematical constant value in the shader.</td>
+</tr>
+<tr>
+<td><a href="Integer-Node.html">Integer</a></td>
+<td>Defines a constant Float value in the shader using an Integer field.</td>
+</tr>
+<tr>
+<td><a href="Slider-Node.html">Slider</a></td>
+<td>Defines a constant Float value in the shader using a Slider field.</td>
+</tr>
+<tr>
+<td><a href="Time-Node.html">Time</a></td>
+<td>Provides access to various Time parameters in the shader.</td>
+</tr>
+<tr>
+<td><a href="Float-Node.html">Float</a></td>
+<td>Defines a Float value in the shader.</td>
+</tr>
+<tr>
+<td><a href="Vector-2-Node.html">Vector 2</a></td>
+<td>Defines a Vector 2 value in the shader.</td>
+</tr>
+<tr>
+<td><a href="Vector-3-Node.html">Vector 3</a></td>
+<td>Defines a Vector 3 value in the shader.</td>
+</tr>
+<tr>
+<td><a href="Vector-4-Node.html">Vector 4</a></td>
+<td>Defines a Vector 4 value in the shader.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="geometry">Geometry</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Topic</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Bitangent-Vector-Node.html">Bitangent Vector</a></td>
+<td>Provides access to the mesh vertex or fragment's Bitangent Vector.</td>
+</tr>
+<tr>
+<td><a href="Normal-Vector-Node.html">Normal Vector</a></td>
+<td>Provides access to the mesh vertex or fragment's Normal Vector.</td>
+</tr>
+<tr>
+<td><a href="Position-Node.html">Position</a></td>
+<td>Provides access to the mesh vertex or fragment's Position.</td>
+</tr>
+<tr>
+<td><a href="Screen-Position-Node.html">Screen Position</a></td>
+<td>Provides access to the mesh vertex or fragment's Screen Position.</td>
+</tr>
+<tr>
+<td><a href="Tangent-Vector-Node.html">Tangent Vector</a></td>
+<td>Provides access to the mesh vertex or fragment's Tangent Vector.</td>
+</tr>
+<tr>
+<td><a href="UV-Node.html">UV</a></td>
+<td>Provides access to the mesh vertex or fragment's UV coordinates.</td>
+</tr>
+<tr>
+<td><a href="Vertex-Color-Node.html">Vertex Color</a></td>
+<td>Provides access to the mesh vertex or fragment's Vertex Color value.</td>
+</tr>
+<tr>
+<td><a href="View-Direction-Node.html">View Direction</a></td>
+<td>Provides access to the mesh vertex or fragment's View Direction vector.</td>
+</tr>
+<tr>
+<td><a href="Vertex-ID-Node.html">Vertex ID</a></td>
+<td>Provides access to the mesh vertex or fragment's Vertex ID value.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="gradient">Gradient</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Topic</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Blackbody-Node.html">Blackbody</a></td>
+<td>Samples a radiation based gradient from temperature input (in Kelvin).</td>
+</tr>
+<tr>
+<td><a href="Gradient-Node.html">Gradient</a></td>
+<td>Defines a constant Gradient in the shader.</td>
+</tr>
+<tr>
+<td><a href="Sample-Gradient-Node.html">Sample Gradient</a></td>
+<td>Samples a Gradient given the input of Time.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="matrix">Matrix</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Topic</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Matrix-2x2-Node.html">Matrix 2x2</a></td>
+<td>Defines a constant Matrix 2x2 value in the shader.</td>
+</tr>
+<tr>
+<td><a href="Matrix-3x3-Node.html">Matrix 3x3</a></td>
+<td>Defines a constant Matrix 3x3 value in the shader.</td>
+</tr>
+<tr>
+<td><a href="Matrix-4x4-Node.html">Matrix 4x4</a></td>
+<td>Defines a constant Matrix 4x4 value in the shader.</td>
+</tr>
+<tr>
+<td><a href="Transformation-Matrix-Node.html">Transformation Matrix</a></td>
+<td>Defines a constant Matrix 4x4 value for a default Unity Transformation Matrix in the shader.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mesh-deformation">Mesh Deformation</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Topic</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Compute-Deformation-Node.html">Compute Deformation Node</a></td>
+<td>Passes compute deformed vertex data to a vertex shader. Only works with the <a href="https://docs.unity3d.com/Packages/com.unity.entities.graphics@latest/">Entities Graphics package</a>.</td>
+</tr>
+<tr>
+<td><a href="Linear-Blend-Skinning-Node.html">Linear Blend Skinning Node</a></td>
+<td>Applies Linear Blend Vertex Skinning. Only works with the <a href="https://docs.unity3d.com/Packages/com.unity.entities.graphics@latest/">Entities Graphics package</a>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sprite-deformation">Sprite Deformation</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Topic</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Sprite-Skinning-Node.html">Sprite Skinning Node</a></td>
+<td>Applies Vertex Skinning on Sprites. Only works with the <a href="https://docs.unity3d.com/Packages/com.unity.2d.animation@latest/">2D Animation</a>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pbr">PBR</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Topic</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Dielectric-Specular-Node.html">Dielectric Specular</a></td>
+<td>Returns a Dielectric Specular F0 value for a physically based material.</td>
+</tr>
+<tr>
+<td><a href="Metal-Reflectance-Node.html">Metal Reflectance</a></td>
+<td>Returns a Metal Reflectance value for a physically based material.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="scene">Scene</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Topic</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Ambient-Node.html">Ambient</a></td>
+<td>Provides access to the Scene's Ambient color values.</td>
+</tr>
+<tr>
+<td><a href="Camera-Node.html">Camera</a></td>
+<td>Provides access to various parameters of the current Camera.</td>
+</tr>
+<tr>
+<td><a href="Fog-Node.html">Fog</a></td>
+<td>Provides access to the Scene's Fog parameters.</td>
+</tr>
+<tr>
+<td><a href="Baked-GI-Node.html">Baked GI</a></td>
+<td>Provides access to the Baked GI values at the vertex or fragment's position.</td>
+</tr>
+<tr>
+<td><a href="Object-Node.html">Object</a></td>
+<td>Provides access to various parameters of the Object.</td>
+</tr>
+<tr>
+<td><a href="Reflection-Probe-Node.html">Reflection Probe</a></td>
+<td>Provides access to the nearest Reflection Probe to the object.</td>
+</tr>
+<tr>
+<td><a href="Scene-Color-Node.html">Scene Color</a></td>
+<td>Provides access to the current Camera's color buffer.</td>
+</tr>
+<tr>
+<td><a href="Scene-Depth-Node.html">Scene Depth</a></td>
+<td>Provides access to the current Camera's depth buffer.</td>
+</tr>
+<tr>
+<td><a href="Screen-Node.html">Screen</a></td>
+<td>Provides access to parameters of the screen.</td>
+</tr>
+<tr>
+<td><a href="Eye-Index-Node.html">Eye Index</a></td>
+<td>Provides access to the Eye Index when stereo rendering.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="texture">Texture</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Topic</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Cubemap-Asset-Node.html">Cubemap Asset</a></td>
+<td>Defines a constant Cubemap Asset for use in the shader.</td>
+</tr>
+<tr>
+<td><a href="Sample-Cubemap-Node.html">Sample Cubemap</a></td>
+<td>Samples a Cubemap and returns a Vector 4 color value for use in the shader.</td>
+</tr>
+<tr>
+<td><a href="Sample-Reflected-Cubemap-Node.html">Sample Reflected Cubemap Node</a></td>
+<td>Samples a Cubemap with reflected vector and returns a Vector 4 color value for use in the shader.</td>
+</tr>
+<tr>
+<td><a href="Sample-Texture-2D-Node.html">Sample Texture 2D</a></td>
+<td>Samples a Texture 2D and returns a color value for use in the shader.</td>
+</tr>
+<tr>
+<td><a href="Sample-Texture-2D-Array-Node.html">Sample Texture 2D Array</a></td>
+<td>Samples a Texture 2D Array at an Index and returns a color value for use in the shader.</td>
+</tr>
+<tr>
+<td><a href="Sample-Texture-2D-LOD-Node.html">Sample Texture 2D LOD</a></td>
+<td>Samples a Texture 2D at a specific LOD and returns a color value for use in the shader.</td>
+</tr>
+<tr>
+<td><a href="Sample-Texture-3D-Node.html">Sample Texture 3D</a></td>
+<td>Samples a Texture 3D and returns a color value for use in the shader.</td>
+</tr>
+<tr>
+<td><a href="Sample-Virtual-Texture-Node.html">Sample Virtual Texture</a></td>
+<td>Samples a Virtual Texture and returns color values for use in the shader.</td>
+</tr>
+<tr>
+<td><a href="Sampler-State-Node.html">Sampler State</a></td>
+<td>Defines a Sampler State for sampling textures.</td>
+</tr>
+<tr>
+<td><a href="Texture-Size-Node.html">Texture Size</a></td>
+<td>Returns the Width and Height of the texel size of Texture 2D input.</td>
+</tr>
+<tr>
+<td><a href="Texture-2D-Array-Asset-Node.html">Texture 2D Array Asset</a></td>
+<td>Defines a constant Texture 2D Array Asset for use in the shader.</td>
+</tr>
+<tr>
+<td><a href="Texture-2D-Asset-Node.html">Texture 2D Asset</a></td>
+<td>Defines a constant Texture 2D Asset for use in the shader.</td>
+</tr>
+<tr>
+<td><a href="Texture-3D-Asset-Node.html">Texture 3D Asset</a></td>
+<td>Defines a constant Texture 3D Asset for use in the shader.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ui">UI</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Topic</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="element-texture-uv-node.html">Element Texture UV</a></td>
+<td>Provides the texture coordinates (UV) typically used to sample the texture assigned to a UI element.</td>
+</tr>
+<tr>
+<td><a href="element-layout-uv-node.html">Element Layout UV</a></td>
+<td>Provides the layout UV coordinates within a UI element's layout rectangle.</td>
+</tr>
+<tr>
+<td><a href="element-texture-size-node.html">Element Texture Size</a></td>
+<td>Provides the size of the texture assigned to a UI element.</td>
+</tr>
+</tbody>
+</table>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

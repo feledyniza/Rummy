@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Custom Function Node | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Custom Function Node | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="custom-function-node">Custom Function Node</h1>
+
+<p>Use the Custom Function Node to inject your own custom HLSL code in Shader Graphs to do some fine-grained optimization, for example.</p>
+<p>You can either write small functions directly into graphs by using the string mode, or reference external HLSL files. Use the <a href="Custom-Port-Menu.html">Custom Port Menu</a> to define your own input and output ports on the node itself.</p>
+<p><img src="images/Custom-Function-Node-File.png" alt="The Custom Function node properties"></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Property</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Inputs</strong></td>
+<td style="text-align: left;">Define the node's input ports. The names you enter here define the names for the input values you use in the code.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Outputs</strong></td>
+<td style="text-align: left;">Define the node's output ports. The names you enter here define the names for the output values you use in the code.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Type</strong></td>
+<td style="text-align: left;">Select the way to reference the custom function in the node. The options are:<ul><li><strong>File</strong>: Reference an external file that contains the functions.</li><li><strong>String</strong>: Directly write functions in the node.</li></ul></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Name</strong></td>
+<td style="text-align: left;">The name of the custom function in the code, <strong>without</strong> the function precision suffix <code>_half </code> or <code>_float </code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Source</strong></td>
+<td style="text-align: left;">When you set <strong>Type</strong> to <strong>File</strong>, the reference to the HLSL file that includes the custom functions. The file can be anywhere in your Unity project and must have the <code>.hlsl</code> extension. For more details, refer to <a href="#file-content-syntax-details-and-examples">file content syntax</a>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Body</strong></td>
+<td style="text-align: left;">When you set <strong>Type</strong> to <strong>String</strong>, the HLSL code that defines the contents of the custom functions. Unity handles the arguments, braces, and indent scope automatically.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="set-up-a-custom-function-node">Set up a Custom Function node</h2>
+<p>To set up a Custom Function node:</p>
+<ol>
+<li><a href="Create-Node-Menu.html">Create a new node</a> of <strong>Custom Function</strong> type (from the <strong>Utility</strong> category).</li>
+<li>In the <a href="Internal-Inspector.html">Graph Inspector</a>, select <strong>Node Settings</strong>.</li>
+<li><a href="Custom-Port-Menu.html">Define custom <strong>Inputs</strong> and <strong>Outputs</strong></a> to set the node's ports and the corresponding variables to use in the custom function.</li>
+<li>Define the custom function according to your needs, either with a <a href="#define-the-custom-function-with-a-file">file</a> or a <a href="#define-the-custom-function-with-a-string">string</a>.</li>
+</ol>
+<h3 id="define-the-custom-function-with-a-string">Define the custom function with a string</h3>
+<p>In <strong>String</strong> mode, the graph generates the shader function.</p>
+<p>To define the function with a string:</p>
+<ol>
+<li>In the Graph Inspector, in the Node Settings, Set <strong>Type</strong> to <strong>String</strong>.</li>
+<li>In the <strong>Name</strong> field, specify a name for the function.</li>
+<li>In the <strong>Body</strong> field, write the contents of the function. Unity handles the arguments, braces, and indent scope automatically.</li>
+</ol>
+<p>In <strong>String</strong> mode, you may use the token <code>$precision</code> instead of <code>half</code> or <code>float</code> in the <strong>Body</strong> field. Unity replaces this with the correct type when the node is processed, based on that node's precision.</p>
+<p><img src="images/Custom-Function-Node-String-wFunction.png" alt="04"></p>
+<p>The example in the image above generates the following function:</p>
+<pre><code>void MyFunction_float(float3 A, float B, out float3 Out)
+{
+    Out  =  A + B + 1/2;
+}
+</code></pre>
+<h3 id="define-the-custom-function-with-a-file">Define the custom function with a file</h3>
+<p>In <strong>File</strong> mode, the graph does not automatically generate the shader function. This mode injects an include reference in the final generated shader, and uses a function from within the referenced file.</p>
+<p>To create an HLSL file to use from a Custom Function node:</p>
+<ol>
+<li>Use your file system to create an empty text file with the <code>.hlsl</code> extension in any folder of your Unity project.</li>
+<li>Write your custom function according to the <a href="#file-content-syntax-details-and-examples">file content syntax</a>.</li>
+</ol>
+<p>To use a function from the HLSL file in the node:</p>
+<ol>
+<li>In the Graph Inspector, in the Node Settings, set <strong>Type</strong> to <strong>File</strong>.</li>
+<li>In the <strong>Source</strong> field, reference the HLSL file that contains the function.</li>
+<li>In the <strong>Name</strong> field, specify the name of the function to call in the file, <strong>without</strong> the function precision suffix <code>_half </code> or <code>_float </code>.</li>
+</ol>
+<p><img src="images/Custom-Function-Node-File-wFunction.png" alt="06"></p>
+<h4 id="file-content-syntax-details-and-examples">File content syntax, details, and examples</h4>
+<p>HLSL files you reference in Custom Function nodes can contain one or multiple functions. In all cases, you have to match the following expectations:</p>
+<ul>
+<li>The file should include a <code>#ifndef</code> condition along with a <code>#define</code> statement with an identifier to make sure Unity doesn't load the same functions twice, which would result in a compile error.
+<ul>
+<li>You must use the same id string for the <code>#ifndef</code> condition and the <code>#define</code> statement.</li>
+<li>If you create multiple HLSL files for Custom Function nodes in the same project, you must use a different id string for each file.</li>
+</ul>
+</li>
+<li>Each function name must have a precision suffix:
+<ul>
+<li>Use <code>_float</code> to run the function in full precision mode.</li>
+<li>Use <code>_half</code> if you need to save resources, which might only apply to certain platforms.</li>
+</ul>
+</li>
+<li>The function arguments must correspond to the Inputs you defined in the Node Settings.</li>
+</ul>
+<p>For example:</p>
+<pre><code>//UNITY_SHADER_NO_UPGRADE
+#ifndef MYHLSLINCLUDE_INCLUDED
+#define MYHLSLINCLUDE_INCLUDED
+
+void MyFunction_float(float3 A, float B, out float3 Out)
+{
+    Out = A + B;
+}
+#endif //MYHLSLINCLUDE_INCLUDED
+</code></pre>
+<p>The <strong>File</strong> mode allows for more flexibility with custom functions in a graph.</p>
+<h4 id="shared-data-and-uniform-variables">Shared data and uniform variables</h4>
+<p>To supply shared data to your function without additional ports, use uniform variables defined outside the function scope.</p>
+<pre><code>//UNITY_SHADER_NO_UPGRADE
+#ifndef MYHLSLINCLUDE_INCLUDED
+#define MYHLSLINCLUDE_INCLUDED
+float4x4 _MyMatrix;
+void MyFunction_float(float3 A, float B, out float3 Out)
+{
+    A = mul(float4(A, 0.0), _MyMatrix).rgb;
+    Out = A + B;
+}
+#endif //MYHLSLINCLUDE_INCLUDED
+</code></pre>
+<p>When you add a uniform variable in a Custom Function, like the <code>float4x4</code> matrix in the example above, you make this variable global. As a result:</p>
+<ul>
+<li>You can set this uniform globally only, using <code>Shader.SetGlobalMatrix()</code>.</li>
+<li>You don't have to add an input parameter to allow the shader to access them directly.</li>
+<li>You can't set it per material, because it's not declared in the <code>UnityPerMaterial</code> cbuffer and doesn't have a material property associated with it.</li>
+</ul>
+<h4 id="multiple-functions-and-multiple-files">Multiple functions and multiple files</h4>
+<p>You can define multiple functions in the same file, and call them from your referenced function. Alternatively, you can reference the same file, but use different functions from different Custom Function nodes.</p>
+<pre><code>//UNITY_SHADER_NO_UPGRADE
+#ifndef MYHLSLINCLUDE_INCLUDED
+#define MYHLSLINCLUDE_INCLUDED
+float3 MyOtherFunction_float(float3 In)
+{
+    return In * In;
+}
+
+void MyFunction_float(float3 A, float B, out float3 Out)
+{
+    A = MyOtherFunction_float(A);
+    Out = A + B;
+}
+#endif //MYHLSLINCLUDE_INCLUDED
+</code></pre>
+<p>You can even include other files that contain other functions.</p>
+<pre><code>//UNITY_SHADER_NO_UPGRADE
+#ifndef MYHLSLINCLUDE_INCLUDED
+#define MYHLSLINCLUDE_INCLUDED
+#include &quot;Assets/MyOtherInclude.hlsl&quot;
+void MyFunction_float(float3 A, float B, out float3 Out)
+{
+    A = MyOtherFunction_float(A);
+    Out = A + B;
+}
+#endif //MYHLSLINCLUDE_INCLUDED
+</code></pre>
+<h2 id="call-unity-shader-code-functions">Call Unity shader code functions</h2>
+<p>You can call from your custom function any shader code functions that are part of existing Unity's Render Pipeline libraries.</p>
+<p>However, be aware of the following:</p>
+<ul>
+<li>Your project must include the library that contains the shader code functions you need to call. To prevent errors, you should always isolate the code with an <code>#if defined()</code> condition according to the library you're using, and define fallback values for the variables. The usual keywords that identify Unity shader code libraries are the following:
+<ul>
+<li>For the <a href="https://docs.unity3d.com/Manual/use-built-in-shader-methods-birp.html">Built-In Render Pipeline (BiRP)</a> library, use <code>#if defined(BUILTIN_PIPELINE_CORE_INCLUDED)</code>.</li>
+<li>For the <a href="https://docs.unity3d.com/Manual/urp/use-built-in-shader-methods.html">Universal Render Pipeline (URP)</a> library, use <code>#if defined(UNIVERSAL_PIPELINE_CORE_INCLUDED)</code>.</li>
+<li>For the <a href="https://docs.unity3d.com/Manual/high-definition-render-pipeline.html">High-Definition Render Pipeline (HDRP)</a> library, use <code>#if defined(UNITY_HEADER_HD_INCLUDED)</code>.</li>
+</ul>
+</li>
+<li>The Shader Graph node and main previews can't access Unity's Render Pipeline libraries in the Editor. This generates compile errors in the Editor even though the shader works correctly in your project. To prevent this issue, you have to isolate the code with an <code>#ifdef SHADERGRAPH_PREVIEW</code> condition and also define default values for the variables in the Shader Graph preview context.</li>
+<li>The code in libraries might change over time from one Unity version to another. You need to make sure to regularly test and update your custom functions in your projects.</li>
+</ul>
+<p>Here is an example with URP library function calls and the above-mentioned conditional protections set up:</p>
+<pre><code>#ifdef SHADERGRAPH_PREVIEW 
+	half3 color = half3(0,0,0);
+	half atten = 1;
+	half3 dir = half3 (0.707, 0, 0.707);
+	
+#else
+	#if defined(UNIVERSAL_PIPELINE_CORE_INCLUDED)
+		half4 shadowCoord = TransformWorldToShadowCoord(WorldPosition);
+		Light mainLight = GetMainLight(shadowCoord);
+		half3 color = mainLight.color;
+		half atten = mainLight.shadowAttenuation;
+		half3 dir = mainLight.direction;
+	#else
+		half3 color = half3(0, 0, 0);
+		half atten = 1;
+		half3 dir = half3 (0.707, 0, 0.707);
+	#endif
+	
+#endif
+</code></pre>
+<h2 id="reuse-custom-function-nodes">Reuse Custom Function Nodes</h2>
+<p>The Custom Function node, on its own, is a single node instance. If you wish to reuse the same custom function without re-creating the inputs, outputs, and function referencing, include the Custom Function node in a <a href="Sub-graph.html">Sub Graph</a>. Once created, the Sub Graph appears in the <a href="Create-Node-Menu.html">Create Node Menu</a>, along with the nodes.</p>
+<p><img src="images/Custom-Function-Node-Subgraph.png" alt="11"></p>
+<p>You can create a Sub Graph and add a Custom Function node to it, or right-click an existing Custom Function node and select <code>Convert to Sub Graph</code>. To add the appropriate input and output ports, use the <a href="Internal-Inspector.html">Graph Inspector</a> and <a href="Custom-Port-Menu.html">Custom Port Menu</a>.</p>
+<h2 id="work-with-texture-wires">Work with texture wires</h2>
+<p>From version 10.3, Shader Graph has five new data structures to ensure that Custom Function nodes and Sub Graphs input and output data from texture wire in a consistent way. The new structures also make it possible for SamplerState to compile on <a href="https://en.wikipedia.org/wiki/OpenGL_ES#OpenGL_ES_2.0">GLES2</a> platforms and  access data associated with textures via <code>myInputTex.samplerstate</code> and <code>myInputTex.texelSize</code>.</p>
+<p>Four structures are for the texture types, and one is for the sampler state:</p>
+<ul>
+<li>UnityTexture2D</li>
+<li>UnityTexture2DArray</li>
+<li>UnityTexture3D</li>
+<li>UnityTextureCube</li>
+<li>UnitySamplerState</li>
+</ul>
+<p>Custom Function nodes you create with earlier versions of Shader Graph continue to work after this change. As part of the automatic update, Unity transitions them to the new <strong>Bare</strong> node type. This type replicates the old input and output behavior. All other types pass the new structs.</p>
+<p>However, you should manually upgrade Custom Function nodes that produce texture or samplerstate types as output to ensure that they behave consistently—and to gain the benefits of the new design. Unity flags this type of outdated Custom Function Nodes with a warning when you open your Shader Graph in 10.3 or later.</p>
+<h4 id="how-to-upgrade">How to upgrade</h4>
+<ol>
+<li>Change all of the input and output types from <strong>Bare</strong> to <strong>non-Bare</strong>.<br></li>
+</ol>
+<ul>
+<li><p><strong>String</strong> type: Ensure that your HLSL string already uses Unity's texture access macros (such as <code>SAMPLE_TEXTURE2D</code>).</p>
+</li>
+<li><p><strong>File</strong> type: Replace Bare types (such as Texture2D) with the new struct types (such as UnityTexture2D) in your function parameters.</p>
+</li>
+</ul>
+<ol start="2">
+<li>If your HLSL code is using platform-specific or non-standard texture operations, you'll need to convert the way you access textures to take that structure into account. For example, <code>myInputTex.GetDimensions(...)</code> would become <code>myInputTex.tex.GetDimensions(...)</code></li>
+</ol>
+<p>From version 10.3, you can access data associated with textures via <code>myInputTex.samplerstate</code> and <code>myInputTex.texelSize</code>.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

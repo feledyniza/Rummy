@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Unified ray tracing shader code reference | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Unified ray tracing shader code reference | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../../index.html">
+            <img id="logo" class="svg" src="../../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="unified-ray-tracing-shader-code-reference">Unified ray tracing shader code reference</h1>
+
+<p>This section presents the different functions and structs provided by the API for tracing rays in a shader.</p>
+<p>All types are defined inside the <code>UnifiedRT</code> namespace. In your code, you need to prefix them with <code>UnifiedRT::</code>. Alternatively, you can add <code>using namespace UnifiedRT;</code> after your <code>TraceRayAndQueryHit.hlsl</code> include statement.</p>
+<h2 id="function-tracerayclosesthit">function TraceRayClosestHit</h2>
+<pre><code class="lang-HLSL">Hit TraceRayClosestHit(DispatchInfo dispatchInfo, RayTracingAccelStruct accelStruct, uint instanceMask, Ray ray, uint rayFlags)
+</code></pre>
+<p>Searches for intersections between a ray and an acceleration structure. It returns hit information about the closest triangle encountered along the ray.</p>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#struct-dispatchinfo"><code>DispatchInfo</code></a></td>
+<td><em>dispatchInfo</em></td>
+<td>The dispatch info. Must be the value that is passed by <code>RayGenExecute</code>.</td>
+</tr>
+<tr>
+<td><code>RayTracingAccelStruct</code></td>
+<td><em>accelStruct</em></td>
+<td>The acceleration structure to test the ray against.</td>
+</tr>
+<tr>
+<td><code>uint</code></td>
+<td><em>instanceMask</em></td>
+<td>The lower 8 bits of this mask are used to include geometry instances based on the instance mask that was set in <code>MeshInstanceDesc</code> for each instance.</td>
+</tr>
+<tr>
+<td><a href="#struct-ray"><code>Ray</code></a></td>
+<td><em>ray</em></td>
+<td>Describes the ray segment that is intersected against the acceleration structure.</td>
+</tr>
+<tr>
+<td><code>uint</code></td>
+<td><em>rayFlags</em></td>
+<td>Flags that filter out the triangles that participate in the intersection test. Can be one of the following: <ul><li>kRayFlagNone</li><li>kRayFlagCullBackFacingTriangles</li><li>kRayFlagCullFrontFacingTriangles</li> </ul></td>
+</tr>
+</tbody>
+</table>
+<h3 id="returns">Returns</h3>
+<p><a href="#struct-hit"><code>Hit</code></a> containing geometry information about the hit triangle. When no primitive has intersected with the ray, <code>hit.IsValid()</code> returns false.</p>
+<h2 id="function-tracerayanyhit">function TraceRayAnyHit</h2>
+<pre><code class="lang-HLSL">bool TraceRayAnyHit(DispatchInfo dispatchInfo, RayTracingAccelStruct accelStruct, uint instanceMask, Ray ray, uint rayFlags)
+</code></pre>
+<p>Searches for any intersection between a ray and an acceleration structure. The search ends as soon as a valid triangle hit is found. This function can typically be used to trace shadow rays or perform occlusion queries.</p>
+<h3 id="parameters-1">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#struct-dispatchinfo"><code>DispatchInfo</code></a></td>
+<td><em>dispatchInfo</em></td>
+<td>The dispatch info. Must be the value that is passed by <code>RayGenExecute</code>.</td>
+</tr>
+<tr>
+<td><code>RayTracingAccelStruct</code></td>
+<td><em>accelStruct</em></td>
+<td>The acceleration structure to test the ray against.</td>
+</tr>
+<tr>
+<td><code>uint</code></td>
+<td><em>instanceMask</em></td>
+<td>The lower 8 bits of this mask are used to include geometry instances based on the instance mask that was set in <code>MeshInstanceDesc</code> for each instance.</td>
+</tr>
+<tr>
+<td><a href="#struct-ray"><code>Ray</code></a></td>
+<td><em>ray</em></td>
+<td>Describes the ray segment that is intersected against the acceleration structure.</td>
+</tr>
+<tr>
+<td><code>uint</code></td>
+<td><em>rayFlags</em></td>
+<td>Flags that filter out the triangles that participate in the intersection test. Can be one of the following: <ul><li>kRayFlagNone</li><li>kRayFlagCullBackFacingTriangles</li><li>kRayFlagCullFrontFacingTriangles</li> </ul></td>
+</tr>
+</tbody>
+</table>
+<h3 id="returns-1">Returns</h3>
+<p>A boolean that is true if any primitive was hit by the ray.</p>
+<h2 id="struct-ray">struct Ray</h2>
+<p>Describes a ray.
+The <code>tMin</code> and <code>tMax</code> fields define the segment of the ray to be tested against the acceleration structures's primitives.
+Mathematically, the ray consists of all the points defined as <code>P = ray.origin + t * ray.direction</code>, where <code>ray.tMin ≤ t ≤ ray.tMax</code>.</p>
+<h3 id="fields">Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>float3</code></td>
+<td><em>origin</em></td>
+<td>The ray's origin.</td>
+</tr>
+<tr>
+<td><code>float3</code></td>
+<td><em>direction</em></td>
+<td>The ray's direction.</td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td><em>tMin</em></td>
+<td>The ray's starting point.</td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td><em>tMax</em></td>
+<td>The ray's endpoint.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="struct-dispatchinfo">struct DispatchInfo</h2>
+<p>Provides information about the current thread that is invoked.</p>
+<h3 id="fields-1">Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uint3</code></td>
+<td><em>dispatchThreadID</em></td>
+<td>Same semantic as <code>SV_DispatchThreadID</code>.</td>
+</tr>
+<tr>
+<td><code>uint</code></td>
+<td><em>localThreadIndex</em></td>
+<td>Same semantic as <code>SV_GroupIndex</code>.</td>
+</tr>
+<tr>
+<td><code>uint3</code></td>
+<td><em>dispatchDimensionsInThreads</em></td>
+<td>Total numbers of threads dispatched in the X, Y, and Z workgrid directions.</td>
+</tr>
+<tr>
+<td><code>uint</code></td>
+<td><em>globalThreadIndex</em></td>
+<td>Global thread index that is unique within the workgrid.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="struct-hit">struct Hit</h2>
+<p>Describes a Hit.</p>
+<h3 id="fields-2">Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uint</code></td>
+<td><em>instanceID</em></td>
+<td>Matches the <code>instanceID</code> supplied from C# in <code>MeshInstanceDesc.instanceID</code>.</td>
+</tr>
+<tr>
+<td><code>uint</code></td>
+<td><em>primitiveIndex</em></td>
+<td>Index of the hit triangle in its source Mesh.</td>
+</tr>
+<tr>
+<td><code>float2</code></td>
+<td><em>uvBarycentrics</em></td>
+<td>Barycentric coordinates of the hit triangle.</td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td><em>hitDistance</em></td>
+<td>Defines the hit position: <code>hitPos = ray.origin + ray.direction * hit.hitDistance</code>.</td>
+</tr>
+<tr>
+<td><code>bool</code></td>
+<td><em>isFrontFace</em></td>
+<td>Indicates whether the hit triangle is front-facing or back-facing.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="methods">Methods</h3>
+<pre><code class="lang-HLSL">bool IsValid();
+</code></pre>
+<p>Returns true when a hit has been found. When a hit is invalid <code>hit.instanceID</code> is equal to <code>~0</code> and the other fields are undefined.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

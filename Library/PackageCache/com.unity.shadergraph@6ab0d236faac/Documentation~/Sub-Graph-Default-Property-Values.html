@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Set default inputs for a Sub Graph | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Set default inputs for a Sub Graph | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="set-default-inputs-for-a-sub-graph">Set default inputs for a Sub Graph</h1>
+
+<p>To set the default inputs for a Sub Graph, use one of the following approaches:</p>
+<ul>
+<li>For uniform defaults, for example a color or single coordinate, set the default value in the Graph Inspector window.</li>
+<li>For varying defaults, for example a full set of texture coordinates, use a <a href="Branch-On-Input-Connection-Node.html">Branch On Input Connection node</a>.</li>
+</ul>
+<h2 id="set-uniform-defaults">Set uniform defaults</h2>
+<p>After you <a href="Create-Sub-Graph.html#set-inputs">add an input to a Sub Graph</a>, follow these steps:</p>
+<ol>
+<li>In the Sub Graph, select the property in the Blackboard window.</li>
+<li>In the Graph Inspector window, select <strong>Node Settings</strong>, then set <strong>Default Value</strong>.</li>
+</ol>
+<p>When you add the Sub Graph to a parent Shader Graph, the input port of the Sub Graph node uses the default value if the port isn't connected.</p>
+<h2 id="set-varying-defaults">Set varying defaults</h2>
+<div class="NOTE">
+<h5>Note</h5>
+<p>You can't use the Branch On Input Connection node with a Streaming Virtual Texture property. For more information, refer to <a href="https://docs.unity3d.com/Documentation/Manual/svt-use-in-shader-graph.html">Using Streaming Virtual Texturing in Shader Graph</a>.</p>
+</div>
+<p>After you <a href="Create-Sub-Graph.html#set-inputs">add an input to a Sub Graph</a>, follow these steps:</p>
+<ol>
+<li>In the Sub Graph, select the property in the Blackboard window.</li>
+<li>In the Graph Inspector window, select <strong>Node Settings</strong>, then enable <strong>Use Custom Binding</strong>.</li>
+<li>Enter a name in the <strong>Label</strong> field. This label appears on the input in the parent shader graph.</li>
+<li>Right-click in the Sub Graph workspace to open the context menu, then select <strong>Create Node</strong> &gt; <strong>Utility</strong> &gt; <strong>Logic</strong> &gt; <strong>Branch On Input Connection</strong> to add a <a href="Branch-On-Input-Connection-Node.html">Branch On Input Connection node</a>.</li>
+<li>Connect the property to the <strong>Input</strong> port of the Branch On Input Connection node. The node now outputs different values depending on whether the parent shader graph connects a node to the input.</li>
+<li>Connect the property to the <strong>Connected</strong> port. If the parent shader graph connects a node to the input, the Branch On Input Connection node uses that value.</li>
+<li>Connect another node to the <strong>NotConnected</strong> port, for example a <a href="UV-Node.html">UV node</a>. If the parent Shader Graph doesn't connect a node to the input, the Branch On Input Connection node uses this as the default input.</li>
+<li>Connect the output of the Branch On Input Connection node to the rest of your sub graph.</li>
+</ol>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The preview in the Branch On Input Connection node always uses the <strong>NotConnected</strong> value.</p>
+</div>
+<h2 id="example">Example</h2>
+<p>The following sub graph inputs the default UV0 coordinates of the mesh if the parent Shader Graph doesn't connect a node to the input.</p>
+<p><img src="images/shader_graph_branch_on_connection.png" alt="A Vector2 property connected to the Input and Connected inputs of a Branch On Input Connnection node. A UV node is connected to the NotConnected input. The Use Custom Binding property of the Vector2 property is enabled. The Branch On Input Connection node outputs to an Output node."></p>
+<h2 id="additional-resources">Additional resources</h2>
+<ul>
+<li><a href="Branch-Node.html">Branch node</a></li>
+<li><a href="Sub-graphs.html">Sub Graphs</a></li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

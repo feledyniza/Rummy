@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Lighting Model sub graph reference | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Lighting Model sub graph reference | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="lighting-model-sub-graph-reference">Lighting Model sub graph reference</h1>
+
+<p>Explore the Lighting Model sub graphs used in the <a href="Shader-Graph-Sample-Custom-Lighting-Templates.html">URP Custom Lighting templates</a> included in the Custom Lighting sample.</p>
+<p>These sub graphs are available in the <a href="Create-Node-Menu.html"><strong>Create Node</strong> menu</a> under the <strong>Lighting</strong> &gt; <strong>Light Models</strong> section.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>To use any of these sub graphs, you must include it in a shader graph set up with the <strong>Universal</strong> (URP) target and the <strong>Unlit</strong> material type.</p>
+</div>
+<h2 id="common-sub-graph-structure">Common sub graph structure</h2>
+<p>Each Lighting Model sub graph includes the following:</p>
+<ul>
+<li>The <a href="Shader-Graph-Sample-Custom-Lighting-Components.html#general">ApplyDecals</a> sub graph, to blend decal data with the original material properties.</li>
+<li>The <a href="Shader-Graph-Sample-Custom-Lighting-Components.html#debug">Debug Lighting and Debug Materials</a> sub graphs, to support the debug rendering modes (available in the Rendering Debugger window).</li>
+<li>A sub graph from the <a href="Shader-Graph-Sample-Custom-Lighting-Components.html#core-models">Core Models</a> category, to define the lighting behavior according to the model.</li>
+</ul>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The ApplyDecals, DebugLighting, and DebugMaterials sub graph nodes aren’t strictly required. They enable the decals and debug rendering modes, which are core engine features. When you don't use these features, the corresponding sub graph nodes don't affect your project's performance.</p>
+</div>
+<h2 id="available-lighting-model-sub-graphs">Available Lighting Model sub graphs</h2>
+<h3 id="lit-basic">Lit Basic</h3>
+<p>This lighting model does very simple lighting and leaves out most lighting features to render as fast as possible. It calculates simple diffuse lighting and a simple form of ambient lighting. It does not support fog, reflections, specular, light cookies, or any other lighting features. But it does render fast and is ideal for low-end mobile devices and XR headsets.</p>
+<h3 id="lit-colorize">Lit Colorize</h3>
+<p>This lighting model is an example of custom behavior type you can create when you can control the lighting model. The main directional light renders the scene in grayscale with no color. Color is introduced with point lights, which allows you to control where the scene has color based on where you place the point lights in the scene.</p>
+<h3 id="lit-simple">Lit Simple</h3>
+<p>This lighting model is the same as the URP lighting model, except it uses the Blinn formula for the specular highlights. This makes it slightly cheaper to render than standard URP while looking fairly similar. If you still need all of the lighting features (specular, fog, screen space ambient occlusion, reflections, etc), but you want to make the lighting cheaper, this may be a good choice.</p>
+<h3 id="lit-toon">Lit Toon</h3>
+<p>This lighting model uses a Posterize operation to break the smooth lighting gradient into distinct bands of shading. It simulates the look of cartoons where lighting is rendered with distinct colors of paint rather than smooth gradients.</p>
+<h3 id="lit-urp">Lit URP</h3>
+<p>This lighting model closely matches the lighting that the Universal Render Pipeline does by default. If you want to start with the URP lighting and then alter it, this is the node to use.</p>
+<h2 id="additional-resources">Additional resources</h2>
+<ul>
+<li><a href="Shader-Graph-Sample-Custom-Lighting-Introduction.html">Introduction to lighting model customization</a></li>
+<li><a href="Shader-Graph-Sample-Custom-Lighting-Get-Started.html">Get started with the Custom Lighting sample</a></li>
+<li><a href="Shader-Graph-Sample-Custom-Lighting-Templates.html">URP Custom Lighting template reference</a></li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

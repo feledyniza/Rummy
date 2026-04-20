@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Add a custom interpolator | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Add a custom interpolator | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="add-a-custom-interpolator">Add a custom interpolator</h1>
+
+<p>To pass custom data from the vertex shader to the fragment shader, add a custom interpolator to the vertex context of the Master Stack.</p>
+<p>There are two target audiences for custom interpolators:</p>
+<ul>
+<li>Technical Directors and Lead Technical Artists setting up environments for their teams.</li>
+<li>Graphics programmers helping artists to optimize content performance.</li>
+</ul>
+<p><strong>Note:</strong> If you use the Built-In Render Pipeline, refer to <a href="https://docs.unity3d.com/Manual/SL-VertexProgramInputs.html">Input vertex data into a shader</a> instead.</p>
+<h2 id="supported-data-types">Supported data types</h2>
+<p>Custom interpolators support float, vector 2, vector 3, and vector 4 types.</p>
+<h2 id="channel-limits">Channel limits</h2>
+<p>A custom interpolator supports a maximum of 32 channels. A channel is equivalent to four floats. Each float is an interpolator variable.</p>
+<p>Different platforms and GPUs may have different limits, which might prevent your shaders compiling. Test your custom interpolators on your build targets to make sure your shaders compile properly. For more information, refer to the <strong>Interpolator count limits</strong> section in <a href="https://docs.unity3d.com/Manual/SL-VertexProgramInputs.html">Input vertex data into a shader</a>.</p>
+<p>You can't limit the number of channels another user creates in a shader graph. However, to warn users about the limits, go to <a href="https://docs.unity3d.com/Manual/comp-ManagerGroup.html">Project Settings</a> and set the following:</p>
+<ul>
+<li><strong>Warning Threshold</strong> to tell users when they approach the channel limit. The range is 8 to 32 channels.</li>
+<li><strong>Error Threshold</strong> to tell users when they reach or exceed the channel limit. The minimum value is 8 channels, and it must be higher than the <strong>Warning Threshold</strong>.</li>
+</ul>
+<h2 id="add-a-custom-interpolator-block-to-the-master-stack">Add a custom interpolator block to the Master Stack</h2>
+<ol>
+<li>Right-click in the <strong>Vertex</strong> context to create a block node.</li>
+<li>Select <strong>Custom Interpolator</strong>.</li>
+<li>In the <strong>Node Settings</strong> tab of the <strong>Graph Inspector</strong> window, select a data type, for example <strong>Vector 4</strong>.</li>
+<li>Select an <a href="Custom-Interpolators-reference.html">interpolation method</a>.</li>
+<li>In the same tab, enter a name for the interpolator.</li>
+</ol>
+<h2 id="write-data-to-the-interpolator">Write data to the interpolator</h2>
+<ol>
+<li><p>Right-click in your graph to create a node.</p>
+</li>
+<li><p>Select the type, for example <strong>Vertex ID</strong>.</p>
+<p>Custom interpolator blocks support many types of data, so you can connect the data from many other nodes including UV nodes and color nodes.</p>
+</li>
+<li><p>Connect the node to the custom interpolator block.</p>
+</li>
+</ol>
+<p>The graph now writes Vertex ID values into the custom interpolator.</p>
+<h2 id="read-data-from-the-interpolator">Read data from the interpolator</h2>
+<ol>
+<li>Right-click in your graph to create a node.</li>
+<li>Select <strong>Custom Interpolator</strong>.</li>
+<li>Connect the <strong>Custom Interpolator</strong> node to the relevant block in the <strong>Fragment</strong> context, for example <strong>Base Color</strong> to use the Vertex ID as color output.</li>
+</ol>
+<h2 id="delete-a-custom-interpolator">Delete a custom interpolator</h2>
+<p>If you delete a custom interpolator that's associated with nodes that are still in your graph, Unity displays an alert. If you want to keep using these nodes, you can create a new custom interpolator and associate the nodes with it. This prevents the alert from appearing.</p>
+<h2 id="additional-resources">Additional resources</h2>
+<ul>
+<li><a href="Built-In-Blocks.html">Built In Blocks</a></li>
+<li><a href="Custom-Interpolators-reference.html">Custom Interpolator reference</a></li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

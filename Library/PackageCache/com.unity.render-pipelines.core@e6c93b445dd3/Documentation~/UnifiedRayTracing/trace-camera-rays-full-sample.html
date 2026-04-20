@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Sample code: Tracing camera rays | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Sample code: Tracing camera rays | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../../index.html">
+            <img id="logo" class="svg" src="../../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="sample-code-tracing-camera-rays">Sample code: Tracing camera rays</h1>
+
+<p>This section demonstrates how to use the API to cast rays from the scene's Main camera and output the results into a <code>RenderTexture</code>, providing the complete code for implementation.
+<img src="../Images/ExampleOutputTexture.png" alt="Example of output texture for a scene with a simple cube"></p>
+<p>Save the following code in your <strong>Assets</strong> folder as a file named <code>shootCameraRays.urtshader</code>:</p>
+<pre><code class="lang-HLSL">// Include file for the UnifiedRayTracing API functions
+#include &quot;Packages/com.unity.render-pipelines.core/Runtime/UnifiedRayTracing/TraceRayAndQueryHit.hlsl&quot;
+
+// Use this macro to declare the acceleration structure binding
+UNIFIED_RT_DECLARE_ACCEL_STRUCT(_AccelStruct);
+
+uint _RenderWidth;
+uint _RenderHeight;
+float4 _CameraFrustum;
+float4x4 _CameraToWorldMatrix;
+RWTexture2D&lt;float4&gt; _OutputTexture;
+
+UnifiedRT::Ray GenerateFrustumRay(float2 frameCoord, uint2 resolution)
+{
+    float2 ndcCoords01 = (frameCoord + 0.5) / float2(resolution);
+    float3 viewDirection = float3(
+        lerp(_CameraFrustum.x, _CameraFrustum.y, ndcCoords01.x),
+        lerp(_CameraFrustum.z, _CameraFrustum.w, ndcCoords01.y),
+        -1.0);
+
+    UnifiedRT::Ray ray;
+    ray.origin = transpose(_CameraToWorldMatrix)[3].xyz;
+    ray.direction = mul((float3x3) _CameraToWorldMatrix, normalize(viewDirection));
+    ray.tMin = 0.0f;
+    ray.tMax = 100000.0f;
+
+    return ray;
+}
+
+// Entry point of the shader. DispatchInfo provides the current thread index in the dispatch
+void RayGenExecute(UnifiedRT::DispatchInfo dispatchInfo)
+{
+    UnifiedRT::Ray ray = GenerateFrustumRay(dispatchInfo.dispatchThreadID.xy, uint2(_RenderWidth, _RenderHeight));
+
+    // Retrieve the acceleration structure
+    UnifiedRT::RayTracingAccelStruct accelStruct = UNIFIED_RT_GET_ACCEL_STRUCT(_AccelStruct);
+
+    // Trace a ray in the acceleration structure
+    UnifiedRT::Hit hitResult = UnifiedRT::TraceRayClosestHit(dispatchInfo, accelStruct, 0xFFFFFFFF, ray, UnifiedRT::kRayFlagNone);
+    float2 uv = hitResult.uvBarycentrics;
+
+    // display the hit triangle barycentrics coordinates as an RGB color
+    float3 color = hitResult.IsValid() ? float3(uv.x, uv.y, 1.0 - uv.x - uv.y) : 0.0;
+    _OutputTexture[dispatchInfo.dispatchThreadID.xy] = float4(color, 1.0);
+}
+</code></pre>
+<p>The following C# MonoBehaviour is responsible for creating the acceleration structure, loading the ray tracing shader and dispatching it to the GPU.
+Save it as a script file in your <strong>Assets</strong> folder and attach it to one of your scene GameObjects.</p>
+<pre><code class="lang-C#">using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.UnifiedRayTracing;
+
+public class ShootCameraRays : MonoBehaviour
+{
+    RayTracingResources m_RtResources;
+    RayTracingContext m_RtContext;
+    IRayTracingShader m_RtShader;
+    IRayTracingAccelStruct m_RtAccelStruct;
+
+    // Ray tracing results are written to this texture
+    const int width = 1024;
+    const int height = 576;
+    public RenderTexture OutputTexture;
+
+    void Start()
+    {
+        var renderTexDesc = new RenderTextureDescriptor(width, height);
+        renderTexDesc.graphicsFormat = UnityEngine.Experimental.Rendering.GraphicsFormat.R8G8B8A8_SRGB;
+        renderTexDesc.enableRandomWrite = true;
+        OutputTexture = new RenderTexture(renderTexDesc);
+
+        m_RtResources = new RayTracingResources();
+        m_RtResources.Load();
+
+        // Create the RayTracingContext
+        var backend = RayTracingContext.IsBackendSupported(RayTracingBackend.Hardware) ? RayTracingBackend.Hardware : RayTracingBackend.Compute;
+        m_RtContext = new RayTracingContext(backend, m_RtResources);
+
+        // Load the unified ray tracing shader
+        m_RtShader = m_RtContext.LoadRayTracingShader(&quot;Assets/shootCameraRays.urtshader&quot;);
+
+        // Create the ray tracing acceleration structure
+        m_RtAccelStruct = m_RtContext.CreateAccelerationStructure(new AccelerationStructureOptions());
+
+        // Add an instance to the acceleration structure for each MeshRenderer in the current scene
+        uint instanceID = 0;
+        var meshRenderers = UnityEngine.Object.FindObjectsByType&lt;MeshRenderer&gt;(FindObjectsSortMode.None);
+        foreach (var renderer in meshRenderers)
+        {
+            var mesh = renderer.GetComponent&lt;MeshFilter&gt;().sharedMesh;
+            int subMeshCount = mesh.subMeshCount;
+
+            for (int i = 0; i &lt; subMeshCount; ++i)
+            {
+                var instanceDesc = new MeshInstanceDesc(mesh, i);
+                instanceDesc.localToWorldMatrix = renderer.transform.localToWorldMatrix;
+                instanceDesc.instanceID = instanceID++;
+                m_RtAccelStruct.AddInstance(instanceDesc);
+            }
+        }
+    }
+
+    void OnDestroy()
+    {
+        m_RtAccelStruct.Dispose();
+        m_RtContext.Dispose();
+        OutputTexture?.Release();
+    }
+
+    void Update()
+    {
+        // A scratch buffer is required to build the acceleration structure and for the ray traversal, this helper function allocates one with the required size.
+        GraphicsBuffer scratchBuffer = RayTracingHelper.CreateScratchBufferForBuildAndDispatch(m_RtAccelStruct, m_RtShader, width, height, 1);
+
+        var cmd = new CommandBuffer();
+        // build the ray tracing acceleration structure
+        m_RtAccelStruct.Build(cmd, scratchBuffer);
+
+        // bind the shader gpu resources
+        m_RtShader.SetAccelerationStructure(cmd, &quot;_AccelStruct&quot;, m_RtAccelStruct);
+        m_RtShader.SetIntParam(cmd, Shader.PropertyToID(&quot;_RenderWidth&quot;), width);
+        m_RtShader.SetIntParam(cmd, Shader.PropertyToID(&quot;_RenderHeight&quot;), height);
+        m_RtShader.SetVectorParam(cmd, Shader.PropertyToID(&quot;_CameraFrustum&quot;), GetCameraFrustum(Camera.main));
+        m_RtShader.SetMatrixParam(cmd, Shader.PropertyToID(&quot;_CameraToWorldMatrix&quot;), Camera.main.cameraToWorldMatrix);
+        m_RtShader.SetTextureParam(cmd, Shader.PropertyToID(&quot;_OutputTexture&quot;), OutputTexture);
+
+        // dispatch rays. Workgrid dimensions are supplied in threads, not workgroups
+        m_RtShader.Dispatch(cmd, scratchBuffer, width, height, 1);
+        Graphics.ExecuteCommandBuffer(cmd);
+
+        scratchBuffer?.Dispose();
+    }
+
+    // utility function to extract a frustum from a camera
+    Vector4 GetCameraFrustum(Camera camera)
+    {
+        Vector3[] frustumCorners = new Vector3[4];
+        camera.CalculateFrustumCorners(new Rect(0, 0, 1, 1), 1.0f, Camera.MonoOrStereoscopicEye.Mono, frustumCorners);
+        float left = frustumCorners[0].x;
+        float right = frustumCorners[2].x;
+        float bottom = frustumCorners[0].y;
+        float top = frustumCorners[2].y;
+
+        return new Vector4(left, right, bottom, top);
+    }
+}
+
+</code></pre>
+<p>You can now enter Play mode and visualize the ray tracing results. Follow these steps:</p>
+<ol>
+<li>Select the GameObject you attached the <code>ShootCameraRays</code> MonoBehaviour to.</li>
+<li>In the <strong>Inspector</strong> window, go to the <strong>ShootCameraRays</strong> component and double-click <strong>Output Texture</strong>.</li>
+<li>The Inspector now displays a preview of the render texture containing the ray tracing results.</li>
+</ol>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

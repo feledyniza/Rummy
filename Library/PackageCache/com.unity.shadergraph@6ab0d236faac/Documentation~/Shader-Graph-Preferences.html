@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Shader Graph Preferences | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Shader Graph Preferences | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="shader-graph-preferences">Shader Graph Preferences</h1>
+
+<p>Use the Shader Graph preferences to define shader graph settings for your system. To access the Shader Graph system preferences, do the following:</p>
+<ol>
+<li>From the main menu select <strong>Edit</strong> &gt; <strong>Preferences</strong> (macOS: <strong>Unity</strong> &gt; <strong>Settings</strong>). The <strong>Preferences</strong> window is displayed.</li>
+<li>Select <strong>Shader Graph</strong>.</li>
+</ol>
+<h2 id="settings">Settings</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Preview Variant Limit</strong></td>
+<td>Sets the maximum number of variants allowed in local projects. This is a local version of the <strong>Shader Variant Limit</strong> in the project settings. If your graph exceeds this maximum value, Unity returns the following error:<br> <em>Validation: Graph is generating too many variants. Either delete Keywords, reduce Keyword variants, or increase the <strong>Shader Variant Limit</strong> in Preferences &gt; Shader Graph.</em> <br>For more information about shader variants, refer to <a href="https://docs.unity3d.com/Manual/SL-MultipleProgramVariants.html">Making multiple shader program variants</a>. For more information about the Shader Variant Limit, refer to <a href="Shader-Graph-Project-Settings.html">Shader graph project settings</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Automatically Add and Remove Block Nodes</strong></td>
+<td>Adds to the <a href="Master-Stack.html">Master Stack</a> any needed <a href="Block-Node.html">Block nodes</a> and removes from the Master Stack any Block nodes with no incoming connections.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Enable Deprecated Nodes</strong></td>
+<td>Disables warnings for deprecated nodes and properties. When enabled, Shader Graph doesn't display warnings if your graph contains deprecated nodes or properties. When disabled, Shader Graph displays warnings for deprecated nodes and properties, and the new nodes and properties you create use the latest version.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Zoom Step Size</strong></td>
+<td>Adjusts how much the Shader Graph camera zooms with each mouse wheel movement. This helps balance zoom speed, since touchpads can zoom much faster than regular mouse wheels.<br>Only affects materials created automatically, such as when you make a new shader graph from a Decal Projector or Fullscreen Renderer Feature.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Graph Template Workflow</strong></td>
+<td>Sets whether Unity creates new materials as <a href="https://docs.unity3d.com/Manual/materialvariant-concept.html">material variants</a> from the child asset of the shader graph asset, or as standalone materials. The options are: <ul><li><strong>Material Variant</strong>: Unity creates material variants from the child asset of the shader graph asset.</li><li><strong>Material</strong>: Unity creates standalone materials.</li></ul></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Open new Shader Graphs automatically</strong></td>
+<td>Makes Unity open the Shader Graph window immediately after you create a new shader graph asset. When disabled, Unity does not open the window, and you must open the graph manually.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>New Nodes Preview</strong></td>
+<td>Makes Shader Graph automatically expand the preview area for any newly created node that supports previews. When disabled, Shader Graph does not expand previews, but you can expand them manually.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="additional-resources">Additional resources</h2>
+<ul>
+<li><a href="https://docs.unity3d.com/Manual/SL-MultipleProgramVariants.html">Making multiple shader program variants</a></li>
+<li><a href="Master-Stack.html">Master Stack</a></li>
+<li><a href="Shader-Graph-Project-Settings.html">Shader graph project settings</a></li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

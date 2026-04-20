@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Built-in reports | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Built-in reports | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="built-in-reports">Built-in reports</h1>
+
+<p>The <strong>Sprite Atlas Analyzer</strong> has six built-in report types which provide specific information about the 2D texture assets contained in all sprite atlases within your project. The report types are:</p>
+<ul>
+<li>All Sprite Atlases</li>
+<li>Atlas page count</li>
+<li>Source textures with compression in Sprite Atlas</li>
+<li>Texture Space Wastage</li>
+<li>Sprite count</li>
+<li>Textures contain different secondary texture count in Sprite Atlas</li>
+</ul>
+<h2 id="all-sprite-atlases">All Sprite Atlases</h2>
+<p>This report shows a detailed breakdown of information on all the sprite atlases that are present in the project. The report is in a table format with the following columns:</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>The name of the sprite atlas or sprite.</td>
+</tr>
+<tr>
+<td><strong>Sprites</strong></td>
+<td>The number of sprites in the sprite atlas.</td>
+</tr>
+<tr>
+<td><strong>Total Memory</strong></td>
+<td>The runtime memory used by the object.</td>
+</tr>
+<tr>
+<td><strong>Unused Memory</strong></td>
+<td>Unutilized memory usage of the sprite atlas.</td>
+</tr>
+<tr>
+<td><strong>Usage</strong></td>
+<td>Sprite atlas texture area in percentage that is being used to pack Sprites.</td>
+</tr>
+<tr>
+<td><strong>Total Area</strong></td>
+<td>Total area of the sprite atlas's texture.</td>
+</tr>
+<tr>
+<td><strong>Used Area</strong></td>
+<td>Total area of the sprite atlas's texture that is used by to pack Sprites.</td>
+</tr>
+<tr>
+<td><strong>Width</strong></td>
+<td>The width of the texture for the object.</td>
+</tr>
+<tr>
+<td><strong>Height</strong></td>
+<td>The height of the texture for the object.</td>
+</tr>
+<tr>
+<td><strong>Packing Mode</strong></td>
+<td>Indicate how the sprites were created.</td>
+</tr>
+<tr>
+<td><strong>Texture Format</strong></td>
+<td>The object's texture format.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="atlas-page-count">Atlas Page count</h2>
+<p>Displays the number of sprite atlases that have greater than a set number of pages. A sprite atlas can have multiple pages of sprites. You can set the number of pages you want the report to consider its threshold by selecting this report and setting the value in the <strong>Atlas Texture Pages</strong> right panel.</p>
+<p>This information helps to determine how many sprite atlases has multiple pages. If a sprite atlas spans more than two texture pages, sprites used together in a scene could end up on different pages. Unity can only batch sprites that share the same texture page. When sprites are distributed across multiple atlas pages, this causes batch rendering to be unpredictable and may cause performance problems as Unity is unable to batch sprites for rendering efficiently.</p>
+<h2 id="source-textures-with-compression-in-sprite-atlas">Source textures with compression in sprite atlas</h2>
+<p>This report lists all source textures that are already compressed before being packed into a sprite atlas, with a column displaying the detected <strong>Texture Format</strong> used in the texture compression. If the source texture is compressed before being packed, users can experience texture quality degradation due to the final texture being compressed twice when packed into a sprite atlas.</p>
+<h2 id="texture-space-wastage">Texture Space Wastage</h2>
+<p>This report displays the number of sprite atlases that have unused space above a set threshold, in KB. This report measures the amount of unused space in-between packed sprites as wastage. You can set the threshold (in KB) that must be exceeded to be displayed in the report. It's ideal to minimize the amount of wasted texture space in a sprite atlas so that a device's memory is used efficiently.</p>
+<h2 id="sprite-count">Sprite Count</h2>
+<p>This report lists the number of sprite atlases with sprites less than or equal to the set limit. This allows you to identify which sprite atlases contain a small number of individual sprites and could be packed more efficiently.</p>
+<h2 id="textures-contain-different-secondary-texture-count-in-sprite-atlas">Textures contain different secondary texture count in sprite atlas</h2>
+<p>This report lists sprite atlases that contains a different number of secondary textures compared to the number of individual sprites. With textures containing different secondary texture count can result in texture space wastage.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Property Types | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Property Types | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="property-types">Property Types</h1>
+
+<h2 id="description">Description</h2>
+<p><strong>Property Types</strong> are the types of <a href="https://docs.unity3d.com/Manual/SL-Properties.html">Property</a> than can be defined on the <a href="Blackboard.html">Blackboard</a> for use in the <strong>Graph</strong>. These <a href="https://docs.unity3d.com/Manual/SL-Properties.html">Properties</a> are exposed to the <a href="https://docs.unity3d.com/Manual/UsingTheInspector.html">Inspector</a> for <a href="https://docs.unity3d.com/Manual/class-Material.html">Materials</a> that use the shader.</p>
+<p>Each property has an associated <strong>Data Type</strong>. See <a href="Data-Types.html">Data Types</a> for more information.</p>
+<h2 id="common-parameters">Common Parameters</h2>
+<p>All properties have the following common parameters in addition to those specific to their <a href="Data-Types.html">Data Types</a>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Name</strong></td>
+<td style="text-align: left;">Displays the user-facing name of the property in the UI.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Reference</strong></td>
+<td style="text-align: left;">Defines the internal identifier used by the shader for this property; use this <code>Reference</code> instead of the display <code>Name</code> when accessing the property from a script.<br><br>If you overwrite this parameter, be aware of the following:<ul><li>If the string doesn't begin with an underscore, Unity automatically adds one.</li><li>If the string contains any characters that HLSL does not support, Unity removes them.</li><li>You can revert to the default value: right-click on the <strong>Reference</strong> field label, and select <strong>Reset Reference</strong>.</li></ul></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Promote to final Shader</strong></td>
+<td style="text-align: left;">Makes the property accessible across the final shader as a material property, not as an input port on the Subgraph Node.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Precision</strong></td>
+<td style="text-align: left;">Sets the numeric precision for the property’s data type.<br><br>The options are:<ul><li><strong>Inherit</strong>: Uses the precision defined by the graph or parent context.</li><li><strong>Single</strong>: Uses single-precision (float) for maximum accuracy.</li><li><strong>Half</strong>: Uses half-precision to reduce memory and improve performance.</li><li><strong>Use Graph Precision</strong>: Uses the precision mode set in the graph settings.</li></ul><br>For more details, refer to <a href="Precision-Modes.html">Precision Modes</a>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Scope</strong></td>
+<td style="text-align: left;">Specifies where and how the property is edited across materials. The options are:<ul><li><strong>Global</strong>: Makes the property editable at a global level, through a C# script only, for all materials that use it. Selecting this option hides or grays out all parameters that relate to the Inspector UI display.</li><li><strong>Per Material</strong>: Makes the property independently editable per material, either through a C# script, or in the Inspector UI if you enable <strong>Show In Inspector</strong>.</li><li><strong>Hybrid Per Instance</strong>: Has the same effect as <strong>Per Material</strong>, unless you're using <a href="https://docs.unity3d.com/Packages/com.unity.entities.graphics@latest/index.html?subfolder=/manual/dots-instancing-shader.html">DOTS instancing</a>.</li></ul></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Default Value</strong></td>
+<td style="text-align: left;">Sets the property's initial value to be serialized and used when new material instances are created. The value depends on the property type.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Preview Value</strong></td>
+<td style="text-align: left;">Sets a value to use for preview in the Shader Graph window, only when you set <strong>Scope</strong> to <strong>Global</strong>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Show In Inspector</strong></td>
+<td style="text-align: left;">Displays the property in the material Inspector when enabled.<br>If you disable this option, it includes an <code>[HideInInspector]</code> attribute to the material property (refer to <a href="https://docs.unity3d.com/Manual/SL-Properties.html#material-property-attributes">Properties block reference in ShaderLab</a> for more details).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Read Only</strong></td>
+<td style="text-align: left;">Marks the property as non-editable in the material Inspector by adding the <a href="https://docs.unity3d.com/ScriptReference/Rendering.ShaderPropertyFlags.html"><code>PerRendererData</code></a> attribute.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Custom Attributes</strong></td>
+<td style="text-align: left;">Enables attachment of custom scripted drawers or decorators to extend the material property UI, such as adding static headers or complex controls.<br>The <strong>Custom Material Property Drawers</strong> sample, available in the Package Manager among other <a href="ShaderGraph-Samples.html">Shader Graph samples</a>, shows how to display a Vector2 as a min/max slider, for example.<br><br><strong>Note</strong>: When you declare the custom functions in the script, make sure to suffix their names with <code>Drawer</code> or <code>Decorator</code>.<br><br>In the list, use <strong>+</strong> or <strong>-</strong> to add or remove entries. Each entry corresponds to a function call which requires the following parameters:<ul><li><strong>Name</strong>: A shorthened version of the function name, without its <code>Drawer</code> or <code>Decorator</code> suffix.</li><li><strong>Value</strong>: The input values for the function as the script expects them.</li></ul><strong>Note</strong>: A property can only have one drawer at any given time.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Use Custom Binding</strong></td>
+<td style="text-align: left;">Turns the property into a bound input port for connection to the <a href="Branch-On-Input-Connection-Node.html"><strong>Branch On Input Connection</strong></a> node. In the <strong>Label</strong> field, enter the label for the default value that displays on your Subgraph node's port binding in its parent Shader Graph.<br>This property is available only in sub graphs.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="float">Float</h2>
+<p>Defines a <strong>Float</strong> value.</p>
+<p>Parameters specific to Float properties in addition to the <a href="#common-parameters">common parameters</a>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Mode</strong></td>
+<td style="text-align: left;">Selects the UI mode used to display and edit the property value in the material Inspector, requiring a specific subset of parameters depending on the chosen option.<br><br>The options are:<ul><li><strong>Default</strong>: Displays a scalar input field in the material Inspector; only requires a <strong>Default Value</strong>.</li><li><strong>Slider</strong>: Defines the Float property in <a href="https://docs.unity3d.com/Manual/SL-Properties.html#material-property-declaration-syntax-by-type"><code>Range</code></a> mode to display a slider; use <a href="#slider">additional parameters</a> to define the slider type.</li><li><strong>Integer</strong>: Displays an integer input field in the material Inspector; only requires a <strong>Default Value</strong>.</li><li><strong>Enum</strong>: Adds an <a href="https://docs.unity3d.com/ScriptReference/MaterialPropertyDrawer.html"><code>Enum</code></a> attribute to the Float property to display a drop-down of specific values; use <a href="#enum">additional parameters</a> to define the enum type.</li></ul></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Default Value</strong></td>
+<td style="text-align: left;">Sets the initial value of the <a href="https://docs.unity3d.com/Manual/SL-Properties.html">Property</a>.<br>The value is either a float or an integer depending on the selected <strong>Mode</strong> and its options. Not available when <strong>Scope</strong> is set to <strong>Global</strong>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Requires Literal Input</strong></td>
+<td style="text-align: left;">Requires the input to be a constant value. When enabled, if the user connects a variable, the shader compilation fails with an error.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="slider">Slider</h3>
+<p>Additional parameters available when you set the Float property <strong>Mode</strong> to <strong>Slider</strong>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Slider Type</strong></td>
+<td style="text-align: left;">Selects the slider response type applied when adjusting the value in the material Inspector.<br><br>The options are:<ul><li><strong>Default</strong>: Displays a slider with a linear response; the value changes linearly within the slider range.</li><li><strong>Power</strong>: Adds a <a href="https://docs.unity3d.com/ScriptReference/MaterialPropertyDrawer.html"><code>PowerSlider</code></a> attribute to display a slider with a non-linear response; the value changes exponentially within the range according to the specified <strong>Power</strong>.</li><li><strong>Integer</strong>: Adds an <a href="https://docs.unity3d.com/ScriptReference/MaterialPropertyDrawer.html"><code>IntRange</code></a> attribute to display a slider with integer steps; the value changes in whole-number increments within the range.</li></ul></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Min</strong></td>
+<td style="text-align: left;">Sets the minimum value of the slider range.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Max</strong></td>
+<td style="text-align: left;">Sets the maximum value of the slider range.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Power</strong></td>
+<td style="text-align: left;">Defines the exponent used for non-linear response between <strong>Min</strong> and <strong>Max</strong> when <strong>Slider Type</strong> is set to <strong>Power</strong>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="enum">Enum</h3>
+<p>Additional parameters available when you set the Float property <strong>Mode</strong> to <strong>Enum</strong>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Enum Type</strong></td>
+<td style="text-align: left;">Selects the source used to populate the dropdown entries in the material Inspector.<br><br>The options are:<ul><li><strong>Explicit Values</strong>: Uses a list of <strong>Entries</strong> you specify directly in this interface.</li><li><strong>Type Reference</strong>: Uses a <strong>C# Enum Type</strong> reference that contains predefined entries.</li></ul></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Entries</strong></td>
+<td style="text-align: left;">Defines the list of dropdown entries when <strong>Enum Type</strong> is set to <strong>Explicit Values</strong>.<br><br>Use <strong>+</strong> or <strong>-</strong> to add or remove entries. Each entry requires the following parameters:<ul><li><strong>Name</strong>: Sets the label displayed in the dropdown in the material Inspector.</li><li><strong>Value</strong>: Sets the numeric value applied to the Float property when its <strong>Name</strong> is selected.</li></ul><strong>Note</strong>: Supports up to 7 entries. If you need more, use <strong>Type Reference</strong>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>C# Enum Type</strong></td>
+<td style="text-align: left;">Specifies the existing enum type to reference when <strong>Enum Type</strong> is set to <strong>Type Reference</strong>.<br>Enter the full type path with namespace, for example: <code>UnityEngine.Rendering.BlendMode</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vector-2">Vector 2</h2>
+<p>Defines a <strong>Vector 2</strong> value. Displays a <strong>Vector 4</strong> input field in the material inspector, where the z and w components are not used.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Default Value</strong></td>
+<td style="text-align: left;">Sets the initial value of the <a href="https://docs.unity3d.com/Manual/SL-Properties.html">Property</a>.<br>A 2D vector value (Vector2).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vector-3">Vector 3</h2>
+<p>Defines a <strong>Vector 3</strong> value. Displays a <strong>Vector 4</strong> input field in the material inspector, where the w component is not used.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Default Value</strong></td>
+<td style="text-align: left;">Sets the initial value of the <a href="https://docs.unity3d.com/Manual/SL-Properties.html">Property</a>.<br>A 3D vector value (Vector3).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vector-4">Vector 4</h2>
+<p>Defines a <strong>Vector 4</strong> value. Displays a <strong>Vector 4</strong> input field in the material inspector.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Default Value</strong></td>
+<td style="text-align: left;">Sets the initial value of the <a href="https://docs.unity3d.com/Manual/SL-Properties.html">Property</a>.<br>A 4D vector value (Vector4).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="color">Color</h2>
+<p>Defines a <strong>Color</strong> value.  If the Property Inspector displays <strong>Main Color</strong>, this is the <a href="https://docs.unity3d.com/Manual/SL-Properties.html">Main Color</a> for the shader. To select or deselect this node as the <strong>Main Color</strong>, right-click it in the graph or Blackboard and select <strong>Set as Main Color</strong> or <strong>Clear Main Color</strong>. Corresponds to the <a href="https://docs.unity3d.com/Manual/SL-Properties.html"><code>MainColor</code></a> ShaderLab Properties attribute.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Default Value</strong></td>
+<td style="text-align: left;">Sets the initial value of the <a href="https://docs.unity3d.com/Manual/SL-Properties.html">Property</a>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Mode</strong></td>
+<td style="text-align: left;">Selects the color input mode.<br><br>The options are:<ul><li><strong>Default</strong>: Allows to select a standard sRGB color.</li><li><strong>HDR</strong>: Allows to select an HDR color and sets its intensity from -10 to 10 exposure stops.</li></ul></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> In versions prior to 10.0, Shader Graph didn't correct HDR colors for the project colorspace. Version 10.0 corrected this behavior. HDR color properties that you created with older versions maintain the old behavior, but you can use the <a href="Internal-Inspector.html">Graph Inspector</a> to upgrade them. To mimic the old behavior in a gamma space project, you can use the <a href="Colorspace-Conversion-Node.html">Colorspace Conversion Node</a> to convert a new HDR <strong>Color</strong> property from <strong>RGB</strong> to <strong>Linear</strong> space.</p>
+<h2 id="boolean">Boolean</h2>
+<p>Defines a <strong>Boolean</strong> value. Displays a <strong>ToggleUI</strong> field in the material inspector. Note that internally to the shader this value is a <strong>Float</strong>. The <strong>Boolean</strong> type in Shader Graph is merely for usability.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Default Value</strong></td>
+<td style="text-align: left;">Sets the initial value of the <a href="https://docs.unity3d.com/Manual/SL-Properties.html">Property</a>.<br>A boolean value.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="gradient">Gradient</h2>
+<p>Defines a constant <strong>Gradient</strong>.</p>
+<p>Parameters specific to Gradient properties in addition to the <a href="#common-parameters">common parameters</a>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Default Value</strong></td>
+<td style="text-align: left;">Displays the <strong>HDR Gradient Editor</strong> with selectable modes.<br>The options are:<ul><li><strong>Blend (Classic)</strong>: Creates transitions based on traditional HDR handling.</li><li><strong>Blend (Perceptual)</strong>: Creates human vision–based gradient transitions in HDR.</li><li><strong>Fixed</strong>: Creates a discrete gradient with fixed steps.</li></ul></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> The <strong>Promote to final Shader</strong> parameter is not available for this property.</p>
+<h2 id="texture-2d">Texture 2D</h2>
+<p>Defines a <a href="https://docs.unity3d.com/Manual/class-TextureImporter.html">Texture 2D</a> value. Displays an object field of type <a href="https://docs.unity3d.com/Manual/class-TextureImporter.html">Texture</a> in the material inspector. If the Property Inspector displays <strong>Main Texture</strong>, this is the <code>Main Texture</code> for the shader. To select or deselect this node as the <code>Main Texture</code>, right-click on it in the graph or Blackboard and select <strong>Set as Main Texture</strong> or <strong>Clear Main Texture</strong>. Corresponds to the <a href="https://docs.unity3d.com/Manual/SL-Properties.html"><code>MainTexture</code></a> ShaderLab Properties attribute.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Default Value</strong></td>
+<td style="text-align: left;">Sets the initial value of the <a href="https://docs.unity3d.com/Manual/SL-Properties.html">Property</a>.<br>A texture asset reference.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Mode</strong></td>
+<td style="text-align: left;">Defines the fallback texture Unity uses when none is provided.<br><br>The options are:<ul><li><strong>White</strong>: Sets a solid white (1,1,1) texture to ensure full-intensity sampling.</li><li><strong>Black</strong>: Sets a solid black (0,0,0) texture to yield zero contribution.</li><li><strong>Grey</strong>: Sets a mid-grey in sRGB (~0.5) as a neutral fallback.</li><li><strong>Normal Map</strong>: Sets a flat normal value to keep surfaces flat without a normal texture.</li><li><strong>Linear Grey</strong>: Sets a mid-grey in linear color space.</li><li><strong>Red</strong>: Sets a solid red (1,0,0) texture, useful for data expected in the red channel.</li></ul></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Use Tiling and Offset</strong></td>
+<td style="text-align: left;">Toggles the property <code>NoScaleOffset</code> to enable manipulating scale and offset separately from other texture properties; see <a href="Split-Texture-Transform-Node.html">SplitTextureTransformNode</a>.<br>A boolean value.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Use TexelSize</strong></td>
+<td style="text-align: left;">Uses the size of texels expressed in UV space.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="texture-2d-array">Texture 2D Array</h2>
+<p>Defines a <a href="https://docs.unity3d.com/Manual/class-TextureImporter.html">Texture 2D Array</a> value. Displays an object field of type <a href="https://docs.unity3d.com/Manual/class-TextureImporter.html">Texture 2D Array</a> in the material inspector.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Default Value</strong></td>
+<td style="text-align: left;">Sets the initial value of the <a href="https://docs.unity3d.com/Manual/SL-Properties.html">Property</a>.<br>A texture asset reference.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="texture-3d">Texture 3D</h2>
+<p>Defines a <a href="https://docs.unity3d.com/Manual/class-TextureImporter.html">Texture 3D</a> value. Displays an object field of type <a href="https://docs.unity3d.com/Manual/class-TextureImporter.html">Texture 3D</a> in the material inspector.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Default Value</strong></td>
+<td style="text-align: left;">Sets the initial value of the <a href="https://docs.unity3d.com/Manual/SL-Properties.html">Property</a>.<br>A texture asset reference.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cubemap">Cubemap</h2>
+<p>Defines a <a href="https://docs.unity3d.com/Manual/class-Cubemap.html">Cubemap</a> value. Displays an object field of type <a href="https://docs.unity3d.com/Manual/class-TextureImporter.html">Texture</a> in the material inspector.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Default Value</strong></td>
+<td style="text-align: left;">Sets the initial value of the <a href="https://docs.unity3d.com/Manual/SL-Properties.html">Property</a>.<br>A cubemap asset reference.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="virtual-texture"> </a></p>
+<h2 id="virtual-texture">Virtual Texture</h2>
+<p>Defines a <a href="https://docs.unity3d.com/2020.1/Documentation/Manual/svt-use-in-shader-graph.html">Texture Stack</a>, which appears as object fields of type  <a href="https://docs.unity3d.com/Manual/class-TextureImporter.html">Texture</a> in the Material Inspector. The number of fields corresponds to the number of layers in the property.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Layers</strong></td>
+<td style="text-align: left;">Manages the collection of layers in the stack.<br><br>The options are:<ul><li><strong>Add (+)</strong>: Adds a new layer.</li><li><strong>Remove (−)</strong>: Removes the selected layer.</li></ul><br>Select the active layer to edit its parameters.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Layer Name</strong></td>
+<td style="text-align: left;">Displays the user-defined name for the selected layer.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Layer Reference</strong></td>
+<td style="text-align: left;">Defines the internal identifier used to reference the selected layer.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Layer Texture</strong></td>
+<td style="text-align: left;">Assigns the default texture asset for the selected layer.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Layer Texture Type</strong></td>
+<td style="text-align: left;">Specifies the expected data type for the selected layer’s texture, which determines import settings and sampling behavior, such as sRGB vs Linear and normal map decoding.<br><br>The options are:<ul><li><strong>Normal tangent space</strong>: Encodes per-texel normals relative to the mesh’s tangent basis so surface detail follows UVs and local orientation.</li><li><strong>Normal object space</strong>: Preserves per-texel normals in object coordinates.</li></ul></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> The <strong>Use Custom Binding</strong> parameter isn't available for this property.</p>
+<p><strong>Note:</strong> The <strong>Promote to final Shader</strong> parameter is not available for this property.</p>
+<h2 id="matrix-2">Matrix 2</h2>
+<p>Defines a Matrix 2. Matrices do not display in the <strong>Inspector</strong> window of the material.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Default Value</strong></td>
+<td style="text-align: left;">Sets the initial value of the <a href="https://docs.unity3d.com/Manual/SL-Properties.html">Property</a>.<br>A 2×2 matrix value (Matrix2).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="matrix-3">Matrix 3</h2>
+<p>Defines a Matrix 3 value. Can't be displayed in the material inspector.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Default Value</strong></td>
+<td style="text-align: left;">Sets the initial value of the <a href="https://docs.unity3d.com/Manual/SL-Properties.html">Property</a>.<br>A 3×3 matrix value (Matrix3).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="matrix-4">Matrix 4</h2>
+<p>Defines a Matrix 4 value. Can't be displayed in the material inspector.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Default Value</strong></td>
+<td style="text-align: left;">Sets the initial value of the <a href="https://docs.unity3d.com/Manual/SL-Properties.html">Property</a>.<br>A 4×4 matrix value (Matrix4).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="samplerstate">SamplerState</h2>
+<p>Defines a <strong>SamplerState</strong>.</p>
+<p>Parameters specific to Float properties in addition to the <a href="#common-parameters">common parameters</a>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Filter</strong></td>
+<td style="text-align: left;">Specifies the texture filtering mode used when sampling. The options are:<ul><li><strong>Linear</strong>: Sets bilinear filtering within mip levels for smoother results, at the cost of potential blur.</li><li><strong>Point</strong>: Sets nearest-neighbor sampling for a crisp, pixelated look.</li><li><strong>Trilinear</strong>: Sets bilinear filtering with interpolation between mip levels for smoother transitions.</li></ul></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Wrap</strong></td>
+<td style="text-align: left;">Specifies how UVs outside the [0–1] range are handled. The options are:<ul><li><strong>Repeat</strong>: Tiles the texture infinitely.</li><li><strong>Clamp</strong>: Clamps to edge texels with no tiling.</li><li><strong>Mirror</strong>: Tiles by mirroring each repeat.</li><li><strong>MirrorOnce</strong>: Mirrors once, then clamps.</li></ul></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Aniso</strong></td>
+<td style="text-align: left;">Specifies the anisotropic filtering level to improve texture clarity at grazing angles. The options are:<ul><li><strong>None</strong>: Disables anisotropic filtering.</li><li><strong>x2</strong>: Applies a low level for higher performance.</li><li><strong>x4</strong>: Applies a moderate level.</li><li><strong>x8</strong>: Applies a high level.</li><li><strong>x16</strong>: Applies the maximum level for best quality at lower performance.</li></ul></td>
+</tr>
+</tbody>
+</table>
+<h2 id="dropdown">Dropdown</h2>
+<p>Defines a  <strong>Dropdown</strong>. This property is available only in sub graphs.</p>
+<p>Parameters specific to Dropdown properties in addition to the <a href="#common-parameters">common parameters</a>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Default Value</strong></td>
+<td style="text-align: left;">Selects the default Entry that you want Shader Graph to select on your property.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Entries</strong></td>
+<td style="text-align: left;">Adds a corresponding input port to the node for each entry.<br><br>The options are:<ul><li><strong>Add to the list (+)</strong>: Adds a new option to your dropdown.</li><li><strong>Remove selection from the list (-)</strong>: Removes the selected entry from the list.</li></ul></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> The <strong>Promote to final Shader</strong> parameter is not available for this property.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

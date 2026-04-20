@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Configuring input | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Configuring input | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="input-system-configuring-input">
+<h1 id="configuring-input">Configuring input</h1>
+
+<p>The <strong>Input Actions Editor</strong> allows you to edit <a class="xref" href="ActionAssets.html">action assets</a>, which contain a saved configuration of <a class="xref" href="Actions.html">input actions</a> and their associated <a class="xref" href="ActionBindings.html">bindings</a>.</p>
+<p>It allows you to group collections of actions into <a href="ActionsEditor.html#configure-action-maps">action maps</a>, which represent different input scenarios in your project (such as UI navigation, gameplay, etc.)</p>
+<p>It also allows you to define <a class="xref" href="ActionBindings.html#control-schemes">control schemes</a> which are a way to enable or disable a set of devices, or respond to which type of device is being used. This is often useful if you want to customize your UI based on whether your users are using a mouse, keyboard, or gamepad as their chosen input.</p>
+<h2 id="action-assets-and-project-wide-actions">Action assets and project-wide actions</h2>
+<p>The typical workflow for most projects is to have a single action asset, which is assigned as the <strong>project-wide actions</strong>. Refer to <a class="xref" href="ProjectWideActions.html">Project-Wide Actions</a> to create and assign an actions asset as your project-wide action if you haven't already done this.</p>
+<h2 id="the-input-actions-editor-window-and-panels">The Input Actions Editor window and panels</h2>
+<p>The <strong>Input Actions Editor</strong> appears when you double-click an action asset to open it.</p>
+<p>It also appears in the Project Settings window under <strong>Edit</strong> &gt; <strong>Project Settings</strong> &gt; <strong>Input System Package</strong> if you have an action asset assigned as project-wide.</p>
+<p><img src="./Images/ActionsEditorCallout.png" alt="The Input Actions Editor displays the three panels and the default actions"></p>
+<p>The Input Actions Editor is divided into three panels (marked A, B &amp; C in the image above).</p>
+<table>
+<thead>
+<tr>
+<th>Panel name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>(A) Action Maps</strong></td>
+<td>Displays the list of currently defined action maps. Each action map is a collection of actions that you can enable or disable together as a group.</td>
+</tr>
+<tr>
+<td><strong>(B) Actions</strong></td>
+<td>Displays all the actions defined in the currently selected action map, and the bindings associated with each action.</td>
+</tr>
+<tr>
+<td><strong>(C) Properties</strong></td>
+<td>Displays the properties of the currently selected action or binding from the Actions panel. The title of this panel changes depending on whether you have an action or a binding selected in the Actions panel.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="configure-action-maps">Configure action maps</h2>
+<ul>
+<li>To add a new action map, select the Add (+) icon in the header of the <strong>Action Maps</strong> panel.</li>
+<li>To rename an existing action map, either long-click the name, or right-click the action map and select <strong>Rename</strong> from the context menu. Note that action map names can't contain slashes  (<code>/</code>).</li>
+<li>To delete an existing action map, right-click it and select <strong>Delete</strong> from the context menu.</li>
+<li>To duplicate an existing action map, right-click it and select <strong>Duplicate</strong> from the context menu.</li>
+</ul>
+<h2 id="configure-actions">Configure actions</h2>
+<ul>
+<li>To add a new action, select the Add (+) icon in the header of the <strong>Action</strong> column.</li>
+<li>To rename an existing action, either long-click the name, or right-click the action map and select <strong>Rename</strong> from the context menu.</li>
+<li>To delete an existing action, either right-click it and select <strong>Delete</strong> from the context menu.</li>
+<li>To duplicate an existing action, either right-click it and select <strong>Duplicate</strong> from the context menu.</li>
+</ul>
+<h2 id="edit-action-properties">Edit action properties</h2>
+<p>If you select an action, you can edit its properties in the <strong>Action Properties</strong> panel on the right:</p>
+<p><img src="Images/ActionProperties.png" alt="The Action Properties panel of the Input Actions Editor displays the Action, Interactions, and Processors groups expanded."></p>
+<h3 id="action-type">Action Type</h3>
+<p>Use the <strong>Action Type</strong> setting to select <strong>Button</strong>, <strong>Value</strong> or <strong>PassThrough</strong>.</p>
+<p>These options relate to whether this action should represent a discrete on/off button-style interaction or a value that can change over time while the control is being used.</p>
+<p>For device controls such as keyboard keys, mouse clicks, or gamepad buttons, select <strong>Button</strong>. For device controls such as mouse movement, a joystick or gamepad stick, or device orientation that provide continuously changing input over a period of time, select <strong>Value</strong>.</p>
+<p>The Button and Value types of action also provides data about the action such as whether it has started and stopped, and conflict resolution in situations where multiple bindings are mapped to the same action.</p>
+<p>The third option, <strong>PassThrough</strong>, is also a value type, and as such is suitable for the same types of device controls as value. The difference is that actions set to PassThrough only provide basic information about the values incoming from the device controls bound to it, and does not provide the extra data relating to the phase of the action, nor does it perform conflict resolution in the case of multiple controls mapped to the same action.</p>
+<p>For details about how these types work, refer to <a class="xref" href="RespondingToActions.html#action-types">Action types</a> and <a class="xref" href="Interactions.html#default-interaction">Default Interaction</a>.</p>
+<h3 id="control-type">Control Type</h3>
+<p>The <strong>Control Type</strong> setting allows you to select the type of control expected by the action. This limits the controls shown when setting up bindings in the UI and also limits which contols can be bound interactively to the action.</p>
+<p>For example, if you select <strong>2D axis</strong>, only those controls that can supply a 2D vector as value are available as options for the binding control path.</p>
+<p>There are more specific control types available which further filter the available bindings, such as &quot;Stick&quot;, &quot;Dpad&quot; or &quot;Touch&quot;. If you select one of these control types, the list of available controls is further limited to only those controls of those specific types when you select a binding for your action (see directly below).</p>
+<h2 id="bindings">Bindings</h2>
+<ul>
+<li>To add a new binding, select the Add (+) icon on the action you want to add it to, and select the binding type from the menu that appears.</li>
+<li>To delete an existing binding, either right-click it and select <strong>Delete</strong> from the context menu.</li>
+<li>To duplicate an existing binding, either right-click it and select <strong>Duplicate</strong> from the context menu.</li>
+</ul>
+<p>You can add multiple bindings to an action, which is generally useful for supporting multiple types of input device. For example, in the default set of actions, the &quot;Move&quot; action has a binding to the left gamepad stick and the WSAD keys, which means input through any of these bindings will perform the action.</p>
+<p><img src="./Images/ActionWithMultipleBindings.png" alt=""><br>
+<em>The default Move action in the Input Actions Editor, displaying the multiple bindings associated with it.</em></p>
+<p>If you select a binding, you can edit its properties in the <strong>Binding Properties</strong> panel on the right:</p>
+<p><img src="Images/BindingProperties.png" alt="The Binding Properties panel displays the Path value as Left Stick [Gamepad]."></p>
+<h3 id="set-control-paths">Set control paths</h3>
+<p>The most important property of any binding is the <a class="xref" href="Controls.html#control-paths">control path</a> it's bound to. To edit it, open the <strong>Path</strong> dropdown menu. This displays a control picker window.</p>
+<p><img src="Images/InputControlPicker.png" alt="The Binding Properties panel displays the control picker window available from the Path dropdown menu."></p>
+<p>In the control picker window, you can explore a tree of input devices and controls that the Input System recognizes, and bind to these controls. Unity filters this list by the action's <a href="xref:UnityEngine.InputSystem.InputAction.expectedControlType"><code>expectedControlType</code></a> property. For example, if the control type is <code>Vector2</code>, you can only select a control that generates two-dimensional values, like a stick.</p>
+<p>The device and control tree is organized hierarchically from generic to specific. For example, the <strong>Gamepad</strong> control path <code>&lt;Gamepad&gt;/buttonSouth</code> matches the lower action button on any gamepad. Alternatively, if you navigate to <strong>Gamepad</strong> &gt; <strong>More Specific Gamepads</strong> and select <strong>PS4 Controller</strong>, and then choose the control path <code>&lt;DualShockGamepad&gt;/buttonSouth</code>, this only matches the &quot;Cross&quot; button on PlayStation gamepads, and doesn't match any other gamepads.</p>
+<p>Instead of browsing the tree to find the control you want, it's easier to let the Input System listen for input. To do that, select the <strong>Listen</strong> button. At first, the list of Controls is empty. Once you start pressing buttons or actuating Controls on the Devices you want to bind to, the control picker window starts listing any bindings that match the controls you pressed. Select any of these bindings to view them.</p>
+<p>Finally, you can choose to manually edit the binding path, instead of using the control picker. To do that, select the <strong>T</strong> button next to the control path popup. This changes the popup to a text field, where you can enter any binding string. This also allows you to use wildcard (<code>*</code>) characters in your bindings. For example, you can use a binding path such as <code>&lt;Touchscreen&gt;/touch*/press</code> to bind to any finger being pressed on the touchscreen, instead of manually binding to <code>&lt;Touchscreen&gt;/touch0/press</code>, <code>&lt;Touchscreen&gt;/touch1/press</code> and so on.</p>
+<h3 id="edit-composite-bindings">Edit composite bindings</h3>
+<p>Composite bindings are bindings consisting of multiple parts, which form a control together. For instance, a <a class="xref" href="ActionBindings.html#2d-vector">2D Vector Composite</a> uses four buttons (left, right, up, down) to simulate a 2D stick input. Refer to <a class="xref" href="ActionBindings.html#composite-bindings">Composite bindings</a> to learn more.</p>
+<p><img src="Images/2DVectorComposite.png" alt="The WASD setting appears under the Move property on the Actions panel.">{width=&quot;486&quot; height=&quot;178&quot;}</p>
+<p>To create a composite binding, in the Input Actions Editor, select the Add (+) icon on the action you want to add it to, and select the composite binding type from the popup menu.</p>
+<p><img src="Images/Add2DVectorComposite.png" alt="The Add Up/Down/Left/Right Composite binding is selected for the Move property on the Actions panel.">{width=&quot;486&quot; height=&quot;199&quot;}</p>
+<p>This creates multiple binding entries for the action: one for the Composite as a whole, and then, one level below that, one for each Composite part. The Composite itself doesn't have a binding path property, but its individual parts do, and you can edit these parts like any other binding. Once you bind all the Composite's parts, the Composite can work together as if you bound a single control to the action.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The set of Composites displayed in the menu is depends on the value type of the action. This means that, for example, if the action is set to type &quot;Button&quot;, then only Composites able to return values of type <code>float</code> will be shown.</p>
+</div>
+<p>To change the type of a Composite retroactively, select the Composite, then select the new type from the <strong>Composite Type</strong> drop-down in the <strong>Properties</strong> pane.</p>
+<p><img src="./Images/CompositeType.png" alt="The Composite Type binding is set to 2D Vector binding on the Actions panel.">{width=&quot;486&quot; height=&quot;184&quot;}</p>
+<p>To change the part of the Composite to which a particular binding is assigned, use the <strong>Composite Part</strong> drop-down in the binding's properties.</p>
+<p><img src="./Images/CompositePart.png" alt="The Composite Part binding is set to Up under the Path binding property.">{width=&quot;486&quot; height=&quot;161&quot;}</p>
+<p>You can assign multiple bindings to the same part. You can also duplicate individual part bindings: right-click the binding, then select <strong>Duplicate</strong> to create new part bindings for the Composite. This can be used, for example, to create a single Composite for both &quot;WASD&quot; style controls and arrow keys.</p>
+<p><img src="./Images/DuplicatedPartBindings.png" alt="The Keyboard setting under Move on the Actions panel displays duplicated part bindings.">{width=&quot;486&quot; height=&quot;214&quot;}</p>
+<h2 id="edit-control-schemes">Edit control schemes</h2>
+<p>Input action assets can have multiple <a class="xref" href="ActionBindings.html#control-schemes">control schemes</a>, which let you enable or disable different sets of bindings for your actions for different types of Devices.</p>
+<p><img src="Images/ControlSchemeProperties.png" alt="Gamepad appears as the Scheme Name value on the Add Control Scheme window."></p>
+<p>To see the control schemes in the Input Actions Editor, open the control scheme drop-down list in the top left of the window. This menu lets you add or remove control schemes to your actions asset. If the actions asset contains any control schemes, you can select a control scheme, and then the window only shows bindings that are associated with that scheme. If you select a binding, you can pick the control schemes for which this binding is active in the <strong>Properties</strong> panel on the left.</p>
+<p>When you add a new control scheme, or select an existing control scheme, and then select <strong>Edit Control Scheme</strong>, you can edit the name of the control scheme and which devices the scheme should be active for. When you add a new control scheme, the &quot;Device Type&quot; list is empty by default (as shown above). You must add at least one type of device to this list for the control scheme to be functional.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
