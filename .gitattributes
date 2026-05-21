@@ -1,0 +1,11 @@
+# Ignoruj foldery zewnętrzne i ustawienia Unity
+Assets/TextMesh?Pro/** linguist-vendored
+Assets/Settings/** linguist-vendored
+Packages/** linguist-vendored
+ProjectSettings/** linguist-vendored
+
+# Ignoruj dokumentację i pliki shaderów
+_site/** linguist-documentation
+api/** linguist-documentation
+*.shader linguist-vendored
+*.hlsl linguist-vendored
