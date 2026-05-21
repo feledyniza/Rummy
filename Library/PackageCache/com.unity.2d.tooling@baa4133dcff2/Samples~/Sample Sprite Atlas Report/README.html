@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Sample Sprite Atlas Report | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Sample Sprite Atlas Report | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../../index.html">
+            <img id="logo" class="svg" src="../../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="sample-sprite-atlas-report">Sample Sprite Atlas Report</h1>
+
+<p>This sample demonstrates how to create a custom report for the Sprite Atlas Analyzer by implementing a report that identifies sprites included in multiple Sprite Atlases.</p>
+<h2 id="overview">Overview</h2>
+<p>The sample consists of three main components:</p>
+<ol>
+<li><strong>SpriteInMultipleAtlasIssue.cs</strong> - The main report class that inherits from <code>AnalyzerIssueReportBase</code></li>
+<li><strong>SpriteInMultipleAtlasCellData.cs</strong> - A data structure for representing cell data in the report UI</li>
+<li><strong>SpriteInMultipleAtlasIssue.uss</strong> - Styling for the report UI</li>
+</ol>
+<h2 id="how-to-create-a-new-report">How to Create a New Report</h2>
+<p>To create your own custom report based on this sample:</p>
+<h3 id="1-create-a-report-class">1. Create a Report Class</h3>
+<p>Create a class that inherits from <code>AnalyzerIssueReportBase</code>:</p>
+<pre><code class="lang-csharp">class YourCustomReport : AnalyzerIssueReportBase
+{
+    public YourCustomReport() : base(new [] {typeof(SpriteAtlasDataSource)})
+    {
+        SetReportListItemName(&quot;Your Report Name&quot;);
+        SetReportListemCount(&quot;0&quot;);
+        // Setup your UI here
+    }
+}
+</code></pre>
+<h3 id="2-define-required-properties">2. Define Required Properties</h3>
+<p>Implement the required abstract properties:</p>
+<pre><code class="lang-csharp">public override VisualElement reportContent =&gt; m_ReportContent;
+public override VisualElement settingsContent =&gt; null; // or your settings UI
+public override string reportTitle =&gt; &quot;Your Report Title&quot;;
+</code></pre>
+<h3 id="3-handle-data-source-changes">3. Handle Data Source Changes</h3>
+<p>Override <code>OnReportDataSourceChanged</code> to process data when it becomes available:</p>
+<pre><code class="lang-csharp">protected override async void OnReportDataSourceChanged(IReportDataSource reportDataSource)
+{
+    if (reportDataSource is SpriteAtlasDataSource dataSource)
+    {
+        isFilteringReport = true;
+        var filteredData = await ProcessData(dataSource.data);
+        // Update your UI with the processed data
+        SetReportListemCount($&quot;{filteredData.Count}&quot;);
+    }
+}
+</code></pre>
+<h3 id="4-create-data-processing-logic">4. Create Data Processing Logic</h3>
+<p>Implement your data filtering and processing logic:</p>
+<pre><code class="lang-csharp">async Task&lt;List&lt;TreeViewItemData&lt;YourDataType&gt;&gt;&gt; ProcessData(List&lt;EditorAtlasInfo&gt; dataSource)
+{
+    List&lt;TreeViewItemData&lt;YourDataType&gt;&gt; result = new();
+
+    // Your custom logic here
+    for(int i = 0; i &lt; dataSource.Count; ++i)
+    {
+        var atlasInfo = dataSource[i];
+        await Task.Delay(10); // Yield control periodically for large datasets
+
+        // Process atlas data according to your requirements
+    }
+
+    return result;
+}
+</code></pre>
+<h3 id="5-define-cell-data-structure">5. Define Cell Data Structure</h3>
+<p>Create a data structure for your UI cells:</p>
+<pre><code class="lang-csharp">[Serializable]
+record YourCellData
+{
+    public string name;
+    public string icon;
+    public string objectGlobalID;
+    // Add other properties as needed
+}
+</code></pre>
+<h3 id="6-setup-ui-elements">6. Setup UI Elements</h3>
+<p>Configure your MultiColumnTreeView with appropriate columns:</p>
+<pre><code class="lang-csharp">void SetupReportContent()
+{
+    var columns = new Columns()
+    {
+        new Column()
+        {
+            name = &quot;Name&quot;,
+            title = &quot;Name&quot;,
+            width = Length.Pixels(100),
+            makeCell = () =&gt; /* Create your cell UI */,
+            bindCell = (e, i) =&gt; /* Bind data to cell */
+        }
+        // Add more columns as needed
+    };
+
+    m_ReportContent = new MultiColumnTreeView(columns);
+    m_ReportContent.selectionChanged += OnSelectionChanged;
+}
+</code></pre>
+<h2 id="key-features-demonstrated">Key Features Demonstrated</h2>
+<ul>
+<li><strong>Data Source Integration</strong>: Uses <code>SpriteAtlasDataSource</code> to access Sprite Atlas data</li>
+<li><strong>Asynchronous Processing</strong>: Handles large datasets without blocking the UI</li>
+<li><strong>Multi-Column Tree View</strong>: Displays hierarchical data with custom columns</li>
+<li><strong>Object Selection</strong>: Integrates with Unity's Inspector for selecting objects</li>
+<li><strong>Custom Styling</strong>: Uses USS files for custom UI appearance</li>
+<li><strong>Global Object ID Handling</strong>: Converts between global IDs and Unity objects</li>
+</ul>
+<h2 id="notes">Notes</h2>
+<p>This sample uses internal APIs from the package which are subject to change in future versions.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

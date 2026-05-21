@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Graph Settings tab reference | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Graph Settings tab reference | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="graph-settings-tab-reference">Graph Settings tab reference</h1>
+
+<p>Use the <strong>Graph Settings</strong> tab in the <a href="Internal-Inspector.html">Graph Inspector</a> window to change settings that affect the current shader graph as a whole.</p>
+<h2 id="general-properties">General properties</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Property</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Precision</strong></td>
+<td style="text-align: left;">Select a default <a href="Precision-Modes.html">Precision Mode</a> for the entire graph. You can override the precision mode at the node level in your graph.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Preview</strong></td>
+<td style="text-align: left;">Select your preferred preview mode for the nodes that support preview. The options are: <ul><li><strong>Inherit</strong>:  The Unity Editor automatically selects the preview mode to use.</li><li><strong>Preview 2D</strong>: Renders the output of the sub graph as a flat two-dimensional preview.</li><li><strong>Preview 3D</strong>: Renders the output of the sub graph on a three-dimensional object such as a sphere.</li></ul> This property is available only in <a href="Sub-graph.html">sub graphs</a>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="target-settings">Target Settings</h2>
+<p>Add or remove graph targets to the current shader graph and set target properties according to the selected material type.</p>
+<h3 id="active-targets">Active Targets</h3>
+<p>A list that contains the <a href="Graph-Target.html">graph targets</a> selected for the current shader graph. Select the <strong>Add (+)</strong> and <strong>Remove (−)</strong> buttons to add or remove <strong>Active Targets</strong>.</p>
+<p>Shader Graph supports the following target types:</p>
+<ul>
+<li><strong>Custom Render Texture</strong>: Shaders for updating <a href="Custom-Render-Texture.html">Custom Render Textures</a>.</li>
+<li><strong>Built-in</strong>: Shaders for Unity’s <a href="xref:built-in-render-pipeline">Built-In Render Pipeline</a>.</li>
+<li><strong>Universal</strong>: Shaders for the <a href="xref:um-universal-render-pipeline">Universal Render Pipeline (URP)</a>, available only if your project uses URP.</li>
+<li><strong>HDRP</strong>: Shaders for the <a href="xref:high-definition-render-pipeline">High Definition Render Pipeline (HDRP)</a>, available only if your project uses HDRP.</li>
+</ul>
+<h3 id="target-properties">Target properties</h3>
+<p>Each graph target added in the list of <strong>Active Targets</strong> has its own set of properties.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Property</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Material</strong></td>
+<td style="text-align: left;">Selects a material type for the target. The available options depend on the current target type.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Other properties (contextual)</td>
+<td style="text-align: left;">A set of material and shader related properties that correspond to the current target type and the <strong>Material</strong> you select for the target.<ul><li>For Universal Render Pipeline (URP) target properties, refer to <a href="xref:um-shaders-in-universalrp-reference">Shader graph material Inspector window reference for URP</a>.</li><li>For High Definition Render Pipeline (HDRP) target properties, refer to HDRP's <a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.high-definition@latest/index.html?subfolder=/manual/shader-graph-materials-reference.html">Shader Graph materials reference</a>.</li></ul></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Custom Editor GUI</strong></td>
+<td style="text-align: left;">Renders a custom editor GUI in the Inspector window of the material. Enter the name of the GUI class in the field. For more information, refer to <a href="xref:um-writing-shader-display-types">Control material properties in the Inspector window</a> and <a href="xref:um-sl-custom-editor">Custom Editor block in ShaderLab reference</a>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Support VFX Graph</strong></td>
+<td style="text-align: left;">Enables this shader graph to support the <a href="https://docs.unity3d.com/Packages/com.unity.visualeffectgraph@latest">Visual Effect Graph</a> to render particles.<br><strong>Note</strong>: This option is only available for certain material types.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="additional-resources">Additional resources</h2>
+<ul>
+<li><a href="Precision-Modes.html">Precision Modes</a></li>
+<li><a href="Graph-Target.html">Graph targets</a></li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Introduction to resources in the render graph system in SRP Core | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Introduction to resources in the render graph system in SRP Core | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="introduction-to-resources-in-the-render-graph-system-in-srp-core">Introduction to resources in the render graph system in SRP Core</h1>
+
+<p>To declare a resource and use it in a render pass, for example a texture or a list of objects to render, call render graph APIs that return a handle to the resource. You can't directly allocate or dispose of resources yourself.</p>
+<p>The render graph system only allocates the memory for a resource just before the first render pass that writes to it, and releases the memory after the last render pass that reads it. This lets render graph manage memory in the most efficient way possible, and avoid allocating memory for resources that aren't used in a frame.</p>
+<p>You can create resources in two ways:</p>
+<ul>
+<li><p>Create a resource inside a render pass. These are called internal or transient resources. The render graph system handles the lifetime of these resources. You can't access them outside of the render graph instance, or pass them between frames or different render graphs.</p>
+<p>For example:</p>
+<pre><code class="lang-c#">TextureHandle tempTexture = myRenderGraph.CreateTexture(textureProperties);
+</code></pre>
+<p>For more information, refer to <a href="render-graph-create-a-texture.html">Create a texture in the render graph system</a>.</p>
+</li>
+<li><p>Import an existing resource from outside a render pass, for example the camera back buffer, or textures you want a render graph to use across multiple frames. These are called imported or external resources. You manage their lifetime yourself.</p>
+<p>For example:</p>
+<pre><code class="lang-c#">TextureHandle cameraColorBuffer = myRenderGraph.ImportBackbuffer(BuiltinRenderTextureType.CameraTarget, cameraTargetProperties);            
+</code></pre>
+<p>Imported resources are useful when the resource is used in one of two possible render passes. For example, using the color buffer in either a deferred lighting pass or a forward lighting pass.</p>
+<p>For more information, refer to <a href="render-graph-import-a-texture.html">Import a texture into the render graph system</a>.</p>
+</li>
+</ul>
+<p>Each API requires a descriptor structure as a parameter. The properties in these structures are similar to the properties in the resources they represent (respectively <a href="rthandle-system.html">RTHandle</a>, <a href="https://docs.unity3d.com/ScriptReference/ComputeBuffer.html">ComputeBuffer</a>, and <a href="https://docs.unity3d.com/ScriptReference/Rendering.RendererList.html">RendererLists</a>).</p>
+<p>For the complete list of APIs, refer to the <a href="../api/UnityEngine.Rendering.RenderGraphModule.RenderGraph.html">API documentation</a>.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

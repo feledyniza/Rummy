@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Input bindings | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Input bindings | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="input-system-action-bindings">
+<h1 id="input-bindings">Input bindings</h1>
+
+<p>An <a href="xref:UnityEngine.InputSystem.InputBinding"><code>InputBinding</code></a> represents a connection between an <a class="xref" href="Actions.html">action</a> and one or more <a class="xref" href="Controls.html">controls</a> identified by a <a class="xref" href="Controls.html#control-paths">control path</a>. For example, the right trigger of a gamepad (a control) might be bound to an an action named &quot;accelerate&quot;, so that pulling the right trigger causes a car to accelerate in your game.</p>
+<p>You can add multiple bindings to an action, which is generally useful for supporting multiple types of input device. For example, in the default set of actions, the &quot;Move&quot; action has a binding to the left gamepad stick and the WASD keys, which means input through any of these bindings will perform the action.</p>
+<p>You can also bind multiple controls from the same device to an action. For example, both the left and right trigger of a gamepad could be mapped to the same action, so that pulling either trigger has the same result in your game.</p>
+<p>You can also set up <a href="#composite-bindings">Composite</a> bindings, which don't bind to the controls themselves, but receive their input from <strong>Part Bindings</strong> and then return a value representing a composition of those inputs. For example, the right trigger on the gamepad can act as a strength multiplier on the value of the left stick.</p>
+<h2 id="inputbinding-api-access">InputBinding API access</h2>
+<p>Each <code>InputBinding</code> has the following properties:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.InputBinding.path"><code>path</code></a></td>
+<td><a class="xref" href="Controls.html#control-paths">Control path</a> that identifies the control(s) from which the action should receive input.<br><br>Example: <code>&quot;&lt;Gamepad&gt;/leftStick&quot;</code></td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.InputBinding.overridePath"><code>overridePath</code></a></td>
+<td><a class="xref" href="Controls.html#control-paths">Control path</a> that overrides <code>path</code>. Unlike <code>path</code>, <code>overridePath</code> is not persistent, so you can use it to non-destructively override the path on a binding. If it is set to something other than null, it takes effect and overrides <code>path</code>.  To get the path which is currently in effect (that is, either <code>path</code> or <code>overridePath</code>), you can query the <a href="xref:UnityEngine.InputSystem.InputBinding.effectivePath"><code>effectivePath</code></a> property.</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.InputBinding.action"><code>action</code></a></td>
+<td>The name or ID of the action that the binding should trigger. Note that this can be null or empty (for instance, for  <a href="#composite-bindings">composites</a>). Not case-sensitive.<br><br>Example: <code>&quot;fire&quot;</code></td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.InputBinding.groups"><code>groups</code></a></td>
+<td>A semicolon-separated list of binding groups that the binding belongs to. Can be null or empty. Binding groups can be anything, but are mostly used for <a href="#control-schemes">control schemes</a>. Not case-sensitive.<br><br>Example: <code>&quot;Keyboard&amp;Mouse;Gamepad&quot;</code></td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.InputBinding.interactions"><code>interactions</code></a></td>
+<td>A semicolon-separated list of <a class="xref" href="Interactions.html">Interactions</a> to apply to input on this binding. Note that Unity appends Interactions applied to the <a class="xref" href="Actions.html">action</a> itself (if any) to this list. Not case-sensitive.<br><br>Example: <code>&quot;slowTap;hold(duration=0.75)&quot;</code></td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.InputBinding.processors"><code>processors</code></a></td>
+<td>A semicolon-separated list of <a href="UsingProcessors.html">Processors</a> to apply to input on this binding. Note that Unity appends Processors applied to the <a class="xref" href="Actions.html">action</a> itself (if any) to this list. Not case-sensitive.<br><br>Processors on bindings apply in addition to Processors on controls that are providing values. For example, if you put a <code>stickDeadzone</code> Processor on a binding and then bind it to <code>&lt;Gamepad&gt;/leftStick</code>, you get deadzones applied twice: once from the deadzone Processor sitting on the <code>leftStick</code> control, and once from the binding.<br><br>Example: <code>&quot;invert;axisDeadzone(min=0.1,max=0.95)&quot;</code></td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.InputBinding.id"><code>id</code></a></td>
+<td>Unique ID of the binding. You can use it to identify the binding when storing binding overrides in user settings, for example.</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.InputBinding.name"><code>name</code></a></td>
+<td>Optional name of the binding. Identifies part names inside <a href="#composite-bindings">Composites</a>.<br><br>Example: <code>&quot;Positive&quot;</code></td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.InputBinding.isComposite"><code>isComposite</code></a></td>
+<td>Whether the binding acts as a <a href="#composite-bindings">Composite</a>.</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.InputBinding.isPartOfComposite"><code>isPartOfComposite</code></a></td>
+<td>Whether the binding is part of a <a href="#composite-bindings">Composite</a>.</td>
+</tr>
+</tbody>
+</table>
+<p>To query the bindings for a specific action, use <a href="xref:UnityEngine.InputSystem.InputAction.bindings"><code>InputAction.bindings</code></a>.</p>
+<p>To query a flat list of bindings for all actions in an action map, use <a href="xref:UnityEngine.InputSystem.InputActionMap.bindings"><code>InputActionMap.bindings</code></a>.</p>
+<h2 id="composite-bindings">Composite bindings</h2>
+<p>You might want to have several controls act in unison to mimic a different type of control. The most common example of this is using the W, A, S, and D keys on the keyboard to form a 2D vector control equivalent to mouse deltas or gamepad sticks. Another example is to use two keys to form a 1D axis equivalent to a mouse scroll axis.</p>
+<p>This is difficult to implement with normal bindings. You can bind a  <a href="xref:UnityEngine.InputSystem.Controls.ButtonControl"><code>ButtonControl</code></a> to an action expecting a <code>Vector2</code>, but doing so results in an exception at runtime when the Input System tries to read a <code>Vector2</code> from a control that can deliver only a <code>float</code>.</p>
+<p>Composite bindings (that is, bindings that are made up of other bindings) solve this problem. Composites themselves don't bind directly to controls; instead, they source values from other bindings that do, and then synthesize input on the fly from those values.</p>
+<p>To see how to create Composites in the editor UI, refer to <a class="xref" href="ActionsEditor.html#edit-composite-bindings">Editing Composite Bindings</a>.</p>
+<p>To create composites in code, use the <a href="xref:UnityEngine.InputSystem.InputActionSetupExtensions.AddCompositeBinding(UnityEngine.InputSystem.InputAction,System.String,System.String,System.String)"><code>AddCompositeBinding</code></a> method:</p>
+<pre><code class="lang-CSharp">myAction.AddCompositeBinding(&quot;Axis&quot;)
+    .With(&quot;Positive&quot;, &quot;&lt;Gamepad&gt;/rightTrigger&quot;)
+    .With(&quot;Negative&quot;, &quot;&lt;Gamepad&gt;/leftTrigger&quot;);
+</code></pre>
+<p>Each Composite consists of one binding that has <a href="xref:UnityEngine.InputSystem.InputBinding.isComposite"><code>InputBinding.isComposite</code></a> set to true, followed by one or more bindings that have <a href="xref:UnityEngine.InputSystem.InputBinding.isPartOfComposite"><code>InputBinding.isPartOfComposite</code></a> set to true. In other words, several consecutive entries in <a href="xref:UnityEngine.InputSystem.InputActionMap.bindings"><code>InputActionMap.bindings</code></a> or <a href="xref:UnityEngine.InputSystem.InputAction.bindings"><code>InputAction.bindings</code></a> together form a Composite.</p>
+<p>Note that each composite part can be bound arbitrary many times.</p>
+<pre><code class="lang-CSharp">// Make both shoulders and triggers pull on the axis.
+myAction.AddCompositeBinding(&quot;Axis&quot;)
+    .With(&quot;Positive&quot;, &quot;&lt;Gamepad&gt;/rightTrigger&quot;)
+    .With(&quot;Positive&quot;, &quot;&lt;Gamepad&gt;/rightShoulder&quot;)
+    .With(&quot;Negative&quot;, &quot;&lt;Gamepad&gt;/leftTrigger&quot;);
+    .With(&quot;Negative&quot;, &quot;&lt;Gamepad&gt;/leftShoulder&quot;);
+</code></pre>
+<p>Composites can have parameters, just like <a class="xref" href="Interactions.html">Interactions</a> and <a href="UsingProcessors.html">Processors</a>.</p>
+<pre><code class="lang-CSharp">myAction.AddCompositeBinding(&quot;Axis(whichSideWins=1)&quot;);
+</code></pre>
+<p>There are currently five Composite types that come with the system out of the box:</p>
+<ul>
+<li><a href="#1d-axis">1D-Axis</a>: two buttons that pull a 1D axis in the negative and positive direction.</li>
+<li><a href="#2d-vector">2D-Vector</a>: represents a 4-way button setup where each button represents a cardinal direction, for example a WASD keyboard input (up-down-left-right controls).</li>
+<li><a href="#3d-vector">3D-Vector</a>: represents a 6-way button where two combinations each control one axis of a 3D Vector.</li>
+<li><a href="#one-modifier">One Modifier</a>: requires the user to hold down a &quot;modifier&quot; button in addition to another control, for example, &quot;SHIFT+1&quot;.</li>
+<li><a href="#two-modifiers">Two Modifiers</a>: requires the user to hold down two &quot;modifier&quot; buttons in addition to another control, for example, &quot;SHIFT+CTRL+1&quot;.</li>
+</ul>
+<p>You can also <a href="#writing-custom-composites">add your own</a> types of Composites.</p>
+<h3 id="1d-axis">1D Axis</h3>
+<p><img src="Images/Add1DAxisComposite.png" alt="The Add Positive/Negative binding property is selected for the &quot;fire&quot; action on the Actions panel.">{width=&quot;486&quot; height=&quot;133&quot;}</p>
+<p><img src="Images/1DAxisComposite.png" alt="The 1D Axis Composite binding appears under the &quot;fire&quot; action on the Actions panel.">{width=&quot;486&quot; height=&quot;142&quot;}</p>
+<p>The 1D Axis Composite is made of two buttons: one that pulls a 1D axis in its negative direction, and another that pulls it in its positive direction, using the <a href="xref:UnityEngine.InputSystem.Composites.AxisComposite"><code>AxisComposite</code></a> class to compute a <code>float</code>.</p>
+<pre><code class="lang-CSharp">myAction.AddCompositeBinding(&quot;1DAxis&quot;) // Or just &quot;Axis&quot;
+    .With(&quot;Positive&quot;, &quot;&lt;Gamepad&gt;/rightTrigger&quot;)
+    .With(&quot;Negative&quot;, &quot;&lt;Gamepad&gt;/leftTrigger&quot;);
+</code></pre>
+<p>The axis Composite has two Part Bindings:</p>
+<table>
+<thead>
+<tr>
+<th>Part Binding</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.AxisComposite.positive"><code>positive</code></a></td>
+<td><code>Button</code></td>
+<td>Controls pulling in the positive direction (towards <a href="xref:UnityEngine.InputSystem.Composites.AxisComposite.maxValue"><code>maxValue</code></a>).</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.AxisComposite.negative"><code>negative</code></a></td>
+<td><code>Button</code></td>
+<td>Controls pulling in the negative direction, (towards <a href="xref:UnityEngine.InputSystem.Composites.AxisComposite.minValue"><code>minValue</code></a>).</td>
+</tr>
+</tbody>
+</table>
+<p>You can set the following parameters on an axis Composite:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.AxisComposite.whichSideWins"><code>whichSideWins</code></a></td>
+<td>What happens if both <a href="xref:UnityEngine.InputSystem.Composites.AxisComposite.positive"><code>positive</code></a> and <a href="xref:UnityEngine.InputSystem.Composites.AxisComposite.negative"><code>negative</code></a> are actuated. See table below.</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.AxisComposite.minValue"><code>minValue</code></a></td>
+<td>The value returned if the <a href="xref:UnityEngine.InputSystem.Composites.AxisComposite.negative"><code>negative</code></a> side is actuated. Default is -1.</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.AxisComposite.maxValue"><code>maxValue</code></a></td>
+<td>The value returned if the <a href="xref:UnityEngine.InputSystem.Composites.AxisComposite.positive"><code>positive</code></a> side is actuated. Default is 1.</td>
+</tr>
+</tbody>
+</table>
+<p>If controls from both the <code>positive</code> and the <code>negative</code> side are actuated, then the resulting value of the axis Composite depends on the <code>whichSideWin</code> parameter setting.</p>
+<table>
+<thead>
+<tr>
+<th><a href="xref:UnityEngine.InputSystem.Composites.AxisComposite.WhichSideWins"><code>WhichSideWins</code></a></th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(0) <code>Neither</code></td>
+<td>Neither side has precedence. The Composite returns the <a href="xref:UnityEngine.InputSystem.Composites.AxisComposite.midPoint"><code>midpoint</code></a> between <code>minValue</code> and <code>maxValue</code> as a result. At their default settings, this is 0.<br><br>This is the default value for this setting.</td>
+</tr>
+<tr>
+<td>(1) <code>Positive</code></td>
+<td>The positive side has precedence and the Composite returns <code>maxValue</code>.</td>
+</tr>
+<tr>
+<td>(2) <code>Negative</code></td>
+<td>The negative side has precedence and the Composite returns <code>minValue</code>.</td>
+</tr>
+</tbody>
+</table>
+<div class="NOTE">
+<h5>Note</h5>
+<p>There is no support yet for interpolating between the positive and negative over time.</p>
+</div>
+<h3 id="2d-vector">2D Vector</h3>
+<p><img src="Images/Add2DVectorComposite.png" alt="The Add Up/Down/Left/Right Composite binding is selected for the &quot;Move&quot; action on the Actions panel.">{width=&quot;486&quot; height=&quot;199&quot;}</p>
+<p><img src="Images/2DVectorComposite.png" alt="The WASD part bindings appear under the &quot;Move&quot; action on the Actions panel.">{width=&quot;486&quot; height=&quot;178&quot;}</p>
+<p>A 2D Vector Composite represents a 4-way button setup like the D-pad on gamepads, where each button represents a cardinal direction. This type of Composite binding uses the <a href="xref:UnityEngine.InputSystem.Composites.Vector2Composite"><code>Vector2Composite</code></a> class to compute a <code>Vector2</code>.</p>
+<p>This is very useful for representing up-down-left-right controls, such as WASD keyboard input.</p>
+<pre><code class="lang-CSharp">myAction.AddCompositeBinding(&quot;2DVector&quot;) // Or &quot;Dpad&quot;
+    .With(&quot;Up&quot;, &quot;&lt;Keyboard&gt;/w&quot;)
+    .With(&quot;Down&quot;, &quot;&lt;Keyboard&gt;/s&quot;)
+    .With(&quot;Left&quot;, &quot;&lt;Keyboard&gt;/a&quot;)
+    .With(&quot;Right&quot;, &quot;&lt;Keyboard&gt;/d&quot;);
+
+// To set mode (2=analog, 1=digital, 0=digitalNormalized):
+myAction.AddCompositeBinding(&quot;2DVector(mode=2)&quot;)
+    .With(&quot;Up&quot;, &quot;&lt;Gamepad&gt;/leftStick/up&quot;)
+    .With(&quot;Down&quot;, &quot;&lt;Gamepad&gt;/leftStick/down&quot;)
+    .With(&quot;Left&quot;, &quot;&lt;Gamepad&gt;/leftStick/left&quot;)
+    .With(&quot;Right&quot;, &quot;&lt;Gamepad&gt;/leftStick/right&quot;);
+</code></pre>
+<p>The 2D Vector Composite has four Part Bindings.</p>
+<table>
+<thead>
+<tr>
+<th>Part Binding</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.Vector2Composite.up"><code>up</code></a></td>
+<td><code>Button</code></td>
+<td>Controls representing <code>(0,1)</code> (+Y).</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.Vector2Composite.down"><code>down</code></a></td>
+<td><code>Button</code></td>
+<td>Controls representing <code>(0,-1)</code> (-Y).</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.Vector2Composite.left"><code>left</code></a></td>
+<td><code>Button</code></td>
+<td>Controls representing <code>(-1,0)</code> (-X).</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.Vector2Composite.right"><code>right</code></a></td>
+<td><code>Button</code></td>
+<td>Controls representing <code>(1,0)</code> (+X).</td>
+</tr>
+</tbody>
+</table>
+<p>In addition, you can set this parameter on a 2D Vector Composite:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.Vector2Composite.mode"><code>mode</code></a></td>
+<td>Whether to treat the inputs as digital or as analog controls.<br><br>If this is set to <a href="xref:UnityEngine.InputSystem.Composites.Vector2Composite.Mode.DigitalNormalized"><code>Mode.DigitalNormalized</code></a>, inputs are treated as buttons (off if below <a href="xref:UnityEngine.InputSystem.InputSettings.defaultButtonPressPoint"><code>defaultButtonPressPoint</code></a> and on if equal to or greater). Each input is 0 or 1 depending on whether the button is pressed or not. The vector resulting from the up/down/left/right parts is normalized. The result is a diamond-shaped 2D input range.<br><br>If this is set to <a href="xref:UnityEngine.InputSystem.Composites.Vector2Composite.Mode.Digital"><code>Mode.Digital</code></a>, the behavior is essentially the same as <a href="xref:UnityEngine.InputSystem.Composites.Vector2Composite.Mode.DigitalNormalized"><code>Mode.DigitalNormalized</code></a> except that the resulting vector is not normalized.<br><br>Finally, if this is set to <a href="xref:UnityEngine.InputSystem.Composites.Vector2Composite.Mode.Analog"><code>Mode.Analog</code></a>, inputs are treated as analog (i.e. full floating-point values) and, other than <a href="xref:UnityEngine.InputSystem.Composites.Vector2Composite.down"><code>down</code></a> and <a href="xref:UnityEngine.InputSystem.Composites.Vector2Composite.left"><code>left</code></a> being inverted, values will be passed through as is.<br><br>The default is <a href="xref:UnityEngine.InputSystem.Composites.Vector2Composite.Mode.DigitalNormalized"><code>Mode.DigitalNormalized</code></a>.</td>
+</tr>
+</tbody>
+</table>
+<div class="NOTE">
+<h5>Note</h5>
+<p>There is no support yet for interpolating between the up/down/left/right over time.</p>
+</div>
+<h3 id="3d-vector">3D Vector</h3>
+<p><img src="Images/Add3DVectorComposite.png" alt="The Add Up/Down/Left/Right/Forward/Backward Composite binding is selected for the &quot;position&quot; action on the Actions panel.">{width=&quot;486&quot; height=&quot;150&quot;}</p>
+<p><img src="Images/3DVectorComposite.png" alt="The 3D Vector part bindings appear under the &quot;position&quot; action on the Actions panel.">{width=&quot;486&quot; height=&quot;259&quot;
+}</p>
+<p>A 3D Vector Composite that represents a 6-way button where two combinations each control one axis of a 3D Vector. This type of Composite binding uses the the <a href="xref:UnityEngine.InputSystem.Composites.Vector3Composite"><code>Vector3Composite</code></a> class to compute a <code>Vector3</code>.</p>
+<pre><code class="lang-CSharp">myAction.AddCompositeBinding(&quot;3DVector&quot;)
+    .With(&quot;Up&quot;, &quot;&lt;Keyboard&gt;/w&quot;)
+    .With(&quot;Down&quot;, &quot;&lt;Keyboard&gt;/s&quot;)
+    .With(&quot;Left&quot;, &quot;&lt;Keyboard&gt;/a&quot;)
+    .With(&quot;Right&quot;, &quot;&lt;Keyboard&gt;/d&quot;);
+
+// To set mode (2=analog, 1=digital, 0=digitalNormalized):
+myAction.AddCompositeBinding(&quot;3DVector(mode=2)&quot;)
+    .With(&quot;Up&quot;, &quot;&lt;Gamepad&gt;/leftStick/up&quot;)
+    .With(&quot;Down&quot;, &quot;&lt;Gamepad&gt;/leftStick/down&quot;)
+    .With(&quot;Left&quot;, &quot;&lt;Gamepad&gt;/leftStick/left&quot;)
+    .With(&quot;Right&quot;, &quot;&lt;Gamepad&gt;/leftStick/right&quot;);
+</code></pre>
+<p>The 3D Vector Composite has four Part Bindings.</p>
+<table>
+<thead>
+<tr>
+<th>Part Binding</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.Vector3Composite.up"><code>up</code></a></td>
+<td><code>Button</code></td>
+<td>Controls representing <code>(0,1,0)</code> (+Y).</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.Vector3Composite.down"><code>down</code></a></td>
+<td><code>Button</code></td>
+<td>Controls representing <code>(0,-1,0)</code> (-Y).</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.Vector3Composite.left"><code>left</code></a></td>
+<td><code>Button</code></td>
+<td>Controls representing <code>(-1,0,0)</code> (-X).</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.Vector3Composite.right"><code>right</code></a></td>
+<td><code>Button</code></td>
+<td>Controls representing <code>(1,0,0)</code> (+X).</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.Vector3Composite.forward"><code>forward</code></a></td>
+<td><code>Button</code></td>
+<td>Controls representing <code>(0,0,1)</code> (+Z).</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.Vector3Composite.backward"><code>backward</code></a></td>
+<td><code>Button</code></td>
+<td>Controls representing <code>(0,0,-1)</code> (-Z).</td>
+</tr>
+</tbody>
+</table>
+<p>In addition, you can set the following parameters on a 3D vector Composite:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.Vector3Composite.mode"><code>mode</code></a></td>
+<td>Whether to treat the inputs as digital or as analog controls.<br><br>If this is set to <a href="xref:UnityEngine.InputSystem.Composites.Vector3Composite.Mode.DigitalNormalized"><code>Mode.DigitalNormalized</code></a>, inputs are treated as buttons (off if below <a href="xref:UnityEngine.InputSystem.InputSettings.defaultButtonPressPoint"><code>defaultButtonPressPoint</code></a> and on if equal to or greater). Each input is 0 or 1 depending on whether the button is pressed or not. The vector resulting from the up/down/left/right/forward/backward parts is normalized.<br><br>If this is set to <a href="xref:UnityEngine.InputSystem.Composites.Vector3Composite.Mode.Digital"><code>Mode.Digital</code></a>, the behavior is essentially the same as <a href="xref:UnityEngine.InputSystem.Composites.Vector3Composite.Mode.DigitalNormalized"><code>Mode.DigitalNormalized</code></a> except that the resulting vector is not normalized.<br><br>Finally, if this is set to <a href="xref:UnityEngine.InputSystem.Composites.Vector3Composite.Mode.Analog"><code>Mode.Analog</code></a>, inputs are treated as analog (that is, full floating-point values) and, other than <a href="xref:UnityEngine.InputSystem.Composites.Vector3Composite.down"><code>down</code></a>, <a href="xref:UnityEngine.InputSystem.Composites.Vector3Composite.left"><code>left</code></a>, and <a href="xref:UnityEngine.InputSystem.Composites.Vector3Composite.backward"><code>backward</code></a> being inverted, values will be passed through as they are.<br><br>The default is <a href="xref:UnityEngine.InputSystem.Composites.Vector3Composite.Mode.Analog"><code>Analog</code></a>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="one-modifier">One Modifier</h3>
+<p><img src="Images/AddBindingWithOneModifier.png" alt="The Add Binding With One Modifier Composite binding is selected for the &quot;fire&quot; action on the Actions panel.">{width=&quot;486&quot; height=&quot;129&quot;}</p>
+<p><img src="Images/OneModifierComposite.png" alt="The One Modifier part bindings appear under the &quot;fire&quot; action on the Actions panel.">{width=&quot;486&quot; height=&quot;147&quot;}</p>
+<p>A One Modifier Composite requires the user to hold down a &quot;modifier&quot; button in addition to another control from which the actual value of the binding is determined. This can be used, for example, for bindings such as &quot;SHIFT+1&quot;. This type of Composite binding uses the <a href="xref:UnityEngine.InputSystem.Composites.OneModifierComposite"><code>OneModifierComposite</code></a> class. The buttons can be on any device, and can be toggle buttons or full-range buttons such as gamepad triggers.</p>
+<p>The result is a value of the same type as the controls bound to the <a href="xref:UnityEngine.InputSystem.Composites.OneModifierComposite.binding"><code>binding</code></a> part.</p>
+<pre><code class="lang-CSharp">// Add binding for &quot;CTRL+1&quot;.
+myAction.AddCompositeBinding(&quot;OneModifier&quot;)
+    .With(&quot;Binding&quot;, &quot;&lt;Keyboard&gt;/1&quot;)
+    .With(&quot;Modifier&quot;, &quot;&lt;Keyboard&gt;/ctrl&quot;)
+
+// Add binding to mouse delta such that it only takes effect
+// while the ALT key is down.
+myAction.AddCompositeBinding(&quot;OneModifier&quot;)
+    .With(&quot;Binding&quot;, &quot;&lt;Mouse&gt;/delta&quot;)
+    .With(&quot;Modifier&quot;, &quot;&lt;Keyboard&gt;/alt&quot;);
+</code></pre>
+<p>The button with One Modifier Composite has two Part Bindings.</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.OneModifierComposite.modifier"><code>modifier</code></a></td>
+<td><code>Button</code></td>
+<td>Modifier that has to be held for <code>binding</code> to come through. If the user holds any of the buttons bound to the <code>modifier</code> at the same time as the button that triggers the action, the Composite assumes the value of the <code>modifier</code> binding. If the user does not press any button bound to the <code>modifier</code>, the Composite remains at default value.</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.OneModifierComposite.binding"><code>binding</code></a></td>
+<td>Any</td>
+<td>The control(s) whose value the Composite assumes while the user holds down the <code>modifier</code> button.</td>
+</tr>
+</tbody>
+</table>
+<p>This Composite has no parameters.</p>
+<h3 id="two-modifiers">Two Modifiers</h3>
+<p><img src="Images/AddBindingWithTwoModifiers.png" alt="The bindings With Two Modifiers Composite binding is selected for the &quot;fire&quot; action on the Actions panel.">{width=&quot;486&quot; height=&quot;119&quot;}</p>
+<p><img src="Images/TwoModifiersComposite.png" alt="The Two Modifiers part bindings appear under the &quot;fire&quot; action on the Actions panel.">{width=&quot;486&quot; height=&quot;149&quot;}</p>
+<p>A Two Modifiers Composite requires the user to hold down two &quot;modifier&quot; buttons in addition to another control from which the actual value of the binding is determined. This can be used, for example, for bindings such as &quot;SHIFT+CTRL+1&quot;. This type of Composite binding uses the <a href="xref:UnityEngine.InputSystem.Composites.TwoModifiersComposite"><code>TwoModifiersComposite</code></a> class. The buttons can be on any device, and can be toggle buttons or full-range buttons such as gamepad triggers.</p>
+<p>The result is a value of the same type as the controls bound to the <a href="xref:UnityEngine.InputSystem.Composites.TwoModifiersComposite.binding"><code>binding</code></a> part.</p>
+<pre><code class="lang-CSharp">myAction.AddCompositeBinding(&quot;TwoModifiers&quot;)
+    .With(&quot;Button&quot;, &quot;&lt;Keyboard&gt;/1&quot;)
+    .With(&quot;Modifier1&quot;, &quot;&lt;Keyboard&gt;/leftCtrl&quot;)
+    .With(&quot;Modifier1&quot;, &quot;&lt;Keyboard&gt;/rightCtrl&quot;)
+    .With(&quot;Modifier2&quot;, &quot;&lt;Keyboard&gt;/leftShift&quot;)
+    .With(&quot;Modifier2&quot;, &quot;&lt;Keyboard&gt;/rightShift&quot;);
+</code></pre>
+<p>The button with Two Modifiers Composite has three Part Bindings.</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.TwoModifiersComposite.modifier1"><code>modifier1</code></a></td>
+<td><code>Button</code></td>
+<td>The first modifier the user must hold alongside <code>modifier2</code>, for <code>binding</code> to come through. If the user does not press any button bound to the <code>modifier1</code>, the Composite remains at default value.</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.TwoModifiersComposite.modifier2"><code>modifier2</code></a></td>
+<td><code>Button</code></td>
+<td>The second modifier the user must hold alongside <code>modifier1</code>, for <code>binding</code> to come through. If the user does not press any button bound to the <code>modifier2</code>, the Composite remains at default value.</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.Composites.TwoModifiersComposite.binding"><code>binding</code></a></td>
+<td>Any</td>
+<td>The control(s) whose value the Composite assumes while the user presses both <code>modifier1</code> and <code>modifier2</code> at the same time.</td>
+</tr>
+</tbody>
+</table>
+<p>This Composite has no parameters.</p>
+<h3 id="writing-custom-composites">Writing custom Composites</h3>
+<p>You can define new types of Composites, and register them with the API. Unity treats these the same as predefined types, which the Input System internally defines and registers in the same way.</p>
+<p>To define a new type of Composite, create a class based on <a href="xref:UnityEngine.InputSystem.InputBindingComposite%601"><code>InputBindingComposite&lt;TValue&gt;</code></a>.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Composites must be <strong>stateless</strong>. This means that you cannot store local state that changes depending on the input being processed. For <strong>stateful</strong> processing on bindings, see <a class="xref" href="Interactions.html#writing-custom-interactions">interactions</a>.</p>
+</div>
+<pre><code class="lang-CSharp">// Use InputBindingComposite&lt;TValue&gt; as a base class for a composite that returns
+// values of type TValue.
+// NOTE: It is possible to define a composite that returns different kinds of values
+//       but doing so requires deriving directly from InputBindingComposite.
+#if UNITY_EDITOR
+[InitializeOnLoad] // Automatically register in editor.
+#endif
+// Determine how GetBindingDisplayString() formats the composite by applying
+// the  DisplayStringFormat attribute.
+[DisplayStringFormat(&quot;{firstPart}+{secondPart}&quot;)]
+public class CustomComposite : InputBindingComposite&lt;float&gt;
+{
+    // Each part binding is represented as a field of type int and annotated with
+    // InputControlAttribute. Setting &quot;layout&quot; restricts the controls that
+    // are made available for picking in the UI.
+    //
+    // On creation, the int value is set to an integer identifier for the binding
+    // part. This identifier can read values from InputBindingCompositeContext.
+    // See ReadValue() below.
+    [InputControl(layout = &quot;Button&quot;)]
+    public int firstPart;
+
+    [InputControl(layout = &quot;Button&quot;)]
+    public int secondPart;
+
+    // Any public field that is not annotated with InputControlAttribute is considered
+    // a parameter of the composite. This can be set graphically in the UI and also
+    // in the data (e.g. &quot;custom(floatParameter=2.0)&quot;).
+    public float floatParameter;
+    public bool boolParameter;
+
+    // This method computes the resulting input value of the composite based
+    // on the input from its part bindings.
+    public override float ReadValue(ref InputBindingCompositeContext context)
+    {
+        var firstPartValue = context.ReadValue&lt;float&gt;(firstPart);
+        var secondPartValue = context.ReadValue&lt;float&gt;(secondPart);
+
+        //... do some processing and return value
+    }
+
+    // This method computes the current actuation of the binding as a whole.
+    public override float EvaluateMagnitude(ref InputBindingCompositeContext context)
+    {
+        // Compute normalized [0..1] magnitude value for current actuation level.
+    }
+
+    static CustomComposite()
+    {
+        // Can give custom name or use default (type name with &quot;Composite&quot; clipped off).
+        // Same composite can be registered multiple times with different names to introduce
+        // aliases.
+        //
+        // NOTE: Registering from the static constructor using InitializeOnLoad and
+        //       RuntimeInitializeOnLoadMethod is only one way. You can register the
+        //       composite from wherever it works best for you. Note, however, that
+        //       the registration has to take place before the composite is first used
+        //       in a binding. Also, for the composite to show in the editor, it has
+        //       to be registered from code that runs in edit mode.
+        InputSystem.RegisterBindingComposite&lt;CustomComposite&gt;();
+    }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void Init() {} // Trigger static constructor.
+}
+</code></pre>
+<p>The Composite should now appear in the editor UI when you add a binding, and you can now use it in scripts.</p>
+<pre><code class="lang-CSharp">    myAction.AddCompositeBinding(&quot;custom(floatParameter=2.0)&quot;)
+        .With(&quot;firstpart&quot;, &quot;&lt;Gamepad&gt;/buttonSouth&quot;)
+        .With(&quot;secondpart&quot;, &quot;&lt;Gamepad&gt;/buttonNorth&quot;);
+</code></pre>
+<p>To define a custom parameter editor for the Composite, you can derive from  <a href="xref:UnityEngine.InputSystem.Editor.InputParameterEditor%601"><code>InputParameterEditor&lt;TObject&gt;</code></a>.</p>
+<pre><code class="lang-CSharp">#if UNITY_EDITOR
+public class CustomParameterEditor : InputParameterEditor&lt;CustomComposite&gt;
+{
+    public override void OnGUI()
+    {
+        EditorGUILayout.Label(&quot;Custom stuff&quot;);
+        target.floatParameter = EditorGUILayout.FloatField(&quot;Some Parameter&quot;, target.floatParameter);
+    }
+}
+#endif
+</code></pre>
+<h2 id="working-with-bindings">Working with bindings</h2>
+<h3 id="look-up-bindings">Look up bindings</h3>
+<p>You can retrieve the bindings of an action using its <a href="xref:UnityEngine.InputSystem.InputAction.bindings"><code>InputAction.bindings</code></a> property which returns a read-only array of <a href="xref:UnityEngine.InputSystem.InputBinding"><code>InputBinding</code></a> structs.</p>
+<pre><code class="lang-CSharp">    // Get bindings of &quot;fire&quot; action.
+    var fireBindings = playerInput.actions[&quot;fire&quot;].bindings;
+</code></pre>
+<p>Also, all the bindings for all actions in an <a href="xref:UnityEngine.InputSystem.InputActionMap"><code>InputActionMap</code></a> are made available through the <a href="xref:UnityEngine.InputSystem.InputActionMap.bindings"><code>InputActionMap.bindings</code></a> property. The bindings are associated with actions through an <a href="xref:UnityEngine.InputSystem.InputAction.id">action ID</a> or <a href="xref:UnityEngine.InputSystem.InputAction.name">action name</a> stored in the <a href="xref:UnityEngine.InputSystem.InputBinding.action"><code>InputBinding.action</code></a> property.</p>
+<pre><code class="lang-CSharp">    // Get all bindings in &quot;gameplay&quot; action map.
+    var gameplayBindings = playerInput.actions.FindActionMap(&quot;gameplay&quot;).bindings;
+</code></pre>
+<p>You can also look up specific the indices of specific bindings in <a href="xref:UnityEngine.InputSystem.InputAction.bindings"><code>InputAction.bindings</code></a> using the <a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.GetBindingIndex(UnityEngine.InputSystem.InputAction,UnityEngine.InputSystem.InputBinding)"><code>InputActionRebindingExtensions.GetBindingIndex</code></a> method.</p>
+<pre><code class="lang-CSharp">    // Find the binding in the &quot;Keyboard&quot; control scheme.
+    playerInput.actions[&quot;fire&quot;].GetBindingIndex(group: &quot;Keyboard&quot;);
+
+    // Find the first binding to the space key in the &quot;gameplay&quot; action map.
+    playerInput.FindActionMap(&quot;gameplay&quot;).GetBindingIndex(
+        new InputBinding { path = &quot;&lt;Keyboard&gt;/space&quot; });
+</code></pre>
+<p>Finally, you can look up the binding that corresponds to a specific control through <a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.GetBindingIndexForControl*"><code>GetBindingIndexForControl</code></a>. This way, you can, for example, map a control found in the <a href="xref:UnityEngine.InputSystem.InputAction.controls"><code>controls</code></a> array of an <a href="xref:UnityEngine.InputSystem.InputAction"><code>InputAction</code></a> back to an <a href="xref:UnityEngine.InputSystem.InputBinding"><code>InputBinding</code></a>.</p>
+<pre><code class="lang-CSharp">    // Find the binding that binds LMB to &quot;fire&quot;. If there is no such binding,
+    // bindingIndex will be -1.
+    var fireAction = playerInput.actions[&quot;fire&quot;];
+    var bindingIndex = fireAction.GetBindingIndexForControl(Mouse.current.leftButton);
+    if (binding == -1)
+        Debug.Log(&quot;Fire is not bound to LMB of the current mouse.&quot;);
+</code></pre>
+<h3 id="change-bindings">Change bindings</h3>
+<p>In general, you can change existing bindings via the <a href="xref:UnityEngine.InputSystem.InputActionSetupExtensions.ChangeBinding(UnityEngine.InputSystem.InputAction,System.Int32)"><code>InputActionSetupExtensions.ChangeBinding</code></a> method. This returns an accessor that can be used to modify the properties of the targeted <a href="xref:UnityEngine.InputSystem.InputBinding"><code>InputBinding</code></a>. Note that most of the write operations of the accessor are destructive. For non-destructive changes to bindings, refer to <a href="#apply-overrides">Apply overrides</a>.</p>
+<pre><code class="lang-CSharp">// Get write access to the second binding of the 'fire' action.
+var accessor = playerInput.actions['fire'].ChangeBinding(1);
+
+// You can also gain access through the InputActionMap. Each
+// map contains an array of all its bindings (see InputActionMap.bindings).
+// Here we gain access to the third binding in the map.
+accessor = playerInput.actions.FindActionMap(&quot;gameplay&quot;).ChangeBinding(2);
+</code></pre>
+<p>You can use the resulting accessor to modify properties through methods such as <a href="xref:UnityEngine.InputSystem.InputActionSetupExtensions.BindingSyntax.WithPath*"><code>WithPath</code></a> or <a href="xref:UnityEngine.InputSystem.InputActionSetupExtensions.BindingSyntax.WithProcessors*"><code>WithProcessors</code></a>.</p>
+<pre><code class="lang-CSharp">playerInput.actions[&quot;fire&quot;].ChangeBinding(1)
+    // Change path to space key.
+    .WithPath(&quot;&lt;Keyboard&gt;/space&quot;);
+</code></pre>
+<p>You can also use the accessor to iterate through bindings using <a href="xref:UnityEngine.InputSystem.InputActionSetupExtensions.BindingSyntax.PreviousBinding*"><code>PreviousBinding</code></a> and <a href="xref:UnityEngine.InputSystem.InputActionSetupExtensions.BindingSyntax.NextBinding*"><code>NextBinding</code></a>.</p>
+<pre><code class="lang-CSharp">// Move accessor to previous binding.
+accessor = accessor.PreviousBinding();
+
+// Move accessor to next binding.
+accessor = accessor.NextBinding();
+</code></pre>
+<p>If the given binding is a <a href="xref:UnityEngine.InputSystem.InputBinding.isComposite">composite</a>, you can address it by its name rather than by index.</p>
+<pre><code class="lang-CSharp">// Change the 2DVector composite of the &quot;move&quot; action.
+playerInput.actions[&quot;move&quot;].ChangeCompositeBinding(&quot;2DVector&quot;)
+
+
+//
+playerInput.actions[&quot;move&quot;].ChangeBinding(&quot;WASD&quot;)
+</code></pre>
+<h4 id="apply-overrides">Apply overrides</h4>
+<p>You can override aspects of any binding at run-time non-destructively. Specific properties of <a href="xref:UnityEngine.InputSystem.InputBinding"><code>InputBinding</code></a> have an <code>override</code> variant that, if set, will take precedent over the property that they shadow.  All <code>override</code> properties are of type <code>String</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Override</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.InputBinding.path"><code>path</code></a></td>
+<td><a href="xref:UnityEngine.InputSystem.InputBinding.overridePath"><code>overridePath</code></a></td>
+<td>Replaces the <a class="xref" href="Controls.html#control-paths">control path</a> that determines which control(s) are referenced in the binding. If <a href="xref:UnityEngine.InputSystem.InputBinding.overridePath"><code>overridePath</code></a> is set to an empty string, the binding is effectively disabled.<br><br>Example: <code>&quot;&lt;Gamepad&gt;/leftStick&quot;</code></td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.InputBinding.processors"><code>processors</code></a></td>
+<td><a href="xref:UnityEngine.InputSystem.InputBinding.overrideProcessors"><code>overrideProcessors</code></a></td>
+<td>Replaces the <a href="UsingProcessors.html">processors</a> applied to the binding.<br><br>Example: <code>&quot;invert,normalize(min=0,max=10)&quot;</code></td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.InputBinding.interactions"><code>interactions</code></a></td>
+<td><a href="xref:UnityEngine.InputSystem.InputBinding.overrideInteractions"><code>overrideInteractions</code></a></td>
+<td>Replaces the <a class="xref" href="Interactions.html">interactions</a> applied to the binding.<br><br>Example: <code>&quot;tap(duration=0.5)&quot;</code></td>
+</tr>
+</tbody>
+</table>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The <code>override</code> property values are not saved with the actions, for example, when calling <a href="xref:UnityEngine.InputSystem.InputActionAsset.ToJson"><code>InputActionAsset.ToJson()</code></a>). Refer to <a href="#save-and-load-rebinds">Saving and loading rebinds</a> for details about how to persist user rebinds.</p>
+</div>
+<p>To set the various <code>override</code> properties, you can use the <a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.ApplyBindingOverride(UnityEngine.InputSystem.InputAction,UnityEngine.InputSystem.InputBinding)"><code>ApplyBindingOverride</code></a> APIs.</p>
+<pre><code class="lang-CSharp">// Rebind the &quot;fire&quot; action to the left trigger on the gamepad.
+playerInput.actions[&quot;fire&quot;].ApplyBindingOverride(&quot;&lt;Gamepad&gt;/leftTrigger&quot;);
+</code></pre>
+<p>In most cases, it is best to locate specific bindings using APIs such as <a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.GetBindingIndexForControl*"><code>GetBindingIndexForControl</code></a> and to then apply the override to that specific binding.</p>
+<pre><code class="lang-CSharp">// Find the &quot;Jump&quot; binding for the space key.
+var jumpAction = playerInput.actions[&quot;Jump&quot;];
+var bindingIndex = jumpAction.GetBindingIndexForControl(Keyboard.current.spaceKey);
+
+// And change it to the enter key.
+jumpAction.ApplyBindingOverride(bindingIndex, &quot;&lt;Keyboard&gt;/enter&quot;);
+</code></pre>
+<h4 id="erase-bindings">Erase bindings</h4>
+<p>You can erase a binding by calling <a href="xref:UnityEngine.InputSystem.InputActionSetupExtensions.BindingSyntax.Erase*"><code>Erase</code></a> on the <a href="xref:UnityEngine.InputSystem.InputActionSetupExtensions.BindingSyntax">binding accessor</a>.</p>
+<pre><code class="lang-CSharp">// Erase first binding on &quot;fire&quot; action.
+playerInput.actions[&quot;fire&quot;].ChangeBinding(0).Erase();
+
+// Erase &quot;2DVector&quot; composite. This will also erase the part
+// bindings of the composite.
+playerInput.actions[&quot;move&quot;].ChangeCompositeBinding(&quot;2DVector&quot;).Erase();
+
+// Can also do this by using the name given to the composite binding.
+playerInput.actions[&quot;move&quot;].ChangeCompositeBinding(&quot;WASD&quot;).Erase();
+
+// Erase first binding in &quot;gameplay&quot; action map.
+playerInput.actions.FindActionMap(&quot;gameplay&quot;).ChangeBinding(0).Erase();
+</code></pre>
+<h4 id="add-bindings">Add bindings</h4>
+<p>New bindings can be added to an action using <a href="xref:UnityEngine.InputSystem.InputActionSetupExtensions.AddBinding(UnityEngine.InputSystem.InputAction,System.String,System.String,System.String,System.String)"><code>AddBinding</code></a> or <a href="xref:UnityEngine.InputSystem.InputActionSetupExtensions.AddCompositeBinding(UnityEngine.InputSystem.InputAction,System.String,System.String,System.String)"><code>AddCompositeBinding</code></a>.</p>
+<pre><code class="lang-CSharp">// Add a binding for the left mouse button to the &quot;fire&quot; action.
+playerInput.actions[&quot;fire&quot;].AddBinding(&quot;&lt;Mouse&gt;/leftButton&quot;);
+
+// Add a WASD composite binding to the &quot;move&quot; action.
+playerInput.actions[&quot;move&quot;]
+    .AddCompositeBinding(&quot;2DVector&quot;)
+        .With(&quot;Up&quot;, &quot;&lt;Keyboard&gt;/w&quot;)
+        .With(&quot;Left&quot;, &quot;&lt;Keyboard&gt;/a&quot;)
+        .With(&quot;Down&quot;, &quot;&lt;Keyboard&gt;/s&quot;)
+        .With(&quot;Right&quot;, &quot;&lt;Keyboard&gt;/d&quot;);
+</code></pre>
+<h4 id="set-parameters">Set parameters</h4>
+<p>A binding may, either through itself or through its associated action, lead to <a href="UsingProcessors.html">processor</a>, <a class="xref" href="Interactions.html">interaction</a>, and/or <a href="#composite-bindings">composite</a> objects being created. These objects can have parameters you can configure through in the <a class="xref" href="ActionsEditor.html#bindings">Binding properties view</a> of the <a class="xref" href="ActionsEditor.html">Input Actions Editor</a> or through the API. This configuration will give parameters their default value.</p>
+<pre><code class="lang-CSharp">// Create an action with a &quot;Hold&quot; interaction on it.
+// Set the &quot;duration&quot; parameter to 4 seconds.
+var action = new InputAction(interactions: &quot;hold(duration=4)&quot;);
+</code></pre>
+<p>You can query the current value of any such parameter using the <a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.GetParameterValue(UnityEngine.InputSystem.InputAction,System.String,UnityEngine.InputSystem.InputBinding)"><code>GetParameterValue</code></a> API.</p>
+<pre><code class="lang-CSharp">// This returns a PrimitiveValue?. It will be null if the
+// parameter is not found. Otherwise, it is a PrimitiveValue
+// which can be converted to a number or boolean.
+var p = action.GetParameterValue(&quot;duration&quot;);
+Debug.Log(&quot;'duration' is set to: &quot; + p.Value);
+</code></pre>
+<p>The above looks for the parameter on any object found on any of the bindings on the action. You can restrict either or both to a more narrow set.</p>
+<pre><code class="lang-CSharp">// Retrieve the value of the &quot;duration&quot; parameter specifically of a
+// &quot;Hold&quot; interaction and only look on bindings in the &quot;Gamepad&quot; group.
+action.GetParameterValue(&quot;hold:duration&quot;, InputBinding.MaskByGroup(&quot;Gamepad&quot;));
+</code></pre>
+<p>Alternatively, you can use an expression parameter to encapsulate both the type and the name of the parameter you want to get the value of. This has the advantage of not needing a string parameter but rather references both the type and the name of the parameter in a typesafe way.</p>
+<pre><code class="lang-CSharp">// Retrieve the value of the &quot;duration&quot; parameter of TapInteraction.
+// This version returns a float? instead of a PrimitiveValue? as it
+// sees the type of &quot;duration&quot; at compile-time.
+action.GetParameterValue((TapInteraction x) =&gt; x.duration);
+</code></pre>
+<p>To alter the current value of a parameter, you can use what is referred to as a &quot;parameter override&quot;. You can apply these at the level of an individual <a href="xref:UnityEngine.InputSystem.InputAction"><code>InputAction</code></a>, or at the level of an entire <a href="xref:UnityEngine.InputSystem.InputActionMap"><code>InputActionMap</code></a>, or even at the level of an entire <a href="xref:UnityEngine.InputSystem.InputActionAsset"><code>InputActionAsset</code></a>. Such overrides are stored internally and applied automatically even on bindings added later.</p>
+<p>To add an override, use the <a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.ApplyParameterOverride(UnityEngine.InputSystem.InputAction,System.String,UnityEngine.InputSystem.Utilities.PrimitiveValue,UnityEngine.InputSystem.InputBinding)"><code>ApplyParameterOverride</code></a> API or any of its overloads.</p>
+<pre><code class="lang-CSharp">// Set the &quot;duration&quot; parameter on all bindings of the action to 4.
+action.ApplyParameterOverride(&quot;duration&quot;, 4f);
+
+// Set the &quot;duration&quot; parameter specifically for &quot;tap&quot; interactions only.
+action.ApplyParameterOverride(&quot;tap:duration&quot;, 0.5f);
+
+// Set the &quot;duration&quot; parameter on tap interactions but only for bindings
+// in the &quot;Gamepad&quot; group.
+action.ApplyParameterOverride(&quot;tap:duration&quot;, 0.5f, InputBinding.MaskByGroup(&quot;Gamepad&quot;);
+
+// Set tap duration for all bindings in an action map.
+map.ApplyParameterOverride(&quot;tap:duration&quot;, 0.5f);
+
+// Set tap duration for all bindings in an entire asset.
+asset.ApplyParameterOverride(&quot;tap:duration&quot;, 0.5f);
+
+// Like for GetParameterValue, overloads are available that take
+// an expression instead.
+action.ApplyParameterOverride((TapInteraction x) =&gt; x.duration, 0.4f);
+map.ApplyParameterOverride((TapInteraction x) =&gt; x.duration, 0.4f);
+asset.ApplyParameterOverride((TapInteraction x) =&gt; x.duration, 0.4f);
+</code></pre>
+<p>The new value will be applied immediately and affect all composites, processors, and interactions already in use and targeted by the override.</p>
+<p>Note that if multiple parameter overrides are applied – especially when applying some directly to actions and some to maps or assets –, there may be conflicts between which override to apply. In this case, an attempt is made to chose the &quot;most specific&quot; override to apply.</p>
+<pre><code class="lang-CSharp">// Let's say you have an InputAction `action` that is part of an InputActionAsset asset.
+var map = action.actionMap;
+var asset = map.asset;
+
+// And you apply a &quot;tap:duration&quot; override to the action.
+action.ApplyParameterOverride(&quot;tap:duration&quot;, 0.6f);
+
+// But also apply a &quot;tap:duration&quot; override to the action specifically
+// for bindings in the &quot;Gamepad&quot; group.
+action.ApplyParameterOverride(&quot;tap:duration&quot;, 1f, InputBinding.MaskByGroup(&quot;Gamepad&quot;));
+
+// And finally also apply a &quot;tap:duration&quot; override to the entire asset.
+asset.ApplyParameterOverride(&quot;tap:duration&quot;, 0.3f);
+
+// Now, bindings on `action` in the &quot;Gamepad&quot; group will use a value of 1 for tap durations,
+// other bindings on `action` will use 0.6, and every other binding in the asset will use 0.3.
+</code></pre>
+<p>You can use parameter overrides, for example, to scale mouse delta values on a &quot;Look&quot; action.</p>
+<pre><code class="lang-CSharp">// Set up an example &quot;Look&quot; action.
+var look = new InputAction(&quot;look&quot;, type: InputActionType.Value);
+look.AddBinding(&quot;&lt;Mouse&gt;/delta&quot;, groups: &quot;KeyboardMouse&quot;, processors: &quot;scaleVector2&quot;);
+look.AddBinding(&quot;&lt;Gamepad&gt;/rightStick&quot;, groups: &quot;Gamepad&quot;, processors: &quot;scaleVector2&quot;);
+
+// Now you can adjust stick sensitivity separately from mouse sensitivity.
+look.ApplyParameterOverride(&quot;scaleVector2:x&quot;, 0.5f, InputBinding.MaskByGroup(&quot;KeyboardMouse&quot;));
+look.ApplyParameterOverride(&quot;scaleVector2:y&quot;, 0.5f, InputBinding.MaskByGroup(&quot;KeyboardMouse&quot;));
+
+look.ApplyParameterOverride(&quot;scaleVector2:x&quot;, 2f, InputBinding.MaskByGroup(&quot;Gamepad&quot;));
+look.ApplyParameterOverride(&quot;scaleVector2:y&quot;, 2f, InputBinding.MaskByGroup(&quot;Gamepad&quot;));
+
+// Alternative to using groups, you can also apply overrides directly to specific binding paths.
+look.ApplyParameterOverride(&quot;scaleVector2:x&quot;, 0.5f, new InputBinding(&quot;&lt;Mouse&gt;/delta&quot;));
+look.ApplyParameterOverride(&quot;scaleVector2:y&quot;, 0.5f, new InputBinding(&quot;&lt;Mouse&gt;/delta&quot;));
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Parameter overrides are <em>not</em> persisted along with an asset.</p>
+</div>
+<h3 id="interactive-rebinding">Interactive rebinding</h3>
+<div class="NOTE">
+<h5>Note</h5>
+<p>To download a sample project which demonstrates how to set up a rebinding user interface with Input System APIs, open the Package Manager, select the Input System Package, and choose the sample project &quot;Rebinding UI&quot; to download.</p>
+</div>
+<p>Runtime rebinding allows users of your application to set their own bindings.</p>
+<p>To allow users to choose their own bindings interactively, use the  <a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.RebindingOperation"><code>InputActionRebindingExtensions.RebindingOperation</code></a> class. Call the <a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.PerformInteractiveRebinding(UnityEngine.InputSystem.InputAction,System.Int32)"><code>PerformInteractiveRebinding()</code></a> method on an action to create a rebinding operation. This operation waits for the Input System to register any input from any device which matches the action's expected control type, then uses <a href="xref:UnityEngine.InputSystem.InputBinding.overridePath"><code>InputBinding.overridePath</code></a> to assign the control path for that control to the action's bindings. If the user actuates multiple controls, the rebinding operation chooses the control with the highest <a class="xref" href="Controls.html#control-actuation">magnitude</a>.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>You must dispose of <a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.RebindingOperation"><code>InputActionRebindingExtensions.RebindingOperation</code></a> instances via <code>Dispose()</code>, so that they don't leak memory on the unmanaged memory heap.</p>
+</div>
+<pre><code class="lang-C#">    void RemapButtonClicked(InputAction actionToRebind)
+    {
+        var rebindOperation = actionToRebind
+            .PerformInteractiveRebinding().Start();
+    }
+</code></pre>
+<p>The <a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.RebindingOperation"><code>InputActionRebindingExtensions.RebindingOperation</code></a> API is highly configurable to match your needs. For example, you can:</p>
+<ul>
+<li><p>Choose expected control types (<a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.RebindingOperation.WithExpectedControlType(System.Type)"><code>WithExpectedControlType()</code></a>).</p>
+</li>
+<li><p>Exclude certain controls (<a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.RebindingOperation.WithControlsExcluding(System.String)"><code>WithControlsExcluding()</code></a>).</p>
+</li>
+<li><p>Set a control to cancel the operation (<a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.RebindingOperation.WithCancelingThrough(UnityEngine.InputSystem.InputControl)"><code>WithCancelingThrough()</code></a>).</p>
+</li>
+<li><p>Choose which bindings to apply the operation on if the action has multiple bindings (<a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.RebindingOperation.WithTargetBinding(System.Int32)"><code>WithTargetBinding()</code></a>, <a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.RebindingOperation.WithBindingGroup(System.String)"><code>WithBindingGroup()</code></a>, <a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.RebindingOperation.WithBindingMask(System.Nullable%7BUnityEngine.InputSystem.InputBinding%7D)"><code>WithBindingMask()</code></a>).</p>
+</li>
+</ul>
+<p>Refer to the scripting API reference for <a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.RebindingOperation"><code>InputActionRebindingExtensions.RebindingOperation</code></a> for a full overview.</p>
+<p>Note that <a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.PerformInteractiveRebinding(UnityEngine.InputSystem.InputAction,System.Int32)"><code>PerformInteractiveRebinding()</code></a> automatically applies a set of default configurations based on the given action and targeted binding.</p>
+<h3 id="save-and-load-rebinds">Save and load rebinds</h3>
+<p>You can serialize override properties of <a href="xref:UnityEngine.InputSystem.InputBinding">bindings</a> by serializing them as JSON strings and restoring them from these. Use <a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.SaveBindingOverridesAsJson(UnityEngine.InputSystem.IInputActionCollection2)"><code>SaveBindingOverridesAsJson</code></a> to create these strings and <a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.LoadBindingOverridesFromJson(UnityEngine.InputSystem.IInputActionCollection2,System.String,System.Boolean)"><code>LoadBindingOverridesFromJson</code></a> to restore overrides from them.</p>
+<pre><code class="lang-CSharp">// Store player rebinds in PlayerPrefs.
+var rebinds = playerInput.actions.SaveBindingOverridesAsJson();
+PlayerPrefs.SetString(&quot;rebinds&quot;, rebinds);
+
+// Restore player rebinds from PlayerPrefs (removes all existing
+// overrides on the actions; pass `false` for second argument
+// in case you want to prevent that).
+var rebinds = PlayerPrefs.GetString(&quot;rebinds&quot;);
+playerInput.actions.LoadBindingOverridesFromJson(rebinds);
+</code></pre>
+<h4 id="restore-original-bindings">Restore original bindings</h4>
+<p>You can remove binding overrides and thus restore defaults by using <a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.RemoveBindingOverride(UnityEngine.InputSystem.InputAction,System.Int32)"><code>RemoveBindingOverride</code></a> or <a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.RemoveAllBindingOverrides(UnityEngine.InputSystem.IInputActionCollection2)"><code>RemoveAllBindingOverrides</code></a>.</p>
+<pre><code class="lang-CSharp">// Remove binding overrides from the first binding of the &quot;fire&quot; action.
+playerInput.actions[&quot;fire&quot;].RemoveBindingOverride(0);
+
+// Remove all binding overrides from the &quot;fire&quot; action.
+playerInput.actions[&quot;fire&quot;].RemoveAllBindingOverrides();
+
+// Remove all binding overrides from a player's actions.
+playerInput.actions.RemoveAllBindingOverrides();
+</code></pre>
+<h4 id="display-bindings">Display bindings</h4>
+<p>It can be useful for the user to know what an action is currently bound to (taking any potentially active rebindings into account) while rebinding UIs, and for on-screen hints while the app is running. You can use <a href="xref:UnityEngine.InputSystem.InputBinding.effectivePath"><code>InputBinding.effectivePath</code></a> to get the currently active path for a binding (which returns <a href="xref:UnityEngine.InputSystem.InputBinding.overridePath"><code>overridePath</code></a> if set, or otherwise returns <a href="xref:UnityEngine.InputSystem.InputBinding.path"><code>path</code></a>).</p>
+<p>The easiest way to retrieve a display string for an action is to call <a href="xref:UnityEngine.InputSystem.InputActionRebindingExtensions.GetBindingDisplayString*"><code>InputActionRebindingExtensions.GetBindingDisplayString</code></a> which is an extension method for <a href="xref:UnityEngine.InputSystem.InputAction"><code>InputAction</code></a>.</p>
+<pre><code class="lang-CSharp">    // Get a binding string for the action as a whole. This takes into account which
+    // bindings are currently active and the actual controls bound to the action.
+    m_RebindButton.GetComponentInChildren&lt;Text&gt;().text = action.GetBindingDisplayString();
+
+    // Get a binding string for a specific binding on an action by index.
+    m_RebindButton.GetComponentInChildren&lt;Text&gt;().text = action.GetBindingDisplayString(1);
+
+    // Look up binding indices with GetBindingIndex.
+    var bindingIndex = action.GetBindingIndex(InputBinding.MaskByGroup(&quot;Gamepad&quot;));
+    m_RebindButton.GetComponentInChildren&lt;Text&gt;().text =
+        action.GetBindingDisplayString(bindingIndex);
+</code></pre>
+<p>You can also use this method to replace the text string with images.</p>
+<pre><code class="lang-CSharp">    // Call GetBindingDisplayString() such that it also returns information about the
+    // name of the device layout and path of the control on the device. This information
+    // is useful for reliably associating imagery with individual controls.
+    // NOTE: The first argument is the index of the binding within InputAction.bindings.
+    var bindingString = action.GetBindingDisplayString(0, out deviceLayout, out controlPath);
+
+    // If it's a gamepad, look up an icon for the control.
+    Sprite icon = null;
+    if (!string.IsNullOrEmpty(deviceLayout)
+        &amp;&amp; !string.IsNullOrEmpty(controlPath)
+        &amp;&amp; InputSystem.IsFirstLayoutBasedOnSecond(deviceLayout, &quot;Gamepad&quot;))
+    {
+        switch (controlPath)
+        {
+            case &quot;buttonSouth&quot;: icon = aButtonIcon; break;
+            case &quot;dpad/up&quot;: icon = dpadUpIcon; break;
+            //...
+        }
+    }
+
+    // If you have an icon, display it instead of the text.
+    var text = m_RebindButton.GetComponentInChildren&lt;Text&gt;();
+    var image = m_RebindButton.GetComponentInChildren&lt;Image&gt;();
+    if (icon != null)
+    {
+        // Display icon.
+        text.gameObject.SetActive(false);
+        image.gameObject.SetActive(true);
+        image.sprite = icon;
+    }
+    else
+    {
+        // Display text.
+        text.gameObject.SetActive(true);
+        image.gameObject.SetActive(false);
+        text.text = bindingString;
+    }
+</code></pre>
+<p>Additionally, each binding has a <a href="xref:UnityEngine.InputSystem.InputBinding.ToDisplayString(UnityEngine.InputSystem.InputBinding.DisplayStringOptions,UnityEngine.InputSystem.InputControl)"><code>ToDisplayString</code></a> method, which you can use to turn individual bindings into display strings. There is also a generic formatting method for control paths, <a href="xref:UnityEngine.InputSystem.InputControlPath.ToHumanReadableString(System.String,UnityEngine.InputSystem.InputControlPath.HumanReadableStringOptions,UnityEngine.InputSystem.InputControl)"><code>InputControlPath.ToHumanReadableString</code></a>, which you can use with arbitrary control path strings.</p>
+<p>Note that the controls a binding resolves to can change at any time, and the display strings for controls might change dynamically. For example, if the user switches the currently active keyboard layout, the display string for each individual key on the <a href="xref:UnityEngine.InputSystem.Keyboard"><code>Keyboard</code></a> might change.</p>
+<h2 id="control-schemes">Control schemes</h2>
+<p>A binding can belong to any number of binding groups. Unity stores these on the <a href="xref:UnityEngine.InputSystem.InputBinding"><code>InputBinding</code></a> class as a semicolon-separated string in the  <a href="xref:UnityEngine.InputSystem.InputBinding.groups"><code>InputBinding.groups</code></a> property, and you can use them for any arbitrary grouping of bindings. To enable different sets of binding groups for an <a href="xref:UnityEngine.InputSystem.InputActionMap"><code>InputActionMap</code></a> or <a href="xref:UnityEngine.InputSystem.InputActionAsset"><code>InputActionAsset</code></a>, you can use the <a href="xref:UnityEngine.InputSystem.InputActionMap.bindingMask"><code>InputActionMap.bindingMask</code></a>/<a href="xref:UnityEngine.InputSystem.InputActionAsset.bindingMask"><code>InputActionAsset.bindingMask</code></a> property. The Input System uses this to implement the concept of grouping bindings into different  <a href="xref:UnityEngine.InputSystem.InputControlScheme"><code>InputControlSchemes</code></a>.</p>
+<p>Control Schemes use binding groups to map bindings in an <a href="xref:UnityEngine.InputSystem.InputActionMap"><code>InputActionMap</code></a> or <a href="xref:UnityEngine.InputSystem.InputActionAsset"><code>InputActionAsset</code></a> to different types of devices. The <a class="xref" href="PlayerInput.html"><code>PlayerInput</code></a> class uses these to enable a matching control scheme for a new <a class="xref" href="UserManagement.html">user</a> joining the game, based on the device they are playing on.</p>
+<h2 id="details">Details</h2>
+<h3 id="binding-resolution">Binding resolution</h3>
+<p>When the Input System accesses the <a class="xref" href="Controls.html">controls</a> bound to an action for the first time, the action resolves its bindings to match them to existing controls on existing devices. In this process, the action calls <a href="xref:UnityEngine.InputSystem.InputSystem.FindControls%60%601(System.String,UnityEngine.InputSystem.InputControlList%7B%60%600%7D@)"><code>InputSystem.FindControls&lt;&gt;()</code></a> (filtering for devices assigned to the InputActionMap, if there are any) for the binding path of each of the action's bindings. This creates a list of resolved controls that are now bound to the action.</p>
+<p>Note that a single <a class="xref" href="Controls.html#control-paths">binding path</a> can match multiple controls:</p>
+<ul>
+<li><p>A specific device path such as <code>&lt;DualShockGamepad&gt;/buttonEast</code> matches the &quot;Circle&quot; button on a <a class="xref" href="Gamepad.html#playstation-controllers">PlayStation controller</a>. If you have multiple PlayStation controllers connected, it resolves to the &quot;Circle&quot; button on each of these controllers.</p>
+</li>
+<li><p>An abstract device path such as <code>&lt;Gamepad&gt;/buttonEast</code> matches the right action button on any connected gamepad. If you have a PlayStation controller and an <a class="xref" href="Gamepad.html#xbox-controllers">Xbox controller</a> connected, it resolves to the &quot;Circle&quot; button on the PlayStation controller, and to the &quot;B&quot; button on the Xbox controller.</p>
+</li>
+<li><p>A binding path can also contain wildcards, such as <code>&lt;Gamepad&gt;/button*</code>. This matches any control on any gamepad with a name starting with &quot;button&quot;, which matches all the four action buttons on any connected gamepad. A different example: <code>*/{Submit}</code> matches any control tagged with the &quot;Submit&quot; <a class="xref" href="Controls.html#control-usages">usage</a> on any device.</p>
+</li>
+</ul>
+<p>If there are multiple bindings on the same action that all reference the same control(s), the control will effectively feed into the action multiple times. This is to allow, for example, a single control to produce different input on the same action by virtue of being bound in a different fashion (composites, processors, interactions, etc). However, regardless of how many times a control is bound on any given action, it will only be mentioned once in the action's <a href="xref:UnityEngine.InputSystem.InputAction.controls">array of <code>controls</code></a>.</p>
+<p>To query the controls that an action resolves to, you can use <a href="xref:UnityEngine.InputSystem.InputAction.controls"><code>InputAction.controls</code></a>. You can also run this query if the action is disabled.</p>
+<p>To be notified when binding resolution happens, you can listen to <a href="xref:UnityEngine.InputSystem.InputSystem.onActionChange"><code>InputSystem.onActionChange</code></a> which triggers <a href="xref:UnityEngine.InputSystem.InputActionChange.BoundControlsAboutToChange"><code>InputActionChange.BoundControlsAboutToChange</code></a> before modifying control lists and triggers <a href="xref:UnityEngine.InputSystem.InputActionChange.BoundControlsChanged"><code>InputActionChange.BoundControlsChanged</code></a> after having updated them.</p>
+<h4 id="binding-resolution-while-actions-are-enabled">Binding resolution while actions are enabled</h4>
+<p>In certain situations, the <a href="xref:UnityEngine.InputSystem.InputAction.controls">controls</a> bound to an action have to be updated more than once. For example, if a new <a class="xref" href="Devices.html">device</a> becomes usable with an action, the action may now pick up input from additional controls. Also, if bindings are added, removed, or modified, control lists will need to be updated.</p>
+<p>This updating of controls usually happens transparently in the background. However, when an action is <a href="xref:UnityEngine.InputSystem.InputAction.enabled">enabled</a> and especially when it is <a href="xref:UnityEngine.InputSystem.InputAction.IsInProgress*">in progress</a>, there may be a noticeable effect on the action.</p>
+<p>Adding or removing a device – either <a href="xref:UnityEngine.InputSystem.InputSystem.devices">globally</a> or to/from the <a href="xref:UnityEngine.InputSystem.InputActionAsset.devices">device list</a> of an action – will remain transparent <strong>except</strong> if an action is in progress and it is the device of its <a href="xref:UnityEngine.InputSystem.InputAction.activeControl">active control</a> that is being removed. In this case, the action will automatically be <a href="xref:UnityEngine.InputSystem.InputAction.canceled">cancelled</a>.</p>
+<p>Modifying the <a href="xref:UnityEngine.InputSystem.InputActionAsset.bindingMask">binding mask</a> or modifying any of the bindings (such as through <a href="#interactive-rebinding">rebinding</a> or by adding or removing bindings) will, however, lead to all enabled actions being temporarily disabled and then re-enabled and resumed.</p>
+<h4 id="choose-which-devices-to-use">Choose which devices to use</h4>
+<div class="NOTE">
+<h5>Note</h5>
+<p><a class="xref" href="UserManagement.html"><code>InputUser</code></a> and <a class="xref" href="PlayerInput.html"><code>PlayerInput</code></a> make use of this facility automatically. They set <a href="xref:UnityEngine.InputSystem.InputActionMap.devices"><code>InputActionMap.devices</code></a> automatically based on the devices that are paired to the user.</p>
+</div>
+<p>By default, actions resolve their bindings against all devices present in the Input System (that is, <a href="xref:UnityEngine.InputSystem.InputSystem.devices"><code>InputSystem.devices</code></a>). For example, if there are two gamepads present in the system, a binding to <code>&lt;Gamepad&gt;/buttonSouth</code> picks up both gamepads and allows the action to be used from either.</p>
+<p>You can override this behavior by restricting <a href="xref:UnityEngine.InputSystem.InputActionAsset"><code>InputActionAssets</code></a> or individual <a href="xref:UnityEngine.InputSystem.InputActionMap"><code>InputActionMaps</code></a> to a specific set of devices. If you do this, binding resolution only takes the controls of the given devices into account.</p>
+<pre><code>    var actionMap = new InputActionMap();
+
+    // Restrict the action map to just the first gamepad.
+    actionMap.devices = new[] { Gamepad.all[0] };
+</code></pre>
+<h3 id="conflicting-inputs">Conflicting inputs</h3>
+<p>There are two situations where a given input may lead to ambiguity:</p>
+<ol>
+<li>Several controls are bound to the same action and more than one is feeding input into the action at the same time. Example: an action that is bound to both the left and right trigger on a Gamepad and both triggers are pressed.</li>
+<li>The input is part of a sequence of inputs and there are several possible such sequences. Example: one action is bound to the <code>B</code> key and another action is bound to <code>Shift-B</code>.</li>
+</ol>
+<h4 id="multiple-concurrently-used-controls">Multiple, concurrently used controls</h4>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This section does not apply to <a class="xref" href="RespondingToActions.html#pass-through"><code>PassThrough</code></a> actions as they are by design meant to allow multiple concurrent inputs.</p>
+</div>
+<p>For a <a class="xref" href="RespondingToActions.html#button"><code>Button</code></a> or <a class="xref" href="RespondingToActions.html#value"><code>Value</code></a> action, there can only be one control at any time that is &quot;driving&quot; the action. This control is considered the <a href="xref:UnityEngine.InputSystem.InputAction.activeControl"><code>activeControl</code></a>.</p>
+<p>When an action is bound to multiple controls, the <a href="xref:UnityEngine.InputSystem.InputAction.activeControl"><code>activeControl</code></a> at any point is the one with the greatest level of <a class="xref" href="Controls.html#control-actuation">&quot;actuation&quot;</a>, that is, the largest value returned from <a href="xref:UnityEngine.InputSystem.InputControl.EvaluateMagnitude*"><code>EvaluateMagnitude</code></a>. If a control exceeds the actuation level of the current <a href="xref:UnityEngine.InputSystem.InputAction.activeControl"><code>activeControl</code></a>, it will itself become the active control.</p>
+<p>The following example demonstrates this mechanism with a <a class="xref" href="RespondingToActions.html#button"><code>Button</code></a> action and also demonstrates the difference to a <a class="xref" href="RespondingToActions.html#pass-through"><code>PassThrough</code></a> action.</p>
+<pre><code class="lang-CSharp">// Create a button and a pass-through action and bind each of them
+// to both triggers on the gamepad.
+var buttonAction = new InputAction(type: InputActionType.Button,
+    binding: &quot;&lt;Gamepad&gt;/*Trigger&quot;);
+var passThroughAction = new InputAction(type: InputActionType.PassThrough,
+    binding: &quot;&lt;Gamepad&gt;/*Trigger&quot;);
+
+buttonAction.performed += c =&gt; Debug.Log(&quot;${c.control.name} pressed (Button)&quot;);
+passThroughAction.performed += c =&gt; Debug.Log(&quot;${c.control.name} changed (Pass-Through)&quot;);
+
+buttonAction.Enable();
+passThroughAction.Enable();
+
+// Press the left trigger all the way down.
+// This will trigger both buttonAction and passThroughAction. Both will
+// see leftTrigger becoming the activeControl.
+Set(gamepad.leftTrigger, 1f);
+
+// Will log
+//   &quot;leftTrigger pressed (Button)&quot; and
+//   &quot;leftTrigger changed (Pass-Through)&quot;
+
+// Press the right trigger halfway down.
+// This will *not* trigger or otherwise change buttonAction as the right trigger
+// is actuated *less* than the left one that is already driving action.
+// However, passThrough action is not performing such tracking and will thus respond
+// directly to the value change. It will perform and make rightTrigger its activeControl.
+Set(gamepad.rightTrigger, 0.5f);
+
+// Will log
+//   &quot;rightTrigger changed (Pass-Through)&quot;
+
+// Release the left trigger.
+// For buttonAction, this will mean that now all controls feeding into the action have
+// been released and thus the button releases. activeControl will go back to null.
+// For passThrough action, this is just another value change. So, the action performs
+// and its active control changes to leftTrigger.
+Set(gamepad.leftTrigger,  0f);
+
+// Will log
+//   &quot;leftTrigger changed (Pass-Through)&quot;
+</code></pre>
+<p>For <a href="#composite-bindings">composite bindings</a>, magnitudes of the composite as a whole rather than for individual controls are tracked. However, <a href="xref:UnityEngine.InputSystem.InputAction.activeControl"><code>activeControl</code></a> will stick track individual controls from the composite.</p>
+<h5 id="disable-conflict-resolution">Disable conflict resolution</h5>
+<p>Conflict resolution is always applied to <a class="xref" href="RespondingToActions.html#button">Button</a> and <a class="xref" href="RespondingToActions.html#value">Value</a> type actions. However, it can be undesirable in situations when an action is simply used to gather any and all inputs from bound controls. For example, the following action would monitor the A button of all available gamepads:</p>
+<pre><code class="lang-CSharp">var action = new InputAction(type: InputActionType.PassThrough, binding: &quot;&lt;Gamepad&gt;/buttonSouth&quot;);
+action.Enable();
+</code></pre>
+<p>By using the <a class="xref" href="RespondingToActions.html#pass-through">Pass-Through</a> action type, conflict resolution is bypassed and thus, pressing the A button on one gamepad will not result in a press on a different gamepad being ignored.</p>
+<h4 id="multiple-input-sequences-such-as-keyboard-shortcuts">Multiple input sequences (such as keyboard shortcuts)</h4>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The mechanism described here only applies to actions that are part of the same <a href="xref:UnityEngine.InputSystem.InputActionMap"><code>InputActionMap</code></a> or <a href="xref:UnityEngine.InputSystem.InputActionAsset"><code>InputActionAsset</code></a>.</p>
+</div>
+<p>Inputs that are used in combinations with other inputs may also lead to ambiguities. If, for example, the <code>b</code> key on the Keyboard is bound both on its own as well as in combination with the <code>shift</code> key, then if you first press <code>shift</code> and then <code>b</code>, the latter key press would be a valid input for either of the actions.</p>
+<p>The way this is handled is that bindings will be processed in the order of decreasing &quot;complexity&quot;. This metric is derived automatically from the binding:</p>
+<ul>
+<li>A binding that is <em>not</em> part of a <a href="#composite-bindings">composite</a> is assigned a complexity of 1.</li>
+<li>A binding that <em>is</em> part of a <a href="#composite-bindings">composite</a> is assigned a complexity equal to the number of part bindings in the composite.</li>
+</ul>
+<p>In our example, this means that a <a href="#one-modifier"><code>OneModifier</code></a> composite binding to <code>Shift+B</code> has a higher &quot;complexity&quot; than a binding to <code>B</code> and thus is processed first.</p>
+<p>Additionally, the first binding that results in the action changing <a class="xref" href="RespondingToActions.html#action-callbacks">phase</a> will &quot;consume&quot; the input. This consuming will result in other bindings to the same input not being processed. So in our example, when <code>Shift+B</code> &quot;consumes&quot; the <code>B</code> input, the binding to <code>B</code> will be skipped.</p>
+<p>The following example illustrates how this works at the API level.</p>
+<pre><code class="lang-CSharp">// Create two actions in the same map.
+var map = new InputActionMap();
+var bAction = map.AddAction(&quot;B&quot;);
+var shiftbAction = map.AddAction(&quot;ShiftB&quot;);
+
+// Bind one of the actions to 'B' and the other to 'SHIFT+B'.
+bAction.AddBinding(&quot;&lt;Keyboard&gt;/b&quot;);
+shiftbAction.AddCompositeBinding(&quot;OneModifier&quot;)
+    .With(&quot;Modifier&quot;, &quot;&lt;Keyboard&gt;/shift&quot;)
+    .With(&quot;Binding&quot;, &quot;&lt;Keyboard&gt;/b&quot;);
+
+// Print something to the console when the actions are triggered.
+bAction.performed += _ =&gt; Debug.Log(&quot;B action performed&quot;);
+shiftbAction.performed += _ =&gt; Debug.Log(&quot;SHIFT+B action performed&quot;);
+
+// Start listening to input.
+map.Enable();
+
+// Now, let's assume the left shift key on the keyboard is pressed (here, we manually
+// press it with the InputTestFixture API).
+Press(Keyboard.current.leftShiftKey);
+
+// And then the B is pressed. This is a valid input for both
+// bAction as well as shiftbAction.
+//
+// What will happen now is that shiftbAction will do its processing first. In response,
+// it will *perform* the action (i.e. we see the `performed` callback being invoked) and
+// thus &quot;consume&quot; the input. bAction will stay silent as it will in turn be skipped over.
+Press(keyboard.bKey);
+</code></pre>
+<h3 id="initial-state-check">Initial state check</h3>
+<p>After an action is <a href="xref:UnityEngine.InputSystem.InputAction.enabled">enabled</a>, it will start reacting to input as it comes in. However, at the time the action is enabled, one or more of the controls that are <a href="xref:UnityEngine.InputSystem.InputAction.controls">bound</a> to an action may already have a non-default state at that point.</p>
+<p>Using what is referred to as an &quot;initial state check&quot;, an action can be made to respond to such a non-default state as if the state change happened <em>after</em> the action was enabled. The way this works is that in the first input <a href="xref:UnityEngine.InputSystem.InputSystem.Update*">update</a> after the action was enabled, all its bound controls are checked in turn. If any of them has a non-default state, the action responds right away.</p>
+<p>This check is implicitly enabled for <a class="xref" href="RespondingToActions.html#value">Value</a> actions. If, for example, you have a <code>Move</code> action bound to the left stick on the gamepad and the stick is already pushed in a direction when <code>Move</code> is enabled, the character will immediately start walking.</p>
+<p>By default, <a class="xref" href="RespondingToActions.html#button">Button</a> and <a class="xref" href="RespondingToActions.html#pass-through">Pass-Through</a> type actions, do not perform this check. A button that is pressed when its respective action is enabled first needs to be released and then pressed again for it to trigger the action.</p>
+<p>However, you can manually enable initial state checks on these types of actions using the checkbox in the Editor:</p>
+<p><img src="./Images/InitialStateCheck.png" alt="The Initial State Check setting appears with a checkmark under the Pass Through action on the Actions panel.">{width=&quot;486&quot; height=&quot;116&quot;}</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

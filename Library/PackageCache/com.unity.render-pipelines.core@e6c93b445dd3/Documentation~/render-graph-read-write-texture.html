@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Use a texture in a render pass in SRP Core | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Use a texture in a render pass in SRP Core | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="use-a-texture-in-a-render-pass-in-srp-core">Use a texture in a render pass in SRP Core</h1>
+
+<p>You can use the render graph system API to set a texture as an input or output for a custom render pass, so you can read from or write to it.</p>
+<h2 id="set-a-texture-as-an-input">Set a texture as an input</h2>
+<p>To set a texture as an input for a custom render pass, follow these steps:</p>
+<ol>
+<li><p>In your pass data, add a texture handle field to the data your pass uses.</p>
+<p>For example:</p>
+<pre><code class="lang-lang-cs">// Create the data your pass uses
+public class MyPassData
+{
+    // Add a texture handle
+    public TextureHandle textureToUse;
+}
+</code></pre>
+</li>
+<li><p>Set the texture handle to the texture you want to use. For more information, refer to <a href="render-graph-create-a-texture.html">Create a texture in the render graph system</a> or <a href="render-graph-import-a-texture.html">Import a texture into the render graph system</a>.</p>
+</li>
+<li><p>Call the <a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.core@17.0/api/UnityEngine.Rendering.RenderGraphModule.IBaseRenderGraphBuilder.html#UnityEngine_Rendering_RenderGraphModule_IBaseRenderGraphBuilder_UseTexture_UnityEngine_Rendering_RenderGraphModule_TextureHandle__UnityEngine_Rendering_RenderGraphModule_AccessFlags_"><code>UseTexture</code></a> method to set the texture as an input.</p>
+<p>For example:</p>
+<pre><code class="lang-lang-cs">builder.UseTexture(passData.textureToUse, AccessFlags.Read);
+</code></pre>
+</li>
+</ol>
+<p>In your <code>SetRenderFunc</code> method, you can now use the <code>TextureHandle</code> object in the pass data as an input for APIs.</p>
+<h2 id="set-a-texture-as-the-render-target">Set a texture as the render target</h2>
+<p>To set a texture as the output for APIs, use the <a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.core@17.0/api/UnityEngine.Rendering.RenderGraphModule.IRasterRenderGraphBuilder.html#UnityEngine_Rendering_RenderGraphModule_IRasterRenderGraphBuilder_SetRenderAttachment_UnityEngine_Rendering_RenderGraphModule_TextureHandle_System_Int32_UnityEngine_Rendering_RenderGraphModule_AccessFlags_"><code>SetRenderAttachment</code></a> method. The <code>SetRenderAttachment</code> method sets the texture as write-only by default.</p>
+<p>For example:</p>
+<pre><code class="lang-lang-cs">builder.SetRenderAttachment(textureHandle, 0);
+</code></pre>
+<p>You don't need to add the texture to your pass data. The render graph system sets up the texture for you automatically before it executes the render pass.</p>
+<p>You can't use <code>UseTexture</code> and <code>SetRenderAttachment</code> on the same texture in a <code>AddRasterRenderPass</code> render pass. Refer to <a href="#change-the-render-target-during-a-pass">Change the render target during a render pass</a> for more information.</p>
+<p><a name="change-the-render-target-during-a-pass"></a></p>
+<h2 id="change-the-render-target-during-a-render-pass">Change the render target during a render pass</h2>
+<p>You can't change which texture Unity writes to during a render graph system render pass.</p>
+<p>You can do either of the following instead:</p>
+<ul>
+<li>Create a second custom render pass, and use <code>builder.SetRenderAttachment</code> during the second render pass to change the render target.</li>
+<li>Use the <code>UnsafePass</code> API so you can use the <code>SetRenderTarget</code> API in the <code>SetRenderFunc</code> method. For more information, refer to <a href="render-graph-unsafe-pass.html">Use the CommandBuffer interface in a render graph</a>.</li>
+</ul>
+<p>You can use these methods to read from and write to the same texture, by first copying from the texture to a temporary texture you create, then copying back.</p>
+<p>If you blit between several textures with different properties, rendering might be slow because Unity can't merge the blits into a single native render pass. Use the <code>AddUnsafePass</code> API and the <code>SetRenderTarget()</code> method instead.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Introduction to lighting model customization with Shader Graph | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Introduction to lighting model customization with Shader Graph | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="introduction-to-lighting-model-customization-with-shader-graph">Introduction to lighting model customization with Shader Graph</h1>
+
+<p>You can customize lighting models to do the following:</p>
+<ul>
+<li><p>Improve rendering performance. You can remove or simplify one or more types of lighting calculations and sacrifice visual quality for rendering speed.</p>
+</li>
+<li><p>Make your lighting look different from Unity's default lighting. For example, to make your project look like a watercolor painting or a pen and ink drawing.</p>
+</li>
+</ul>
+<h2 id="lighting-model-customization-examples">Lighting model customization examples</h2>
+<p>The assets available in the <strong>Custom Lighting</strong> sample allow you to <a href="Shader-Graph-Sample-Custom-Lighting-Get-Started.html">get started with lighting model customization</a> in different contexts and for various purposes.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>Context</strong></th>
+<th style="text-align: left;"><strong>Description</strong></th>
+<th style="text-align: left;"><strong>Template</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Model for devices where performance is critical</td>
+<td style="text-align: left;">With XR or low-end mobile devices where performance is critical, you likely need to reduce the cost of calculations in your shaders. For example, you might skip any fog, specular, reflections, light cookies, or SSAO support and only keep the basics.</td>
+<td style="text-align: left;"><a href="Shader-Graph-Sample-Custom-Lighting-Templates.html#custom-lighting-basic">Custom Lighting Basic</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Simplified URP model with performance optimization</td>
+<td style="text-align: left;">If you need to optimize performance in URP, you might want to use a Blinn model, which is similar to the main lighting in URP but slightly cheaper for specular highlights. The Blinn model slightly affects the redering quality but renders faster in most cases.</td>
+<td style="text-align: left;"><a href="Shader-Graph-Sample-Custom-Lighting-Templates.html#custom-lighting-simple">Custom Lighting Simple</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Posterization model for cartoon appearance</td>
+<td style="text-align: left;">You can alter the lighting in a shader graph to achieve stylized effects such as posterization, to give the visuals of your project the appearance of a cartoon.</td>
+<td style="text-align: left;"><a href="Shader-Graph-Sample-Custom-Lighting-Templates.html#custom-lighting-toon">Custom Lighting Toon</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Lit URP model customization</td>
+<td style="text-align: left;">You might want to explore the process of lighting customization directly from a shader based on the Lit URP model.</td>
+<td style="text-align: left;"><a href="Shader-Graph-Sample-Custom-Lighting-Templates.html#custom-lighting-urp">Custom Lighting URP</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Other types of lighting customization</td>
+<td style="text-align: left;">You can use any of the <a href="Shader-Graph-Sample-Custom-Lighting-Lighting-Models.html">Lighting Model</a> sub graphs available in the <strong>Custom Lighting</strong> sample to create any type of lighting that you need within your own shader graphs. These sub graphs use a recommended pattern that illustrates how Unity expects custom lighting models to be defined.</td>
+<td style="text-align: left;">N/A</td>
+</tr>
+</tbody>
+</table>
+<h2 id="limitations">Limitations</h2>
+<p>Before you start to customize lighting models with Shader Graph, be aware of the following limitations:</p>
+<h3 id="shader-graph-doesnt-support-deferred-rendering">Shader Graph doesn't support deferred rendering</h3>
+<p>Customizable lighting is only intended to be used when you set the render type to Forward or Forward+ in the Render Asset.</p>
+<p>When you set the render type to Deferred or Deferred+, it's not possible to control the lighting directly in an object’s shader, because the lighting occurs in a pass that is not directly connected to the object's shader.</p>
+<p>If you need to customize lighting in a deferred rendering context, you have to <a href="xref:um-shader-writing">write shaders in code</a> instead of using Shader Graph.</p>
+<h3 id="handling-multiple-light-sources-in-shader-graph-requires-hlsl-coding">Handling multiple light sources in Shader Graph requires HLSL coding</h3>
+<p>To support multiple light sources in Shader Graph, you have to write a small amount of code.</p>
+<p>For the main directional light, you can create custom lighting in Shader Graph without coding. However, the part of the graph that does multiple light calculations requires the use of a <a href="Custom-Function-Node.html">Custom Function node</a>, because Shader Graph doesn’t support <code>For</code> loops.</p>
+<p>The sample includes multiple examples of Additional Lights nodes, but if you want to create your own, you need to know a little bit of HLSL coding.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

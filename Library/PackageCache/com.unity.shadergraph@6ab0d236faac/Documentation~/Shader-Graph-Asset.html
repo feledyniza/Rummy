@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Shader Graph Asset reference | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Shader Graph Asset reference | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="shader-graph-asset-reference">Shader Graph Asset reference</h1>
+
+<p>A Shader Graph asset is a file that contains a graph you create and edit in the <a href="Shader-Graph-Window.html"><strong>Shader Graph</strong> window</a>. It is also a shader that you can select from a material's shader dropdown, as any other shader.</p>
+<p>To access the properties of a Shader Graph asset in the <strong>Inspector</strong> window, select the asset in your project.</p>
+<h2 id="action-buttons">Action buttons</h2>
+<p>Manage Shader Graph assets code.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Open Shader Editor</strong></td>
+<td>Opens the selected asset in the <a href="Shader-Graph-Window.html">Shader Graph window</a> so you can edit the graph.</td>
+</tr>
+<tr>
+<td><strong>View Generated Shader</strong></td>
+<td>Opens the shader code that the shader graph generates in a text editor or an IDE, such as Visual Studio. The code includes all possible passes and targets.</td>
+</tr>
+<tr>
+<td><strong>Regenerate</strong></td>
+<td>Updates the code you edited in your text editor or IDE. This button appears only when you select <strong>View Generated Shader</strong>.</td>
+</tr>
+<tr>
+<td><strong>Copy Shader</strong></td>
+<td>Copies the shader code to the clipboard.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="properties">Properties</h2>
+<p>Manage Shader Graph assets templates.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Use As Template</strong></td>
+<td>Marks the selected Shader Graph asset as a template. When enabled, the asset appears in the <a href="template-browser.html">Shader Graph template browser</a>, but is no longer listed in any material's <strong>Shader</strong> dropdown by default.</td>
+</tr>
+<tr>
+<td><strong>Expose As Shader</strong></td>
+<td>Keeps the asset listed in a material's <strong>Shader</strong> dropdown so you can still use it as a shader when you also use it as a template. This is available only when <strong>Use As Template</strong> is enabled.</td>
+</tr>
+<tr>
+<td><strong>Name</strong></td>
+<td>Sets the name of the template in the Shader Graph template browser.</td>
+</tr>
+<tr>
+<td><strong>Category</strong></td>
+<td>Sets the category of the template in the Shader Graph template browser.</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>Sets the description of the template in the Shader Graph template browser.</td>
+</tr>
+<tr>
+<td><strong>Icon</strong></td>
+<td>Sets the icon that represents the template in the Shader Graph template browser.</td>
+</tr>
+<tr>
+<td><strong>Thumbnail</strong></td>
+<td>Sets the image that represents the template in the Shader Graph template browser.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="additional-resources">Additional resources</h2>
+<ul>
+<li><a href="Create-Shader-Graph.html">Creating a new shader graph asset</a></li>
+<li><a href="Shader-Graph-Window.html">Shader Graph Window</a></li>
+<li><a href="template-browser.html">Shader Graph template browser</a></li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

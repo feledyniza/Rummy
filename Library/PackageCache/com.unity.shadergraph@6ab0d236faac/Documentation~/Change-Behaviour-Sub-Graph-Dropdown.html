@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Change the behavior of a Sub Graph with a dropdown | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Change the behavior of a Sub Graph with a dropdown | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="change-the-behavior-of-a-sub-graph-with-a-dropdown">Change the behavior of a Sub Graph with a dropdown</h1>
+
+<p>To set up a <a href="Sub-graph.html">Sub Graph</a> so you can change its behavior using a dropdown menu in shader graphs, use a <strong>Dropdown</strong> node. You can specify the number of options that appear in the dropdown menu, and their names.</p>
+<h2 id="create-a-dropdown">Create a dropdown</h2>
+<p>Follow these steps:</p>
+<ol>
+<li><p>From the <strong>Project</strong> window, open a Sub Graph asset.</p>
+</li>
+<li><p>In the Blackboard, select <strong>Add</strong> (+), then select <strong>Dropdown</strong>.</p>
+<p><strong>Note</strong>: The <strong>Dropdown</strong> property appears only in the Blackboard for Sub Graphs, not regular shader graphs.</p>
+</li>
+<li><p>Drag the new <strong>Dropdown</strong> property from the Blackboard to the Sub Graph. Unity creates a <strong>Dropdown</strong> node.</p>
+</li>
+</ol>
+<p>When you add the Sub Graph to a shader graph, the <strong>Sub Graph</strong> node now has a dropdown menu with <strong>A</strong> and <strong>B</strong> options.</p>
+<h2 id="customize-the-dropdown-options">Customize the dropdown options</h2>
+<p>To customize the options in the dropdown menu, follow these steps:</p>
+<ol>
+<li>In the Sub Graph, select the <strong>Dropdown</strong> property in the Blackboard window.</li>
+<li>In the <strong>Graph Inspector</strong> window, select the <strong>Node Settings</strong> tab.</li>
+<li>Next to <strong>Entries</strong>, select the <strong>Add</strong> (<strong>+</strong>) button to add a new option, or the <strong>Remove</strong> (<strong>-</strong>) button to remove an option. The minimum number of options is two.</li>
+</ol>
+<p>Each option you add adds a corresponding input port to the <strong>Dropdown</strong> node.</p>
+<h2 id="set-up-the-output-for-each-option">Set up the output for each option</h2>
+<p>To set up the output for each option in the dropdown menu, follow these steps:</p>
+<ol>
+<li>Connect a node or set of nodes to each input port on the <strong>Dropdown</strong> node. Each input becomes active when the corresponding option is selected in the dropdown menu.</li>
+<li>Connect the <strong>Out</strong> port to the <strong>Output</strong> node.</li>
+</ol>
+<p>Each input port has the Dynamic Vector type, which allows you to connect any Vector type. For more information, refer to <a href="Data-Types.html#dynamic-data-types">Dynamic Data Types</a>.</p>
+<h2 id="example">Example</h2>
+<p>In the following example, a Subgraph Dropdown node changes the UV channel it sends to the Subgraph's Output node. The selection on the Subgraph node in the parent graph changes whether the Subgraph outputs <strong>UV1</strong> or <strong>UV0</strong>. If the Subgraph is used in multiple Shader Graphs, the Subgraph Dropdown node can change the UV channel output without changing the Subgraph:</p>
+<p><img src="images/sg-subgraph-dropdown-node-example-2.png" alt="An image of the Graph window. The first input port on a Subgraph Dropdown node connects to a UV node and receives UV0. The second input port connects to a UV node and receives UV1. The Subgraph Dropdown node sends its output to the Subgraph's Output node."></p>
+<h2 id="additional-resources">Additional resources</h2>
+<ul>
+<li><a href="Sub-graph.html">Sub Graphs</a></li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

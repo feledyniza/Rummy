@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Scene Color node | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Scene Color node | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="scene-color-node">Scene Color node</h1>
+
+<p>The Scene Color node samples the color buffer of the current camera, using the screen space coordinates you input.</p>
+<p>If you use the Universal Render Pipeline (URP), the node samples the opaque texture, which is a copy of the color buffer before Unity renders transparent objects. For more information, refer to <a href="https://docs.unity3d.com/Manual/urp/universalrp-asset.html">Universal Render Pipeline asset reference</a>.</p>
+<p>To make sure the Scene Color node outputs the correct values, follow these steps:</p>
+<ol>
+<li>Connect the node to the fragment <a href="Shader-Stage.html">shader stage</a>. The Scene Color node doesn't support the vertex shader stage.</li>
+<li>In the <strong>Graph Settings</strong> tab of the <a href="Internal-Inspector.html"><strong>Graph Inspector</strong></a> window, set <strong>Surface Type</strong> to <strong>Transparent</strong>. Otherwise, the node samples the color buffer before Unity renders all the opaque contents in the scene.</li>
+</ol>
+<h2 id="render-pipeline-support">Render pipeline support</h2>
+<p>The Scene Color node supports the following render pipelines:</p>
+<ul>
+<li>Universal Render Pipeline (URP)</li>
+<li>High Definition Render Pipeline (HDRP)</li>
+</ul>
+<p>If you use the Scene Color node with an unsupported pipeline, it returns 0 (black).</p>
+<h2 id="ports">Ports</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>Name</strong></th>
+<th style="text-align: left;"><strong>Direction</strong></th>
+<th style="text-align: left;"><strong>Type</strong></th>
+<th style="text-align: left;"><strong>Binding</strong></th>
+<th style="text-align: left;"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>UV</strong></td>
+<td style="text-align: left;">Input</td>
+<td style="text-align: left;">Vector 4</td>
+<td style="text-align: left;">Screen position</td>
+<td style="text-align: left;">The normalized screen space coordinates to sample from.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Out</strong></td>
+<td style="text-align: left;">Output</td>
+<td style="text-align: left;">Vector 3</td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;">The color value from the color buffer at the <strong>UV</strong> coordinates.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="generated-code-example">Generated code example</h2>
+<p>The HLSL code this node generates depends on the render pipeline you use. If you use your own custom render pipeline, you must define the behavior of the node yourself. Otherwise, the node returns a value of 0 (black).</p>
+<p>The following example code represents one possible outcome of this node.</p>
+<pre><code>void Unity_SceneColor_float(float4 UV, out float3 Out)
+{
+    Out = SHADERGRAPH_SAMPLE_SCENE_COLOR(UV);
+}
+</code></pre>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

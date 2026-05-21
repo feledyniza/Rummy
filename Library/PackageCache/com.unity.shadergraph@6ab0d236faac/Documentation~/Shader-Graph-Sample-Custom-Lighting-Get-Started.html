@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Get started with the Custom Lighting sample | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Get started with the Custom Lighting sample | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="get-started-with-the-custom-lighting-sample">Get started with the Custom Lighting sample</h1>
+
+<p>Use the templates and sub graphs included in the <strong>Custom Lighting</strong> sample to get started with lighting model customization in Shader Graph.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>To use the <strong>Custom Lighting</strong> templates and sub graphs, you first need to <a href="ShaderGraph-Samples.html#add-samples">import the sample in your project</a>.</p>
+</div>
+<h2 id="start-from-a-shader-graph-template">Start from a shader graph template</h2>
+<p>To use one of the available Custom Lighting templates as a starting point to customize lighting in a prebuilt shader graph asset, follow these steps:</p>
+<ol>
+<li><p><a href="Create-Shader-Graph.html">Create a shader graph asset from a template</a>.</p>
+</li>
+<li><p>In the <a href="template-browser.html">template browser</a>, select one of the templates from the <strong>URP Custom Lighting</strong> section.</p>
+</li>
+<li><p>Select <strong>Create</strong>.</p>
+</li>
+<li><p>Open the created shader graph asset in the Shader Graph window if the window doesn't open automatically.</p>
+</li>
+</ol>
+<h2 id="start-from-an-empty-shader-graph">Start from an empty shader graph</h2>
+<p>To use one of the available Lighting Model sub graphs as a starting point to customize lighting in an empty shader graph asset, follow these steps:</p>
+<ol>
+<li><p><a href="Create-Shader-Graph.html#create-a-shader-graph-with-a-preset-target">Create a shader graph asset with a preset target</a> and select <strong>URP</strong> &gt; <strong>Unlit Shader Graph</strong>.</p>
+</li>
+<li><p>Open the created shader graph asset in the Shader Graph window if the window doesn't open automatically.</p>
+</li>
+<li><p>Go to the <a href="Create-Node-Menu.html"><strong>Create Node</strong> menu</a> and add one of the sub graphs from the <strong>Custom Lighting</strong> &gt; <strong>Lighting Models</strong> section.</p>
+</li>
+<li><p>Connect the <strong>Lit</strong> output port of the added sub graph to the <strong>Base Color</strong> input port of the Master Stack.</p>
+</li>
+<li><p>To allow the Unlit target to correctly support custom lighting models, set the <a href="Graph-Settings-Tab.html">Graph Settings</a> as follows:</p>
+<ul>
+<li>Enable <strong>Keep Lighting Variants</strong>.</li>
+<li>Disable <strong>Default Decal Blending</strong> and <strong>Default SSAO</strong>.</li>
+</ul>
+</li>
+</ol>
+<h2 id="additional-resources">Additional resources</h2>
+<ul>
+<li><a href="Create-Shader-Graph.html">Create a shader graph asset</a></li>
+<li><a href="Create-Node-Menu.html">Add and connect nodes</a></li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

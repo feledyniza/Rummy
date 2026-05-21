@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Formula node | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Formula node | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="formula-node">Formula node</h1>
+
+<div class="NOTE">
+<h5>Note</h5>
+<p>For versions 2019/2020 LTS, download the Visual Scripting package from the <a href="https://assetstore.unity.com/packages/tools/visual-bolt-163802">Unity Asset Store</a>.</p>
+</div>
+<p>Formula is a powerful node that evaluates logical and mathematical expressions directly via a textual Formula and a list of Arguments.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Due to the binary tree traversal overhead (despite caching attempts), performance in using the formula node is significantly slower than using the operator nodes individually. It is preferable to avoid using this node at every frame.</p>
+</div>
+<p>Although a formula can return either a boolean for logic, or a number for math, formulas can return any type of value.</p>
+<p><img src="images/vs-formula-node.png" alt="A Formula node has two text fields: one for the formula itself, and one for the number of arguments."></p>
+<p>The first text field in the header is the formula itself.</p>
+<p>The second text field is the number of arguments. It's set to 2 by default, giving us A and B as inputs. Formulas can have up to 10 arguments, which are always ordered alphabetically. If more are required,  they are called B, C, D, E, and so forth.</p>
+<p>For example, this formula returns a boolean indicating:</p>
+<ul>
+<li>whether, at a minimum, 10 seconds have elapsed since the start of the game and</li>
+<li>the current object's name is Player.</li>
+</ul>
+<p><img src="images/vs-formula-node-example.png" alt="A formula that returns a Boolean based on the two specified conditions"></p>
+<h2 id="arguments">Arguments</h2>
+<h3 id="variable-names">Variable Names</h3>
+<p>Variable names can be directly used in the formula. For example, a graph variable named health can return a boolean just by typing the formula health &gt; 50. The argument names are evaluated in the following order of priority:</p>
+<ol>
+<li>Alphabetical argument names (a - z)</li>
+<li>Graph variable names</li>
+<li>Object variable names</li>
+<li>Scene variable names</li>
+<li>Application variable names</li>
+<li>Saved variable names</li>
+</ol>
+<h3 id="properties-and-methods">Properties and Methods</h3>
+<p>Use the <code>\[arg.prop\]</code> notation to retrieve the value of a property on an argument or variable. For example, if position is a Vector 3 object variable, check if it is equal to zero with: <code>\[position.x\] = 0</code>. Get the return value of parameterless methods with the <code>\[arg.Method()\]</code> notation.</p>
+<p>Note: Accessing properties and methods is not guaranteed to be compatible with AOT platforms, because the AOT pre-build cannot generate stubs for members that are only accessed by name.</p>
+<h3 id="literals">Literals</h3>
+<p>Use the following literals for assigning fixed values.</p>
+<table>
+<thead>
+<tr>
+<th>Literal</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number</td>
+<td>An integer or float.</td>
+<td><code>3.5</code></td>
+</tr>
+<tr>
+<td>String</td>
+<td>A piece of text between apostrophes.</td>
+<td><code>&quot;Hello World!&quot;</code></td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>A boolean value.</td>
+<td><code>true, false</code></td>
+</tr>
+<tr>
+<td>Null</td>
+<td>The null constant.</td>
+<td><code>a != null</code></td>
+</tr>
+<tr>
+<td>Delta Time</td>
+<td>The Unity frame delta time.</td>
+<td><code>30 \* dt</code></td>
+</tr>
+<tr>
+<td>Invert Delta Time</td>
+<td>The inverse of the delta time.</td>
+<td><code>30 / second</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="operators">Operators</h3>
+<p>Every common logical and mathematical operator can be used in formulas, as well as the ones defined through custom operator overloading in script.</p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Operation</th>
+<th>Rank</th>
+<th>Result</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>not</code>, <code>!</code></td>
+<td>Logical Negation</td>
+<td>Unary</td>
+<td>The opposite of the operand.</td>
+<td>not true</td>
+</tr>
+<tr>
+<td><code>\-</code></td>
+<td>Numerical Negation</td>
+<td>Unary</td>
+<td>The negative of the operand.</td>
+<td><code>-5</code></td>
+</tr>
+<tr>
+<td><code>and</code>, <code>&amp;&amp;</code></td>
+<td>Logical And</td>
+<td>Binary</td>
+<td>True if both operands are true.</td>
+<td><code>(a \&lt; 5)</code> and <code>(b \&gt; 3)</code></td>
+</tr>
+<tr>
+<td><code>or</code>, <code>\|\|</code></td>
+<td>Logical Or</td>
+<td>Binary</td>
+<td>True if either operand is true</td>
+<td><code>(a \&lt; 5)</code> or <code>(b \&gt; 3)</code></td>
+</tr>
+<tr>
+<td><code>=</code>, <code>==</code></td>
+<td>Equality</td>
+<td>Binary</td>
+<td>True if the two operands are equal.</td>
+<td><code>a = b</code></td>
+</tr>
+<tr>
+<td><code>!=</code>, <code>\&lt;\&gt;</code></td>
+<td>Inequality</td>
+<td>Binary</td>
+<td>True if the two operands are not equal.</td>
+<td><code>a != b</code></td>
+</tr>
+<tr>
+<td><code>\&lt;</code>, <code>\&lt;=</code>, <code>\&gt;</code>, <code>\&gt;=</code></td>
+<td>Numeric Comparison</td>
+<td>Binary</td>
+<td>The result of a numeric comparison</td>
+<td><code>a \&gt;= 10</code></td>
+</tr>
+<tr>
+<td><code>\+</code></td>
+<td>Addition</td>
+<td>Binary</td>
+<td>The sum of the two operands.</td>
+<td><code>a + 5</code></td>
+</tr>
+<tr>
+<td><code>\-</code></td>
+<td>Subtraction</td>
+<td>Binary</td>
+<td>The difference between the two operands.</td>
+<td><code>b - 3</code></td>
+</tr>
+<tr>
+<td><code>\*</code></td>
+<td>Multiplication</td>
+<td>Binary</td>
+<td>The product of the two operands.</td>
+<td><code>12 \* a</code></td>
+</tr>
+<tr>
+<td><code>/</code></td>
+<td>Division</td>
+<td>Binary</td>
+<td>The quotient of the two operands.</td>
+<td><code>b / 2</code></td>
+</tr>
+<tr>
+<td><code>%</code></td>
+<td>Modulo</td>
+<td>Binary</td>
+<td>The remainder of the division of the two operands.</td>
+<td><code>a % 2</code></td>
+</tr>
+<tr>
+<td><code>?:</code></td>
+<td>If</td>
+<td>Ternary</td>
+<td>The left operand if the condition is true, otherwise the right operand.</td>
+<td><code>(health \&gt; 0) ? &quot;Alive&quot; : &quot;Dead&quot;</code></td>
+</tr>
+</tbody>
+</table>
+<p>All common bitwise operators like <code>\~</code> and &gt;&gt; are also supported.</p>
+<h3 id="functions">Functions</h3>
+<p>You can also use any function from the following table.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Result</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>abs</td>
+<td>The absolute value of a specified number.</td>
+<td><code>abs(-1)</code></td>
+</tr>
+<tr>
+<td>acos</td>
+<td>The angle whose cosine is the specified number.</td>
+<td><code>acos(1)</code></td>
+</tr>
+<tr>
+<td>asin</td>
+<td>The angle whose sine is the specified number.</td>
+<td><code>asin(0)</code></td>
+</tr>
+<tr>
+<td>atan</td>
+<td>The angle whose tangent is the specified number.</td>
+<td><code>atan(0)</code></td>
+</tr>
+<tr>
+<td>ceiling</td>
+<td>The smallest integer greater than or equal to the specified number.</td>
+<td><code>ceiling(1.5)</code></td>
+</tr>
+<tr>
+<td>cos</td>
+<td>The cosine of the specified angle.</td>
+<td><code>cos(0)</code></td>
+</tr>
+<tr>
+<td>exp</td>
+<td>e raised to the specified power.</td>
+<td><code>exp(0)</code></td>
+</tr>
+<tr>
+<td>floor</td>
+<td>The largest integer less than or equal to the specified number.</td>
+<td><code>floor(1.5)</code></td>
+</tr>
+<tr>
+<td>log</td>
+<td>The logarithm of a specified number.</td>
+<td><code>log(1, 10)</code></td>
+</tr>
+<tr>
+<td>log10</td>
+<td>The base 10 logarithm of a specified number.</td>
+<td><code>log10(1)</code></td>
+</tr>
+<tr>
+<td>max</td>
+<td>The larger of two specified numbers.</td>
+<td><code>max(1, 2)</code></td>
+</tr>
+<tr>
+<td>min</td>
+<td>The smaller of two numbers.</td>
+<td><code>min(1, 2)</code></td>
+</tr>
+<tr>
+<td>pow</td>
+<td>A specified number raised to the specified power.</td>
+<td><code>pow(3, 2)</code></td>
+</tr>
+<tr>
+<td>round</td>
+<td>Rounds a value to the nearest integer or specified number of decimal places.</td>
+<td><code>round(3.222, 2)</code></td>
+</tr>
+<tr>
+<td>sign</td>
+<td>1 if the number is positive, -1 is if it negative.</td>
+<td><code>sign(-10)</code></td>
+</tr>
+<tr>
+<td>sin</td>
+<td>The sine of the specified angle.</td>
+<td><code>sin(0)</code></td>
+</tr>
+<tr>
+<td>sqrt</td>
+<td>The square root of a specified number.</td>
+<td><code>sqrt(4)</code></td>
+</tr>
+<tr>
+<td>tan</td>
+<td>The tangent of the specified angle.</td>
+<td><code>tan(0)</code></td>
+</tr>
+<tr>
+<td>truncate</td>
+<td>The integral part of a number.</td>
+<td><code>truncate(1.7)</code></td>
+</tr>
+<tr>
+<td>v2</td>
+<td>Creates a 2D vector.</td>
+<td><code>v2(0, 0)</code></td>
+</tr>
+<tr>
+<td>v3</td>
+<td>Creates a 3D vector.</td>
+<td><code>v3(0, 0, 0)</code></td>
+</tr>
+<tr>
+<td>v4</td>
+<td>Creates a 4D vector.</td>
+<td><code>v4(0, 0, 0, 0)</code></td>
+</tr>
+</tbody>
+</table>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

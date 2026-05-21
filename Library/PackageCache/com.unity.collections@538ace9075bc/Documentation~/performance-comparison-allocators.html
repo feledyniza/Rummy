@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Performance Comparison: Allocators | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Performance Comparison: Allocators | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="performance-comparison-allocators">Performance Comparison: Allocators</h1>
+
+<blockquote>
+<p><strong><span style="color:red">This file is auto-generated</span></strong></p>
+<p>All measurments were taken on 12th Gen Intel(R) Core(TM) i9-12900K with 24 logical cores.<br>
+Unity Editor version: 2022.2.8f1<br>
+To regenerate this file locally use: <strong>DOTS -&gt; Unity.Collections -&gt; Generate ***</strong> menu.<br></p>
+</blockquote>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#benchmark-results">Benchmark Results</a>
+<ul>
+<li><a href="#rewindableallocator">RewindableAllocator</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="benchmark-results">Benchmark Results</h2>
+<p>The following benchmarks make <strong>150 consecutive allocations</strong> per sample set.<br>Multithreaded benchmarks make the full <strong>150 consecutive allocations <em>per worker thread</em></strong> per sample set.<br>The <strong>Min of 50 sample sets</strong> is compared against the baseline on the far right side of the table.<br>5 extra sample sets are run as warmup.<br>
+<br></p>
+<blockquote>
+<p><strong>Legend</strong></p>
+<p><code>(S)</code> = Safety Enabled<br>
+<code>(B)</code> = Burst Compiled <em>with Safety Disabled</em><br>
+<code>(S+B)</code> = Burst Compiled <em>with Safety Enabled</em><br>
+<code>(E)</code> = Engine Provided<br>
+<br>
+<em><code>italic</code></em> results are for benchmarking comparison only; these are not included in standard Performance Framework tests<br></p>
+</blockquote>
+<br>
+<h3 id="rewindableallocator"><em>RewindableAllocator</em></h3>
+<table>
+<thead>
+<tr>
+<th>Functionality</th>
+<th style="text-align: right;">RewindableAllocator (S)</th>
+<th style="text-align: right;">RewindableAllocator (S+B)</th>
+<th style="text-align: right;">RewindableAllocator (B)</th>
+<th style="text-align: right;"><em>TempJob (E)</em></th>
+<th style="text-align: right;"><em>Temp (E)</em></th>
+<th style="text-align: right;"><em>Persistent (E)</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FixedSize(1, 1024)</code><em>³</em></td>
+<td style="text-align: right;">11.4µs  <span style="color:green">(2.2x)</span>      </td>
+<td style="text-align: right;">4.0µs   <span style="color:green">(6.3x)</span>      </td>
+<td style="text-align: right;">3.8µs   <span style="color:green">(6.6x)</span> 🟢</td>
+<td style="text-align: right;"><em>17.0µs  <span style="color:green">(1.5x)</span></em>      </td>
+<td style="text-align: right;"><em>10.1µs   <span style="color:green">(2.5x)</span></em>      </td>
+<td style="text-align: right;"><em>25.1µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>FixedSize(2, 1024)</code><em>²˒³</em></td>
+<td style="text-align: right;">23.0µs  <span style="color:green">(2.1x)</span>      </td>
+<td style="text-align: right;">23.1µs   <span style="color:green">(2.0x)</span>      </td>
+<td style="text-align: right;">9.0µs   <span style="color:green">(5.2x)</span> 🟢</td>
+<td style="text-align: right;"><em>20.2µs  <span style="color:green">(2.3x)</span></em>      </td>
+<td style="text-align: right;"><em>11.2µs   <span style="color:green">(4.2x)</span></em>      </td>
+<td style="text-align: right;"><em>47.2µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>FixedSize(4, 1024)</code><em>²˒³</em></td>
+<td style="text-align: right;">66.4µs  <span style="color:green">(1.9x)</span>      </td>
+<td style="text-align: right;">71.9µs   <span style="color:green">(1.7x)</span>      </td>
+<td style="text-align: right;">80.8µs   <span style="color:green">(1.5x)</span>      </td>
+<td style="text-align: right;"><em>23.5µs  <span style="color:green">(5.3x)</span></em>      </td>
+<td style="text-align: right;"><em>11.5µs  <span style="color:green">(10.7x)</span></em> 🟢</td>
+<td style="text-align: right;"><em>123.5µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>FixedSize(8, 1024)</code><em>²˒³</em></td>
+<td style="text-align: right;">167.1µs  <span style="color:green">(2.2x)</span>      </td>
+<td style="text-align: right;">169.2µs   <span style="color:green">(2.2x)</span>      </td>
+<td style="text-align: right;">167.3µs   <span style="color:green">(2.2x)</span>      </td>
+<td style="text-align: right;"><em>45.6µs  <span style="color:green">(8.0x)</span></em>      </td>
+<td style="text-align: right;"><em>12.8µs  <span style="color:green">(28.6x)</span></em> 🟢</td>
+<td style="text-align: right;"><em>366.4µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>FixedSize(1, 1048576)</code><em>³</em></td>
+<td style="text-align: right;">11.9µs <span style="color:green">(16.3x)</span>      </td>
+<td style="text-align: right;">4.7µs  <span style="color:green">(41.3x)</span>      </td>
+<td style="text-align: right;">4.4µs  <span style="color:green">(44.1x)</span> 🟢</td>
+<td style="text-align: right;"><em>17.1µs <span style="color:green">(11.4x)</span></em>      </td>
+<td style="text-align: right;"><em>10.9µs  <span style="color:green">(17.8x)</span></em>      </td>
+<td style="text-align: right;"><em>194.1µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>FixedSize(2, 1048576)</code><em>²˒³</em></td>
+<td style="text-align: right;">26.0µs <span style="color:green">(10.0x)</span>      </td>
+<td style="text-align: right;">17.0µs  <span style="color:green">(15.2x)</span>      </td>
+<td style="text-align: right;">14.1µs  <span style="color:green">(18.4x)</span>      </td>
+<td style="text-align: right;"><em>32.0µs  <span style="color:green">(8.1x)</span></em>      </td>
+<td style="text-align: right;"><em>11.7µs  <span style="color:green">(22.1x)</span></em> 🟢</td>
+<td style="text-align: right;"><em>258.9µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>FixedSize(4, 1048576)</code><em>²˒³</em></td>
+<td style="text-align: right;">70.1µs <span style="color:green">(11.6x)</span>      </td>
+<td style="text-align: right;">71.3µs  <span style="color:green">(11.4x)</span>      </td>
+<td style="text-align: right;">75.3µs  <span style="color:green">(10.8x)</span>      </td>
+<td style="text-align: right;"><em>208.5µs  <span style="color:green">(3.9x)</span></em>      </td>
+<td style="text-align: right;"><em>12.5µs  <span style="color:green">(65.0x)</span></em> 🟢</td>
+<td style="text-align: right;"><em>812.2µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>FixedSize(8, 1048576)</code><em>²˒³</em></td>
+<td style="text-align: right;">139.7µs <span style="color:green">(14.6x)</span>      </td>
+<td style="text-align: right;">161.0µs  <span style="color:green">(12.7x)</span>      </td>
+<td style="text-align: right;">179.8µs  <span style="color:green">(11.3x)</span>      </td>
+<td style="text-align: right;"><em>1317.1µs  <span style="color:green">(1.5x)</span></em>      </td>
+<td style="text-align: right;"><em>19.5µs <span style="color:green">(104.6x)</span></em> 🟢</td>
+<td style="text-align: right;"><em>2039.9µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>IncSize(1, 4096)</code><em>⁴</em></td>
+<td style="text-align: right;">11.9µs  <span style="color:green">(4.0x)</span>      </td>
+<td style="text-align: right;">4.6µs  <span style="color:green">(10.3x)</span>      </td>
+<td style="text-align: right;">4.3µs  <span style="color:green">(11.0x)</span> 🟢</td>
+<td style="text-align: right;"><em>17.9µs  <span style="color:green">(2.6x)</span></em>      </td>
+<td style="text-align: right;"><em>10.3µs   <span style="color:green">(4.6x)</span></em>      </td>
+<td style="text-align: right;"><em>47.2µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>IncSize(2, 4096)</code><em>²˒⁴</em></td>
+<td style="text-align: right;">26.8µs  <span style="color:green">(4.8x)</span>      </td>
+<td style="text-align: right;">10.9µs  <span style="color:green">(11.7x)</span>      </td>
+<td style="text-align: right;">10.5µs  <span style="color:green">(12.2x)</span> 🟢</td>
+<td style="text-align: right;"><em>31.7µs  <span style="color:green">(4.0x)</span></em>      </td>
+<td style="text-align: right;"><em>10.9µs  <span style="color:green">(11.7x)</span></em>      </td>
+<td style="text-align: right;"><em>127.6µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>IncSize(4, 4096)</code><em>²˒⁴</em></td>
+<td style="text-align: right;">58.9µs  <span style="color:green">(7.6x)</span>      </td>
+<td style="text-align: right;">67.6µs   <span style="color:green">(6.6x)</span>      </td>
+<td style="text-align: right;">64.5µs   <span style="color:green">(6.9x)</span>      </td>
+<td style="text-align: right;"><em>71.9µs  <span style="color:green">(6.2x)</span></em>      </td>
+<td style="text-align: right;"><em>11.2µs  <span style="color:green">(39.7x)</span></em> 🟢</td>
+<td style="text-align: right;"><em>444.7µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>IncSize(8, 4096)</code><em>²˒⁴</em></td>
+<td style="text-align: right;">169.3µs  <span style="color:green">(7.8x)</span>      </td>
+<td style="text-align: right;">159.0µs   <span style="color:green">(8.3x)</span>      </td>
+<td style="text-align: right;">185.7µs   <span style="color:green">(7.1x)</span>      </td>
+<td style="text-align: right;"><em>350.8µs  <span style="color:green">(3.8x)</span></em>      </td>
+<td style="text-align: right;"><em>11.5µs <span style="color:green">(114.7x)</span></em> 🟢</td>
+<td style="text-align: right;"><em>1319.0µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>IncSize(1, 65536)</code><em>⁴</em></td>
+<td style="text-align: right;">12.7µs <span style="color:green">(49.2x)</span>      </td>
+<td style="text-align: right;">5.0µs <span style="color:green">(125.1x)</span>      </td>
+<td style="text-align: right;">4.7µs <span style="color:green">(133.1x)</span> 🟢</td>
+<td style="text-align: right;"><em>19.0µs <span style="color:green">(32.9x)</span></em>      </td>
+<td style="text-align: right;"><em>11.0µs  <span style="color:green">(56.9x)</span></em>      </td>
+<td style="text-align: right;"><em>625.4µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>IncSize(2, 65536)</code><em>²˒⁴</em></td>
+<td style="text-align: right;">25.0µs <span style="color:green">(46.3x)</span>      </td>
+<td style="text-align: right;">15.8µs  <span style="color:green">(73.3x)</span>      </td>
+<td style="text-align: right;">13.0µs  <span style="color:green">(89.1x)</span>      </td>
+<td style="text-align: right;"><em>578.1µs  <span style="color:green">(2.0x)</span></em>      </td>
+<td style="text-align: right;"><em>11.3µs <span style="color:green">(102.5x)</span></em> 🟢</td>
+<td style="text-align: right;"><em>1157.7µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>IncSize(4, 65536)</code><em>²˒⁴</em></td>
+<td style="text-align: right;">73.3µs <span style="color:green">(34.7x)</span>      </td>
+<td style="text-align: right;">73.0µs  <span style="color:green">(34.8x)</span>      </td>
+<td style="text-align: right;">70.5µs  <span style="color:green">(36.1x)</span>      </td>
+<td style="text-align: right;"><em>2098.0µs  <span style="color:green">(1.2x)</span></em>      </td>
+<td style="text-align: right;"><em>11.9µs <span style="color:green">(213.6x)</span></em> 🟢</td>
+<td style="text-align: right;"><em>2542.2µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>IncSize(8, 65536)</code><em>²˒⁴</em></td>
+<td style="text-align: right;">141.3µs <span style="color:green">(40.5x)</span>      </td>
+<td style="text-align: right;">168.1µs  <span style="color:green">(34.1x)</span>      </td>
+<td style="text-align: right;">162.6µs  <span style="color:green">(35.2x)</span>      </td>
+<td style="text-align: right;"><em>6036.0µs  <span style="color:red">(0.9x)</span></em> 🟠</td>
+<td style="text-align: right;"><em>12.7µs <span style="color:green">(450.8x)</span></em> 🟢</td>
+<td style="text-align: right;"><em>5724.9µs <span style="color:grey">(1.0x)</span></em>      </td>
+</tr>
+<tr>
+<td><code>DecSize(1, 4096)</code><em>⁵</em></td>
+<td style="text-align: right;">12.2µs  <span style="color:green">(6.1x)</span>      </td>
+<td style="text-align: right;">4.6µs  <span style="color:green">(16.1x)</span>      </td>
+<td style="text-align: right;">4.3µs  <span style="color:green">(17.2x)</span> 🟢</td>
+<td style="text-align: right;"><em>16.9µs  <span style="color:green">(4.4x)</span></em>      </td>
+<td style="text-align: right;"><em>9.8µs   <span style="color:green">(7.5x)</span></em>      </td>
+<td style="text-align: right;"><em>73.9µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>DecSize(2, 4096)</code><em>²˒⁵</em></td>
+<td style="text-align: right;">27.6µs  <span style="color:green">(3.4x)</span>      </td>
+<td style="text-align: right;">12.5µs   <span style="color:green">(7.6x)</span>      </td>
+<td style="text-align: right;">11.9µs   <span style="color:green">(8.0x)</span>      </td>
+<td style="text-align: right;"><em>37.3µs  <span style="color:green">(2.5x)</span></em>      </td>
+<td style="text-align: right;"><em>11.4µs   <span style="color:green">(8.3x)</span></em> 🟢</td>
+<td style="text-align: right;"><em>94.9µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>DecSize(4, 4096)</code><em>²˒⁵</em></td>
+<td style="text-align: right;">68.5µs  <span style="color:green">(7.5x)</span>      </td>
+<td style="text-align: right;">74.7µs   <span style="color:green">(6.8x)</span>      </td>
+<td style="text-align: right;">69.4µs   <span style="color:green">(7.4x)</span>      </td>
+<td style="text-align: right;"><em>79.3µs  <span style="color:green">(6.5x)</span></em>      </td>
+<td style="text-align: right;"><em>11.0µs  <span style="color:green">(46.5x)</span></em> 🟢</td>
+<td style="text-align: right;"><em>511.6µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>DecSize(8, 4096)</code><em>²˒⁵</em></td>
+<td style="text-align: right;">173.5µs  <span style="color:green">(7.4x)</span>      </td>
+<td style="text-align: right;">173.4µs   <span style="color:green">(7.4x)</span>      </td>
+<td style="text-align: right;">168.3µs   <span style="color:green">(7.6x)</span>      </td>
+<td style="text-align: right;"><em>313.4µs  <span style="color:green">(4.1x)</span></em>      </td>
+<td style="text-align: right;"><em>17.1µs  <span style="color:green">(75.1x)</span></em> 🟢</td>
+<td style="text-align: right;"><em>1284.6µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>DecSize(1, 65536)</code><em>⁵</em></td>
+<td style="text-align: right;">12.1µs <span style="color:green">(47.9x)</span>      </td>
+<td style="text-align: right;">4.6µs <span style="color:green">(126.0x)</span>      </td>
+<td style="text-align: right;">4.3µs <span style="color:green">(134.8x)</span> 🟢</td>
+<td style="text-align: right;"><em>20.8µs <span style="color:green">(27.9x)</span></em>      </td>
+<td style="text-align: right;"><em>11.7µs  <span style="color:green">(49.6x)</span></em>      </td>
+<td style="text-align: right;"><em>579.8µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>DecSize(2, 65536)</code><em>²˒⁵</em></td>
+<td style="text-align: right;">28.6µs <span style="color:green">(37.1x)</span>      </td>
+<td style="text-align: right;">17.7µs  <span style="color:green">(60.0x)</span>      </td>
+<td style="text-align: right;">11.5µs  <span style="color:green">(92.3x)</span> 🟢</td>
+<td style="text-align: right;"><em>658.8µs  <span style="color:green">(1.6x)</span></em>      </td>
+<td style="text-align: right;"><em>12.5µs  <span style="color:green">(84.9x)</span></em>      </td>
+<td style="text-align: right;"><em>1061.4µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>DecSize(4, 65536)</code><em>²˒⁵</em></td>
+<td style="text-align: right;">67.3µs <span style="color:green">(38.8x)</span>      </td>
+<td style="text-align: right;">69.4µs  <span style="color:green">(37.6x)</span>      </td>
+<td style="text-align: right;">73.1µs  <span style="color:green">(35.7x)</span>      </td>
+<td style="text-align: right;"><em>2386.4µs  <span style="color:green">(1.1x)</span></em>      </td>
+<td style="text-align: right;"><em>14.2µs <span style="color:green">(183.8x)</span></em> 🟢</td>
+<td style="text-align: right;"><em>2609.3µs <span style="color:grey">(1.0x)</span></em> 🟠</td>
+</tr>
+<tr>
+<td><code>DecSize(8, 65536)</code><em>²˒⁵</em></td>
+<td style="text-align: right;">154.4µs <span style="color:green">(37.8x)</span>      </td>
+<td style="text-align: right;">166.6µs  <span style="color:green">(35.0x)</span>      </td>
+<td style="text-align: right;">155.9µs  <span style="color:green">(37.4x)</span>      </td>
+<td style="text-align: right;"><em>5938.8µs  <span style="color:grey">(1.0x)</span></em> 🟠</td>
+<td style="text-align: right;"><em>28.6µs <span style="color:green">(203.9x)</span></em> 🟢</td>
+<td style="text-align: right;"><em>5830.8µs <span style="color:grey">(1.0x)</span></em>      </td>
+</tr>
+</tbody>
+</table>
+<p><em>²</em> Benchmark run on parallel job workers - results may vary<br>
+<em>³</em> FixedSize(workerThreads, allocSize)<br>
+<em>⁴</em> IncSize(workerThreads, allocSize) -- Makes linearly increasing allocations [1⋅allocSize, 2⋅allocSize ... N⋅allocSize]<br>
+<em>⁵</em> DecSize(workerThreads, allocSize) -- Makes linearly decreasing allocations [N⋅allocSize ... 2⋅allocSize, 1⋅allocSize]<br></p>
+<hr>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

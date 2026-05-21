@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Ray tracing workflow | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Ray tracing workflow | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../../index.html">
+            <img id="logo" class="svg" src="../../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="ray-tracing-workflow">Ray tracing workflow</h1>
+
+<p>To use the API to trace rays in Unity, follow these steps:</p>
+<ol>
+<li>Create the ray tracing context.</li>
+<li>Create an acceleration structure.</li>
+<li>Create a shader.</li>
+<li>Build your acceleration structure.</li>
+<li>Execute your shader.</li>
+</ol>
+<h2 id="create-the-ray-tracing-context">Create the ray tracing context</h2>
+<p>The context serves as the API entry point. Create it using the following parameters:</p>
+<ol>
+<li><code>backend</code>: The chosen backend, which can be either <code>Hardware</code> or <code>Compute</code>.</li>
+<li><code>resources</code>: A collection of assets required by the context to function.</li>
+</ol>
+<pre><code class="lang-C#">var rtContext = new RayTracingContext(backend, rtResources);
+</code></pre>
+<p>For more information, refer to <a href="create-ray-tracing-context.html">Create the ray tracing Context</a>.</p>
+<h2 id="create-an-acceleration-structure">Create an acceleration structure</h2>
+<p>The acceleration structure is the data structure used to represent a collection of instances and geometries that are used for GPU ray tracing.</p>
+<pre><code class="lang-C#">IRayTracingAccelStruct rtAccelStruct = rtContext.CreateAccelerationStructure(options);
+</code></pre>
+<p>After creating the structure, populate it with mesh instances using the <a href="xref:UnityEngine.Rendering.UnifiedRayTracing.IRayTracingAccelStruct.AddInstance(UnityEngine.Rendering.UnifiedRayTracing.MeshInstanceDesc)"><code>AddInstance</code></a> method.</p>
+<p>For more information, refer to <a href="create-acceleration-structure.html">Create an acceleration structure</a>.</p>
+<h2 id="create-a-unified-ray-tracing-shader">Create a unified ray tracing shader</h2>
+<p>Depending on the chosen backend, the <code>RayTracingContext</code> runs either a <code>ComputeShader</code> or a <code>RayTracingShader</code>. The API introduces the unified ray tracing shader (<code>.urtshader</code>), which is a shader type that generates both variants for you.</p>
+<pre><code class="lang-C#">IRayTracingShader rtShader = rtContext.LoadRayTracingShader(&quot;Assets/yourShader.urtshader&quot;);
+</code></pre>
+<p>For more information, refer to <a href="create-shader.html">Create a unified ray tracing shader</a>.</p>
+<h2 id="build-your-acceleration-structure">Build your acceleration structure</h2>
+<p>Whenever it is modified or used for the first time, the acceleration structure needs to be built or rebuilt. This can be achieved with the following code:</p>
+<pre><code class="lang-C#">rtAccelStruct.Build(cmd, buildScratchBuffer);
+</code></pre>
+<p>For more information, refer to <a href="execute-shader.html">Execute your ray tracing code</a>.</p>
+<h2 id="execute-your-shader">Execute your shader</h2>
+<p>To execute your shader, call the <a href="xref:UnityEngine.Rendering.UnifiedRayTracing.IRayTracingShader.Dispatch(UnityEngine.Rendering.CommandBuffer,UnityEngine.GraphicsBuffer,System.UInt32,System.UInt32,System.UInt32)"><code>Dispatch</code></a>
+method of <code>IRayTracingShader</code>.</p>
+<pre><code class="lang-C#">rtShader.Dispatch(cmd, traceScratchBuffer, threadCountX, threadCountY, threadCountZ);
+</code></pre>
+<p>For more information, refer to <a href="execute-shader.html">Execute your ray tracing code</a>.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

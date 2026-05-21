@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Write a render pipeline with render graph in SRP Core | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Write a render pipeline with render graph in SRP Core | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="write-a-render-pipeline-with-render-graph-in-srp-core">Write a render pipeline with render graph in SRP Core</h1>
+
+<p>Create a custom render pipeline using the <a href="render-graph-system.html">render graph system</a> in SRP Core.</p>
+<p><strong>Note:</strong> This page is about creating a custom render pipeline. To use the render graph system in a prebuilt Unity pipeline, refer to either <a href="https://docs.unity3d.com/Manual/urp/render-graph.html">Render graph system in URP</a> or <a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.high-definition@latest/index.html?subfolder=/manual/render-graph-introduction.html">Render graph system in HDRP</a>.</p>
+<ol>
+<li><p>In your class that inherits <code>RenderPipeline</code>, create an instance of a <a href="../api/UnityEngine.Rendering.RenderGraphModule.RenderGraph.html"><code>RenderGraph</code></a>. For example:</p>
+<pre><code class="lang-c#">public class MyRenderPipeline : RenderPipeline
+{
+    ...
+
+    RenderGraph myRenderGraph;
+    myRenderGraph = new RenderGraph(&quot;MyRenderGraph&quot;);
+}
+</code></pre>
+<p><strong>Note:</strong>  To optimize memory usage, use only one instance. You can use more than one instance of a render graph, but Unity doesn't share resources across <code>RenderGraph</code> instances.</p>
+<p>For more information about creating a render pipeline class, refer to <a href="srp-custom.html">Creating a custom render pipeline</a>.</p>
+</li>
+<li><p>In your render loop, create the parameters to initialize the render graph, using the <code>RenderGraphParameters</code> API. For example:</p>
+<pre><code class="lang-c#">void RenderMyCamera(ScriptableRenderContext context, Camera cameraToRender)
+{
+    context.SetupCameraProperties(cameraToRender);
+    var cmd = CommandBufferPool.Get(&quot;ExampleCommandBuffer&quot;);
+
+    RenderGraphParameters rgParams = new RenderGraphParameters
+    {
+        commandBuffer = cmd,
+        scriptableRenderContext = context,
+        currentFrameIndex = Time.frameCount,
+    };
+}
+</code></pre>
+<p>For more information about creating a render loop, refer to <a href="srp-creating-simple-render-loop.html">Create a simple render loop in a custom render pipeline</a>.</p>
+</li>
+<li><p>Initialize the render graph by calling the <a href="../api/UnityEngine.Rendering.RenderGraphModule.RenderGraph.html"><code>BeginRecording</code></a> method. For example:</p>
+<pre><code class="lang-c#">myRenderGraph.BeginRecording(renderGraphParams);
+</code></pre>
+</li>
+<li><p>Run the render passes by calling the <a href="../api/UnityEngine.Rendering.RenderGraphModule.RenderGraph.html"><code>EndRecordingAndExecute</code></a> method. For example:</p>
+<pre><code class="lang-c#">myRenderGraph.BeginRecording(renderGraphParams);
+
+// Add render passes here.
+
+myRenderGraph.EndRecordingAndExecute();
+</code></pre>
+<p>For more information about adding render passes, refer to <a href="render-graph-write-render-pass.html">Write a render pass using the render graph system</a></p>
+</li>
+<li><p>Execute the rendering commands. For more information, refer to <a href="srp-using-scriptable-render-context.html">Execute rendering commands in a custom render pipeline</a>.</p>
+</li>
+<li><p>In the render pipeline class, call the <code>Cleanup()</code> method on the RenderGraph instance to free the resources the render graph allocated. For example:</p>
+<pre><code class="lang-c#">myRenderGraph.Cleanup();
+myRenderGraph = null;
+</code></pre>
+</li>
+<li><p>After the last camera renders, call the <code>EndFrame</code> method to deallocate any resources that the render graph hasn't used since the last frame.</p>
+<pre><code class="lang-c#">myRenderGraph.EndFrame();
+</code></pre>
+</li>
+</ol>
+<h2 id="example-render-pipeline-template">Example render pipeline template</h2>
+<p>This code template is simplified. It demonstrates the clearest workflow, rather than the most efficient runtime performance.</p>
+<pre><code class="lang-c#">using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.RenderGraphModule;
+
+public class ExampleRenderPipeline : RenderPipeline
+{
+    private RenderGraph myRenderGraph;
+
+    public ExampleRenderPipeline(ExampleRenderPipelineAsset asset)
+    {
+        myRenderGraph = new RenderGraph(&quot;My render graph&quot;);
+    }
+
+    protected override void Render(ScriptableRenderContext context, List&lt;Camera&gt; cameras)
+    {
+        foreach (var cam in cameras)
+        {
+            if (cam.enabled)
+            {
+                RenderCamera(context, cam);
+            }
+        }
+    }
+
+    void RenderCamera(ScriptableRenderContext context, Camera cameraToRender)
+    {
+        context.SetupCameraProperties(cameraToRender);
+        var cmd = CommandBufferPool.Get(&quot;Example command buffer&quot;);
+
+        RenderGraphParameters rgParams = new RenderGraphParameters
+        {
+            commandBuffer = cmd,
+            scriptableRenderContext = context,
+            currentFrameIndex = Time.frameCount,
+        };
+
+        try
+        {
+            myRenderGraph.BeginRecording(rgParams);
+            // Add render passes here.
+            myRenderGraph.EndRecordingAndExecute();
+        } 
+        catch (Exception e)
+        {
+            if (renderGraph.ResetGraphAndLogException(e))
+                throw;
+        }
+
+        context.ExecuteCommandBuffer(cmd);
+        CommandBufferPool.Release(cmd);
+        context.Submit();            
+    }
+}
+</code></pre>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

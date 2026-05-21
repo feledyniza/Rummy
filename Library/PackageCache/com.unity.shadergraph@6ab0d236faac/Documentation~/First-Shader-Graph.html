@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Create a shader graph and use it with a material | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Create a shader graph and use it with a material | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="create-a-shader-graph-and-use-it-with-a-material">Create a shader graph and use it with a material</h1>
+
+<p>This example shows you how to do the following:</p>
+<ul>
+<li>Create a simple Lit shader graph with the Universal Render Pipeline (URP).</li>
+<li>Create and manage a material that uses this shader graph in a scene.</li>
+</ul>
+<p>For more options to get started with Shader Graph, refer to:</p>
+<ul>
+<li><a href="Create-Shader-Graph.html">Create a shader graph asset</a></li>
+<li><a href="Create-Node-Menu.html">Add and connect nodes in a shader graph</a></li>
+</ul>
+<h2 id="create-a-new-shader-graph">Create a new shader graph</h2>
+<p>Before you can build a new shader graph, you have to create a shader graph asset to contain it. Follow these steps:</p>
+<ol>
+<li><p>In the <strong>Project</strong> window, right-click and select <strong>Create</strong> &gt; <strong>Shader Graph</strong> &gt; <strong>URP</strong> &gt; <strong>Lit</strong>.</p>
+</li>
+<li><p>Name the created shader graph asset and press Enter.</p>
+</li>
+</ol>
+<p>The <a href="Shader-Graph-Window.html">Shader Graph window</a> opens, which allows you to edit the shader graph in the created asset. If the window doesn't open, double-click on the created asset.</p>
+<h2 id="create-a-new-node">Create a new node</h2>
+<p>For this example, you need to create a Color node. Follow these steps:</p>
+<ol>
+<li><p>Select the Shader Graph window's workspace and press the <strong>Spacebar</strong>.</p>
+<p>The <strong>Create Node</strong> menu opens, with the list of all available nodes.</p>
+</li>
+<li><p>In the <strong>Create Node</strong> menu's search bar, type <code>color</code>.</p>
+</li>
+<li><p>In the <strong>Input</strong> &gt; <strong>Basic</strong> category, double-click on <strong>Color</strong>.</p>
+</li>
+</ol>
+<p>A new <strong>Color</strong> node appears in the workspace.</p>
+<h2 id="connect-the-node-to-the-master-stack">Connect the node to the master stack</h2>
+<p>To use the Color node property as an input for the shader, you need to connect the node to the master stack. Follow these steps:</p>
+<ol>
+<li><p>Select the <strong>Out(4)</strong> port of the <strong>Color</strong> node.</p>
+</li>
+<li><p>Drag it to the <strong>Base Color</strong> block port of the <strong>Fragment</strong> section of the <a href="Master-Stack.html">master stack</a>.</p>
+</li>
+</ol>
+<p>This connection updates the appearance of the 3D object in the <strong>Main Preview</strong>, which is now black, according to the Color node's default value.</p>
+<h2 id="change-the-shader-color">Change the shader color</h2>
+<p>You can change the output color of the Color node to view how it affects the final shader. Follow these steps:</p>
+<ol>
+<li><p>In the <strong>Color</strong> node, click on the color bar.</p>
+</li>
+<li><p>Use the color picker to change the color.</p>
+</li>
+</ol>
+<p>The color of the 3D object in the <strong>Main Preview</strong> changes to the selected color in real time.</p>
+<h2 id="save-your-shader-graph">Save your shader graph</h2>
+<p>You need to save your shader graph to use it with a material. To save your shader graph, do one of the following:</p>
+<ul>
+<li><p>Click the <strong>Save Asset</strong> button in the top left corner of the window.</p>
+</li>
+<li><p>Close the graph. If Unity detects any unsaved changes, a dialog appears, and asks if you want to save those changes.</p>
+</li>
+</ul>
+<h2 id="create-a-material-from-your-shader-graph">Create a material from your shader graph</h2>
+<p>After you've saved your shader graph, you can use it to create a new material.</p>
+<p>The process of <a href="https://docs.unity3d.com/Manual/Materials.html">creating a new Material</a> and assigning it a Shader Graph shader is the same as that for regular shaders.</p>
+<p>To create a new material from your shader graph, follow these steps:</p>
+<ol>
+<li><p>In the Project window, right-click the shader graph asset you created.</p>
+</li>
+<li><p>Select <strong>Create &gt; Material</strong>.</p>
+</li>
+</ol>
+<p>Unity automatically assigns the shader graph asset to the newly created material. You can view the shader graph name selected in the material's Inspector in the <strong>Shader</strong> property.</p>
+<h2 id="use-the-material-in-the-scene">Use the material in the scene</h2>
+<p>Now that you have assigned your shader to a material, you can apply this material to GameObjects in the scene through one of the following:</p>
+<ul>
+<li><p>Drag the material onto a GameObject in the scene.</p>
+</li>
+<li><p>In the GameObject's Inspector, go to <strong>Mesh Renderer &gt; Materials</strong>, and set the <strong>Element</strong> property to your material.</p>
+</li>
+</ul>
+<h2 id="control-the-color-from-the-materials-inspector">Control the color from the material's Inspector</h2>
+<p>You can use a property in the shader graph to alter your shader's appearance directly from the material's Inspector, without the need to edit the shader graph.</p>
+<p>To use a Color property instead of a Color node in your shader graph, follow these steps:</p>
+<ol>
+<li><p>Open the shader graph you created earlier in the <a href="Shader-Graph-Window.html">Shader Graph window</a>.</p>
+</li>
+<li><p>In the <a href="Blackboard.html">Blackboard</a>, select <strong>Add (+)</strong>, and then select <strong>Color</strong>.</p>
+<p>The Blackboard now displays a <a href="Property-Types.html#color">property of Color type</a>.</p>
+</li>
+<li><p>Select the property.</p>
+</li>
+<li><p>In the <a href="Internal-Inspector.html">Graph Inspector</a>, in the <strong>Node Settings</strong> tab:</p>
+<ul>
+<li>Change the <strong>Name</strong> according to the name you want to identify the property within the material's Inspector.</li>
+<li>Make sure to activate the <strong>Show In Inspector</strong> option.</li>
+</ul>
+</li>
+<li><p>Drag the property from the Blackboard onto the Shader Graph window's workspace.</p>
+</li>
+<li><p>Connect the property's node to the <strong>Base Color</strong> block port of the <strong>Fragment</strong> section of the <a href="Master-Stack.html">master stack</a>, instead of the Color node you were using previously.</p>
+<p>This connection updates the appearance of the 3D object in the <strong>Main Preview</strong>, which is now black, according to the property's default value.</p>
+</li>
+<li><p>Save your graph, and return to the material's Inspector.</p>
+<p>The property you added in the graph now appears in the material's Inspector. Any changes you make to the property from the Inspector affects all objects that use this material.</p>
+</li>
+</ol>
+<h2 id="additional-resources">Additional resources</h2>
+<ul>
+<li><a href="https://unity.com/blog/engine-platform/creating-animated-materials-with-shader-graph">Art That Moves: Creating Animated Materials with Shader Graph</a></li>
+<li><a href="https://unity.com/blog/engine-platform/custom-lighting-in-shader-graph-expanding-your-graphs-in-2019">Custom Lighting in Shader Graph: Expanding Your Graphs in 2019</a></li>
+<li><a href="https://www.youtube.com/user/Unity3D/search?query=shader+graph">Shader Graph video tutorials</a> (on Unity YouTube Channel)</li>
+<li><a href="https://discussions.unity.com/tags/c/unity-engine/52/shader-graph">Shader Graph forum</a></li>
+</ul>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Older tutorials use a former version of Shader Graph with master nodes. To know the differences between the former master node and the <a href="Master-Stack.html">Master Stack</a>, refer to the <a href="Upgrade-Guide-10-0-x.html">Upgrade Guide</a>.</p>
+</div>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

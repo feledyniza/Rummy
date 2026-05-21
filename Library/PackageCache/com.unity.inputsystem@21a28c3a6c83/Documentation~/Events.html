@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Input events | RummyDocs </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Input events | RummyDocs ">
+      
+      
+      <link rel="icon" href="../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../index.html">
+            <img id="logo" class="svg" src="../../../../logo.svg" alt="RummyDocs">
+            RummyDocs
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="input-system-events">
+<h1 id="input-events">Input events</h1>
+
+<p>The Input System is event-driven. All input is delivered as events, and you can generate custom input by injecting events. You can also observe all source input by listening in on the events flowing through the system.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Events are an advanced, mostly internal feature of the Input System. Knowledge of the event system is mostly useful if you want to support custom Devices, or change the behavior of existing Devices.</p>
+</div>
+<p>Input events are a low-level mechanism. Usually, you don't need to deal with events if all you want to do is receive input for your app. Events are stored in unmanaged memory buffers and not converted to C# heap objects. The Input System provides wrapper APIs, but unsafe code is required for more involved event manipulations.</p>
+<p>Note that there are no routing mechanism. The runtime delivers events straight to the Input System, which then incorporates them directly into the Device state.</p>
+<p>Input events are represented by the <a href="xref:UnityEngine.InputSystem.LowLevel.InputEvent"><code>InputEvent</code></a> struct. Each event has a set of common properties:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.LowLevel.InputEvent.type"><code>type</code></a></td>
+<td><a href="xref:UnityEngine.InputSystem.Utilities.FourCC"><code>FourCC</code></a> code that indicates what type of event it is.</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.LowLevel.InputEvent.eventId"><code>eventId</code></a></td>
+<td>Unique numeric ID of the event.</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.LowLevel.InputEvent.time"><code>time</code></a></td>
+<td>Timestamp of when the event was generated. This is on the same timeline as <a href="https://docs.unity3d.com/ScriptReference/Time-realtimeSinceStartup.html"><code>Time.realtimeSinceStartup</code></a>.</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.LowLevel.InputEvent.deviceId"><code>deviceId</code></a></td>
+<td>ID of the Device that the event targets.</td>
+</tr>
+<tr>
+<td><a href="xref:UnityEngine.InputSystem.LowLevel.InputEvent.sizeInBytes"><code>sizeInBytes</code></a></td>
+<td>Total size of the event in bytes.</td>
+</tr>
+</tbody>
+</table>
+<p>You can observe the events received for a specific input device in the <a class="xref" href="Debugging.html#debugging-devices">input debugger</a>.</p>
+<h2 id="types-of-events">Types of events</h2>
+<h3 id="state-events">State events</h3>
+<p>A state event contains the input state for a Device. The Input System uses these events to feed new input to Devices.</p>
+<p>There are two types of state events:</p>
+<ul>
+<li><a href="xref:UnityEngine.InputSystem.LowLevel.StateEvent"><code>StateEvent</code></a> (<code>'STAT'</code>)</li>
+<li><a href="xref:UnityEngine.InputSystem.LowLevel.StateEvent"><code>DeltaStateEvent</code></a> (<code>'DLTA'</code>)</li>
+</ul>
+<p><a href="xref:UnityEngine.InputSystem.LowLevel.StateEvent"><code>StateEvent</code></a> contains a full snapshot of the entire state of a Device in the format specific to that Device. The <a href="xref:UnityEngine.InputSystem.LowLevel.StateEvent.stateFormat"><code>stateFormat</code></a> field identifies the type of the data in the event. You can access the raw data using the <a href="xref:UnityEngine.InputSystem.LowLevel.StateEvent.state"><code>state</code></a> pointer and <a href="xref:UnityEngine.InputSystem.LowLevel.StateEvent.stateSizeInBytes"><code>stateSizeInBytes</code></a>.</p>
+<p>A <a href="xref:UnityEngine.InputSystem.LowLevel.DeltaStateEvent"><code>DeltaStateEvent</code></a> is like a <a href="xref:UnityEngine.InputSystem.LowLevel.StateEvent"><code>StateEvent</code></a>, but only contains a partial snapshot of the state of a Device. The Input System usually sends this for Devices that require a large state record, to reduce the amount of memory it needs to update if only some of the Controls change their state. To access the raw data, you can use the <a href="xref:UnityEngine.InputSystem.LowLevel.DeltaStateEvent.deltaState"><code>deltaState</code></a> pointer and <a href="xref:UnityEngine.InputSystem.LowLevel.DeltaStateEvent.deltaStateSizeInBytes"><code>deltaStateSizeInBytes</code></a>. The Input System should apply the data to the Device's state at the offset defined by <a href="xref:UnityEngine.InputSystem.LowLevel.DeltaStateEvent.stateOffset"><code>stateOffset</code></a>.</p>
+<h3 id="device-events">Device events</h3>
+<p>Device events indicate a change that is relevant to a Device as a whole. If you're interested in these events, it is usually more convenient to subscribe to the higher-level <a href="xref:UnityEngine.InputSystem.InputSystem.onDeviceChange"><code>InputSystem.onDeviceChange</code></a> event rather then processing <a href="xref:UnityEngine.InputSystem.LowLevel.InputEvent"><code>InputEvents</code></a> yourself.</p>
+<p>There are three types of Device events:</p>
+<ul>
+<li><a href="xref:UnityEngine.InputSystem.LowLevel.DeviceRemoveEvent"><code>DeviceRemoveEvent</code></a> (<code>'DREM'</code>)</li>
+<li><a href="xref:UnityEngine.InputSystem.LowLevel.DeviceConfigurationEvent"><code>DeviceConfigurationEvent</code></a> (<code>'DCFG'</code>)</li>
+<li><a href="xref:UnityEngine.InputSystem.LowLevel.DeviceResetEvent"><code>DeviceResetEvent</code></a> (<code>'DRST'</code>)</li>
+</ul>
+<p><code>DeviceRemovedEvent</code> indicates that a Device has been removed or disconnected. To query the device that has been removed, you can use the common <a href="xref:UnityEngine.InputSystem.LowLevel.InputEvent.deviceId"><code>deviceId</code></a> field. This event doesn't have any additional data.</p>
+<p><code>DeviceConfigurationEvent</code> indicates that the configuration of a Device has changed. The meaning of this is Device-specific. This might signal, for example, that the layout used by the keyboard has changed or that, on a console, a gamepad has changed which player ID(s) it is assigned to. You can query the changed device from the common <a href="xref:UnityEngine.InputSystem.LowLevel.InputEvent.deviceId"><code>deviceId</code></a> field. This event doesn't have any additional data.</p>
+<p><code>DeviceResetEvent</code> indicates that a device should get reset. This will trigger <a href="xref:UnityEngine.InputSystem.InputSystem.ResetDevice(UnityEngine.InputSystem.InputDevice,System.Boolean)"><code>InputSystem.ResetDevice</code></a> to be called on the Device.</p>
+<h3 id="text-events">Text events</h3>
+<p><a class="xref" href="Keyboard.html">Keyboard</a> devices send these events to handle text input. If you're interested in these events, it's usually more convenient to subscribe to the higher-level <a class="xref" href="Keyboard.html#text-input">callbacks on the Keyboard class</a> rather than processing <a href="xref:UnityEngine.InputSystem.LowLevel.InputEvent"><code>InputEvents</code></a> yourself.</p>
+<p>There are two types of text events:</p>
+<ul>
+<li><a href="xref:UnityEngine.InputSystem.LowLevel.TextEvent"><code>TextEvent</code></a> (<code>'TEXT'</code>)</li>
+<li><a href="xref:UnityEngine.InputSystem.LowLevel.IMECompositionEvent"><code>IMECompositionEvent</code></a> (<code>'IMES'</code>)</li>
+</ul>
+<h2 id="working-with-events">Working with events</h2>
+<h3 id="listening-to-events">Listening to events</h3>
+<p>If you want to do any monitoring or processing on incoming events yourself, subscribe to the <a href="xref:UnityEngine.InputSystem.InputSystem.onEvent"><code>InputSystem.onEvent</code></a> callback.</p>
+<pre><code class="lang-CSharp">InputSystem.onEvent +=
+   (eventPtr, device) =&gt;
+   {
+       Debug.Log($&quot;Received event for {device}&quot;);
+   };
+</code></pre>
+<p>An <a href="https://docs.microsoft.com/en-us/dotnet/api/system.iobservable-1"><code>IObservable</code></a> interface is provided to more conveniently process events.</p>
+<pre><code class="lang-CSharp">// Wait for first button press on a gamepad.
+InputSystem.onEvent
+    .ForDevice&lt;Gamepad&gt;()
+    .Where(e =&gt; e.HasButtonPress())
+    .CallOnce(ctrl =&gt; Debug.Log($&quot;Button {ctrl} pressed&quot;));
+</code></pre>
+<p>To enumerate the controls that have value changes in an event, you can use <a href="xref:UnityEngine.InputSystem.InputControlExtensions.EnumerateChangedControls(UnityEngine.InputSystem.LowLevel.InputEventPtr,UnityEngine.InputSystem.InputDevice,System.Single)"><code>InputControlExtensions.EnumerateChangedControls</code></a>.</p>
+<pre><code class="lang-CSharp">InputSystem.onEvent
+    .Call(eventPtr =&gt;
+    {
+        foreach (var control in eventPtr.EnumerateChangedControls())
+            Debug.Log($&quot;Control {control} changed value to {control.ReadValueFromEventAsObject(eventPtr)}&quot;);
+    });
+</code></pre>
+<p>This is significantly more efficient than manually iterating over <a href="xref:UnityEngine.InputSystem.InputDevice.allControls"><code>InputDevice.allControls</code></a> and reading out the value of each control from the event.</p>
+<h3 id="reading-state-events">Reading state events</h3>
+<p>State events contain raw memory snapshots for Devices. As such, interpreting the data in the event requires knowledge about where and how individual state is stored for a given Device.</p>
+<p>The easiest way to access state contained in a state event is to rely on the Device that the state is meant for. You can ask any Control to read its value from a given event rather than from its own internally stored state.</p>
+<p>For example, the following code demonstrates how to read a value for <a href="xref:UnityEngine.InputSystem.Gamepad.leftStick"><code>Gamepad.leftStick</code></a> from a state event targeted at a <a href="xref:UnityEngine.InputSystem.Gamepad"><code>Gamepad</code></a>.</p>
+<pre><code class="lang-CSharp">InputSystem.onEvent +=
+    (eventPtr, device) =&gt;
+    {
+        // Ignore anything that isn't a state event.
+        if (!eventPtr.IsA&lt;StateEvent&gt;() &amp;&amp; !eventPtr.IsA&lt;DeltaStateEvent&gt;())
+            return;
+
+        var gamepad = device as Gamepad;
+        if (gamepad == null)
+        {
+            // Event isn't for a gamepad or device ID is no longer valid.
+            return;
+        }
+
+        var leftStickValue = gamepad.leftStick.ReadValueFromEvent(eventPtr);
+    };
+</code></pre>
+<h3 id="creating-events">Creating events</h3>
+<p>Anyone can create and queue new input events against any existing Device. Queueing an input event is thread-safe, which means that event generation can happen in background threads.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Unity allocates limited memory to events that come from background threads. If background threads produce too many events, queueing an event from a thread blocks the thread until the main thread flushes out the background event queue.</p>
+</div>
+<p>Note that queuing an event doesn't immediately consume the event. Event processing happens on the next update (depending on <a class="xref" href="Settings.html#update-mode"><code>InputSettings.updateMode</code></a>, it is triggered either manually via <a href="xref:UnityEngine.InputSystem.InputSystem.Update"><code>InputSystem.Update</code></a>, or automatically as part of the Player loop).</p>
+<h4 id="sending-state-events">Sending state events</h4>
+<p>For Devices that have a corresponding &quot;state struct&quot; describing the state of the device, the easiest way of sending input to the Device is to simply queue instances of those structs:</p>
+<pre><code class="lang-CSharp">// Mouse.
+InputSystem.QueueStateEvent(Mouse.current, new MouseState { position = new Vector2(123, 234) });
+
+// Keyboard.
+InputSystem.QueueStateEvent(Keyboard.current, new KeyboardState(Key.LeftCtrl, Key.A));
+</code></pre>
+<p><code>Touchscreen</code> is somewhat special in that it expects its input to be in <a href="xref:UnityEngine.InputSystem.LowLevel.TouchState"><code>TouchState</code></a> format.</p>
+<pre><code class="lang-CSharp">// Start touch.
+InputSystem.QueueStateEvent(Touchscreen.current,
+    new TouchState { touchId = 1, phase = TouchPhase.Began, position = new Vector2(123, 234) });
+
+// Move touch.
+InputSystem.QueueStateEvent(Touchscreen.current,
+    new TouchState { touchId = 1, phase = TouchPhase.Moved, position = new Vector2(234, 345) });
+
+// End touch.
+InputSystem.QueueStateEvent(Touchscreen.current,
+    new TouchState { touchId = 1, phase = TouchPhase.Ended, position = new Vector2(123, 234) });
+</code></pre>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p><a href="xref:UnityEngine.InputSystem.Controls.TouchControl.touchId">Touch IDs</a> cannot be 0! A valid touch must have a non-zero touch ID. Concurrent touches must each have a unique ID. After a touch has ended, its ID can be reused – although it is recommended to not do so.</p>
+</div>
+<p>If the exact format of the state used by a given Device is not known, the easiest way to send input to it is to simply create a <a href="xref:UnityEngine.InputSystem.LowLevel.StateEvent"><code>StateEvent</code></a> from the Device itself:</p>
+<pre><code class="lang-CSharp">// `StateEvent.From` creates a temporary buffer in unmanaged memory that holds
+// a state event large enough for the given device and contains a memory
+// copy of the device's current state.
+InputEventPtr eventPtr;
+using (StateEvent.From(myDevice, out eventPtr))
+{
+    ((AxisControl) myDevice[&quot;myControl&quot;]).WriteValueIntoEvent(0.5f, eventPtr);
+    InputSystem.QueueEvent(eventPtr);
+}
+</code></pre>
+<p>Alternatively, you can send events for individual Controls.</p>
+<pre><code class="lang-CSharp">// Send event to update leftStick on the gamepad.
+InputSystem.QueueDeltaStateEvent(Gamepad.current.leftStick,
+    new Vector2(0.123f, 0.234f);
+</code></pre>
+<p>Note that delta state events only work for Controls that are both byte-aligned and a multiple of 8 bits in size in memory. You can't send a delta state event for a button Control that is stored as a single bit, for example.</p>
+<h3 id="capturing-events">Capturing Events</h3>
+<div class="NOTE">
+<h5>Note</h5>
+<p>To download a sample project which contains a reusable MonoBehaviour called <code>InputRecorder</code>, which can capture and replay input from arbitrary devices, open the Package Manager, select the Input System Package, and choose the sample project &quot;Input Recorder&quot; to download.</p>
+</div>
+<p>You can use the <a href="xref:UnityEngine.InputSystem.LowLevel.InputEventTrace"><code>InputEventTrace</code></a> class to record input events for later processing:</p>
+<pre><code class="lang-CSharp">var trace = new InputEventTrace(); // Can also give device ID to only
+                                   // trace events for a specific device.
+
+trace.Enable();
+
+//... run stuff
+
+var current = new InputEventPtr();
+while (trace.GetNextEvent(ref current))
+{
+    Debug.Log(&quot;Got some event: &quot; + current);
+}
+
+// Also supports IEnumerable.
+foreach (var eventPtr in trace)
+    Debug.Log(&quot;Got some event: &quot; + eventPtr);
+
+// Trace consumes unmanaged resources. Make sure to dispose.
+trace.Dispose();
+</code></pre>
+<p>Dispose event traces after use, so that they do not leak memory on the unmanaged (C++) memory heap.</p>
+<p>You can also write event traces out to files/streams, load them back in, and replay recorded streams.</p>
+<pre><code class="lang-CSharp">// Set up a trace with such that it automatically grows in size as needed.
+var trace = new InputEventTrace(growBuffer: true);
+trace.Enable();
+
+// ... capture some input ...
+
+// Write trace to file.
+trace.WriteTo(&quot;mytrace.inputtrace.&quot;);
+
+// Load trace from same file.
+var loadedTrace = InputEventTrace.LoadFrom(&quot;mytrace.inputtrace&quot;);
+</code></pre>
+<p>You can replay captured traces directly from <a href="xref:UnityEngine.InputSystem.LowLevel.InputEventTrace"><code>InputEventTrace</code></a> instances using the <a href="xref:UnityEngine.InputSystem.LowLevel.InputEventTrace.Replay*"><code>Replay</code></a> method.</p>
+<pre><code class="lang-CSharp">// The Replay method returns a ReplayController that can be used to
+// configure and control playback.
+var controller = trace.Replay();
+
+// For example, to not replay the events as is but rather create new devices and send
+// the events to them, call WithAllDevicesMappedToNewInstances.
+controller.WithAllDevicessMappedToNewInstances();
+
+// Replay all frames one by one.
+controller.PlayAllFramesOnyByOne();
+
+// Replay events in a way that tries to simulate original event timing.
+controller.PlayAllEventsAccordingToTimestamps();
+</code></pre>
+<h2 id="processing-events">Processing events</h2>
+<p><a href="xref:UnityEngine.InputSystem.LowLevel.InputEvent">Events</a> are collected on a queue by the Unity runtime. This queue is regularly flushed out and the events on it processed. Events can be added to the queue manually by calling <a href="xref:UnityEngine.InputSystem.InputSystem.QueueEvent(UnityEngine.InputSystem.LowLevel.InputEventPtr)"><code>InputSystem.QueueEvent</code></a>.</p>
+<p>Each time input is processed, <a href="xref:UnityEngine.InputSystem.InputSystem.Update*"><code>InputSystem.Update</code></a> is called implicitly by the Unity runtime.</p>
+<p>The interval at which this happens is determined by the <a class="xref" href="Settings.html#update-mode">&quot;Update Mode&quot;</a> configured in the settings. By default, input is processed in each frame <strong>before</strong> <c>MonoBehaviour.Update</c> methods are called. If the setting is changed to process input in fixed updates, then this changes to input being processed each time before <c>MonoBehaviour.FixedUpdate</c> methods are called.</p>
+<p>Normally, when input is processed, <strong>all</strong> outstanding input events on the queue will be consumed. There are two exceptions to this, however.</p>
+<p>When using <a href="xref:UnityEngine.InputSystem.InputSettings.UpdateMode.ProcessEventsInFixedUpdate"><code>UpdateMode.ProcessEventsInFixedUpdate</code></a>, the Input System attempts to associate events with the timeslice of the corresponding <c>FixedUpdate</c>. This is based on the <a href="xref:UnityEngine.InputSystem.LowLevel.InputEvent.time">timestamps</a> of the events and a &quot;best effort&quot; at calculating the corresponding timeslice of the current <c>FixedUpdated</c>.</p>
+<p>The other exception are <a href="xref:UnityEngine.InputSystem.LowLevel.InputUpdateType.BeforeRender"><code>BeforeRender</code></a> updates. These updates are run after fixed or dynamic updates but before rendering and used used exclusively to update devices such as VR headsets that need the most up-to-date tracking data. Other input is not consumed from such updates and these updates are only enabled if such devices are actually present. <code>BeforeRender</code> updates are not considered separate frames as far as input is concerned.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Manually calling <a href="xref:UnityEngine.InputSystem.InputSystem.Update*"><code>InputSystem.Update</code></a> is strongly advised against except within tests employing <a href="xref:UnityEngine.InputSystem.InputTestFixture"><code>InputTestFixture</code></a> or when explicitly setting the system to <a href="xref:UnityEngine.InputSystem.InputSettings.UpdateMode.ProcessEventsManually">manual update mode</a>.</p>
+</div>
+<p>Methods such as <a href="xref:UnityEngine.InputSystem.InputAction.WasPerformedThisFrame"><code>InputAction.WasPerformedThisFrame</code></a> and <a href="xref:UnityEngine.InputSystem.InputAction.WasPerformedThisFrame"><code>InputAction.WasPerformedThisFrame</code></a> operate implicitly based on the [<code>InputSystem.Update</code>] cadence described above. Meaning, that they refer to the state as per the <strong>last</strong> fixed/dynamic/manual update happened.</p>
+<p>You can query the <a href="xref:UnityEngine.InputSystem.LowLevel.InputState.currentUpdateType">current/last update type</a> and <a href="xref:UnityEngine.InputSystem.LowLevel.InputState.updateCount">count</a> from <a href="xref:UnityEngine.InputSystem.LowLevel.InputState"><code>InputState</code></a>.</p>
+<h3 id="merging-of-events">Merging of events</h3>
+<p>Input system uses event mering to reduce amount of events required to be processed.
+This greatly improves performance when working with high refresh rate devices like 8000 Hz mice, touchscreens and others.</p>
+<p>For example let's take a stream of 7 mouse events coming in the same update:</p>
+<pre><code>
+Mouse       Mouse       Mouse       Mouse       Mouse       Mouse       Mouse
+Event no1   Event no2   Event no3   Event no4   Event no5   Event no6   Event no7
+Time 1      Time 2      Time 3      Time 4      Time 5      Time 6      Time 7
+Pos(10,20)  Pos(12,21)  Pos(13,23)  Pos(14,24)  Pos(16,25)  Pos(17,27)  Pos(18,28)
+Delta(1,1)  Delta(2,1)  Delta(1,2)  Delta(1,1)  Delta(2,1)  Delta(1,2)  Delta(1,1)
+BtnLeft(0)  BtnLeft(0)  BtnLeft(0)  BtnLeft(1)  BtnLeft(1)  BtnLeft(1)  BtnLeft(1)
+</code></pre>
+<p>To reduce workload we can skip events that are not encoding button state changes:</p>
+<pre><code>                        Mouse       Mouse                               Mouse
+                        Time 3      Time 4                              Time 7
+                        Event no3   Event no4                           Event no7
+                        Pos(13,23)  Pos(14,24)                          Pos(18,28)
+                        Delta(3,3)  Delta(1,1)                          Delta(4,4)
+                        BtnLeft(0)  BtnLeft(1)                          BtnLeft(1)
+</code></pre>
+<p>In that case we combine no1, no2, no3 together into no3 and accumulate the delta,
+then we keep no4 because it stores the transition from button unpressed to button pressed,
+and it's important to keep the exact timestamp of such transition.
+Later we combine no5, no6, no7 together into no7 because it is the last event in the update.</p>
+<p>Currently this approach is implemented for:</p>
+<ul>
+<li><code>FastMouse</code>, combines events unless <code>buttons</code> or <code>clickCount</code> differ in <code>MouseState</code>.</li>
+<li><code>Touchscreen</code>, combines events unless <code>touchId</code>, <code>phaseId</code> or <code>flags</code> differ in <code>TouchState</code>.</li>
+</ul>
+<p>You can disable merging of events by:</p>
+<pre><code>InputSystem.settings.disableRedundantEventsMerging = true;
+</code></pre>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
