@@ -1,0 +1,1016 @@
+### YamlMime:ManagedReference
+items:
+- uid: Assets.Skrypty.Plansza
+  commentId: T:Assets.Skrypty.Plansza
+  id: Plansza
+  parent: Assets.Skrypty
+  children:
+  - Assets.Skrypty.Plansza.#ctor
+  - Assets.Skrypty.Plansza.AktualnyGracz
+  - Assets.Skrypty.Plansza.CzyPoprawnyRuch(System.Collections.Generic.List{Kostka})
+  - Assets.Skrypty.Plansza.CzyWszystkieUkladyPoprawne(System.Collections.Generic.List{System.Collections.Generic.List{Kostka}})
+  - Assets.Skrypty.Plansza.DodajLubModyfikujCiag(System.Collections.Generic.List{Kostka})
+  - Assets.Skrypty.Plansza.NastepnyGracz
+  - Assets.Skrypty.Plansza.PrzygotujGre(System.Collections.Generic.List{Kostka})
+  - Assets.Skrypty.Plansza.WydajLosowaKostkeZPuli
+  - Assets.Skrypty.Plansza.WyliczJokera(Kostka,System.Collections.Generic.List{Kostka})
+  - Assets.Skrypty.Plansza.ciagiKostek
+  - Assets.Skrypty.Plansza.czyGraAktywna
+  - Assets.Skrypty.Plansza.gracze
+  - Assets.Skrypty.Plansza.pulaKostek
+  langs:
+  - csharp
+  - vb
+  name: Plansza
+  nameWithType: Plansza
+  fullName: Assets.Skrypty.Plansza
+  type: Class
+  source:
+    remote:
+      path: Assets/Skrypty/Plansza.cs
+      branch: main
+      repo: https://github.com/feledyniza/Rummy.git
+    id: Plansza
+    path: Assets/Skrypty/Plansza.cs
+    startLine: 12
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  summary: >-
+    Klasa Plansza odpowiada za logike gry. Przechowuje min. grajacych uzytkownikow, pule wszystkich dostepnych kostek,
+
+    oraz wszytskie ciagi znajdujace sie na ekranie gry.
+  example: []
+  syntax:
+    content: public class Plansza
+    content.vb: Public Class Plansza
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Assets.Skrypty.Plansza.gracze
+  commentId: F:Assets.Skrypty.Plansza.gracze
+  id: gracze
+  parent: Assets.Skrypty.Plansza
+  langs:
+  - csharp
+  - vb
+  name: gracze
+  nameWithType: Plansza.gracze
+  fullName: Assets.Skrypty.Plansza.gracze
+  type: Field
+  source:
+    remote:
+      path: Assets/Skrypty/Plansza.cs
+      branch: main
+      repo: https://github.com/feledyniza/Rummy.git
+    id: gracze
+    path: Assets/Skrypty/Plansza.cs
+    startLine: 15
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  syntax:
+    content: public List<Gracz> gracze
+    return:
+      type: System.Collections.Generic.List{Assets.Skrypty.Gracz}
+    content.vb: Public gracze As List(Of Gracz)
+- uid: Assets.Skrypty.Plansza.pulaKostek
+  commentId: F:Assets.Skrypty.Plansza.pulaKostek
+  id: pulaKostek
+  parent: Assets.Skrypty.Plansza
+  langs:
+  - csharp
+  - vb
+  name: pulaKostek
+  nameWithType: Plansza.pulaKostek
+  fullName: Assets.Skrypty.Plansza.pulaKostek
+  type: Field
+  source:
+    remote:
+      path: Assets/Skrypty/Plansza.cs
+      branch: main
+      repo: https://github.com/feledyniza/Rummy.git
+    id: pulaKostek
+    path: Assets/Skrypty/Plansza.cs
+    startLine: 16
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  syntax:
+    content: public List<Kostka> pulaKostek
+    return:
+      type: System.Collections.Generic.List{Kostka}
+    content.vb: Public pulaKostek As List(Of Kostka)
+- uid: Assets.Skrypty.Plansza.ciagiKostek
+  commentId: F:Assets.Skrypty.Plansza.ciagiKostek
+  id: ciagiKostek
+  parent: Assets.Skrypty.Plansza
+  langs:
+  - csharp
+  - vb
+  name: ciagiKostek
+  nameWithType: Plansza.ciagiKostek
+  fullName: Assets.Skrypty.Plansza.ciagiKostek
+  type: Field
+  source:
+    remote:
+      path: Assets/Skrypty/Plansza.cs
+      branch: main
+      repo: https://github.com/feledyniza/Rummy.git
+    id: ciagiKostek
+    path: Assets/Skrypty/Plansza.cs
+    startLine: 17
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  syntax:
+    content: public List<List<Kostka>> ciagiKostek
+    return:
+      type: System.Collections.Generic.List{System.Collections.Generic.List{Kostka}}
+    content.vb: Public ciagiKostek As List(Of List(Of Kostka))
+- uid: Assets.Skrypty.Plansza.czyGraAktywna
+  commentId: F:Assets.Skrypty.Plansza.czyGraAktywna
+  id: czyGraAktywna
+  parent: Assets.Skrypty.Plansza
+  langs:
+  - csharp
+  - vb
+  name: czyGraAktywna
+  nameWithType: Plansza.czyGraAktywna
+  fullName: Assets.Skrypty.Plansza.czyGraAktywna
+  type: Field
+  source:
+    remote:
+      path: Assets/Skrypty/Plansza.cs
+      branch: main
+      repo: https://github.com/feledyniza/Rummy.git
+    id: czyGraAktywna
+    path: Assets/Skrypty/Plansza.cs
+    startLine: 18
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  syntax:
+    content: public bool czyGraAktywna
+    return:
+      type: System.Boolean
+    content.vb: Public czyGraAktywna As Boolean
+- uid: Assets.Skrypty.Plansza.#ctor
+  commentId: M:Assets.Skrypty.Plansza.#ctor
+  id: '#ctor'
+  parent: Assets.Skrypty.Plansza
+  langs:
+  - csharp
+  - vb
+  name: Plansza()
+  nameWithType: Plansza.Plansza()
+  fullName: Assets.Skrypty.Plansza.Plansza()
+  type: Constructor
+  source:
+    remote:
+      path: Assets/Skrypty/Plansza.cs
+      branch: main
+      repo: https://github.com/feledyniza/Rummy.git
+    id: .ctor
+    path: Assets/Skrypty/Plansza.cs
+    startLine: 22
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  summary: Konstruktor, ktory inicjalizuje zmienne potrzebne do wykorzystania pola Plansza.
+  example: []
+  syntax:
+    content: public Plansza()
+    content.vb: Public Sub New()
+  overload: Assets.Skrypty.Plansza.#ctor*
+  nameWithType.vb: Plansza.New()
+  fullName.vb: Assets.Skrypty.Plansza.New()
+  name.vb: New()
+- uid: Assets.Skrypty.Plansza.PrzygotujGre(System.Collections.Generic.List{Kostka})
+  commentId: M:Assets.Skrypty.Plansza.PrzygotujGre(System.Collections.Generic.List{Kostka})
+  id: PrzygotujGre(System.Collections.Generic.List{Kostka})
+  parent: Assets.Skrypty.Plansza
+  langs:
+  - csharp
+  - vb
+  name: PrzygotujGre(List<Kostka>)
+  nameWithType: Plansza.PrzygotujGre(List<Kostka>)
+  fullName: Assets.Skrypty.Plansza.PrzygotujGre(System.Collections.Generic.List<Kostka>)
+  type: Method
+  source:
+    remote:
+      path: Assets/Skrypty/Plansza.cs
+      branch: main
+      repo: https://github.com/feledyniza/Rummy.git
+    id: PrzygotujGre
+    path: Assets/Skrypty/Plansza.cs
+    startLine: 33
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  summary: >-
+    Inicjalizuje pule kostek na podstawie przekazanej listy, tasuje jej zawartosc, rozdaje kazdemu graczowi po 
+
+    10 kostek na poczatek gry, a nastepnie usuwa przyznane kostki z puli.
+  example: []
+  syntax:
+    content: public void PrzygotujGre(List<Kostka> noweKostki)
+    parameters:
+    - id: noweKostki
+      type: System.Collections.Generic.List{Kostka}
+    content.vb: Public Sub PrzygotujGre(noweKostki As List(Of Kostka))
+  overload: Assets.Skrypty.Plansza.PrzygotujGre*
+  nameWithType.vb: Plansza.PrzygotujGre(List(Of Kostka))
+  fullName.vb: Assets.Skrypty.Plansza.PrzygotujGre(System.Collections.Generic.List(Of Kostka))
+  name.vb: PrzygotujGre(List(Of Kostka))
+- uid: Assets.Skrypty.Plansza.WyliczJokera(Kostka,System.Collections.Generic.List{Kostka})
+  commentId: M:Assets.Skrypty.Plansza.WyliczJokera(Kostka,System.Collections.Generic.List{Kostka})
+  id: WyliczJokera(Kostka,System.Collections.Generic.List{Kostka})
+  parent: Assets.Skrypty.Plansza
+  langs:
+  - csharp
+  - vb
+  name: WyliczJokera(Kostka, List<Kostka>)
+  nameWithType: Plansza.WyliczJokera(Kostka, List<Kostka>)
+  fullName: Assets.Skrypty.Plansza.WyliczJokera(Kostka, System.Collections.Generic.List<Kostka>)
+  type: Method
+  source:
+    remote:
+      path: Assets/Skrypty/Plansza.cs
+      branch: main
+      repo: https://github.com/feledyniza/Rummy.git
+    id: WyliczJokera
+    path: Assets/Skrypty/Plansza.cs
+    startLine: 106
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  summary: >-
+    Oblicza i ustawia wartość Jokera na podstawie jego pozycji w układzie na stole
+
+    W grupach przyjmuje wartość cyfr grupy. Natomiast w seriach oblicz wartość na podstawie odległości od najbliższej zwykłej kostki.
+  example: []
+  syntax:
+    content: public int WyliczJokera(Kostka joker, List<Kostka> uklad)
+    parameters:
+    - id: joker
+      type: Kostka
+      description: ''
+    - id: uklad
+      type: System.Collections.Generic.List{Kostka}
+      description: ''
+    return:
+      type: System.Int32
+      description: ''
+    content.vb: Public Function WyliczJokera(joker As Kostka, uklad As List(Of Kostka)) As Integer
+  overload: Assets.Skrypty.Plansza.WyliczJokera*
+  nameWithType.vb: Plansza.WyliczJokera(Kostka, List(Of Kostka))
+  fullName.vb: Assets.Skrypty.Plansza.WyliczJokera(Kostka, System.Collections.Generic.List(Of Kostka))
+  name.vb: WyliczJokera(Kostka, List(Of Kostka))
+- uid: Assets.Skrypty.Plansza.DodajLubModyfikujCiag(System.Collections.Generic.List{Kostka})
+  commentId: M:Assets.Skrypty.Plansza.DodajLubModyfikujCiag(System.Collections.Generic.List{Kostka})
+  id: DodajLubModyfikujCiag(System.Collections.Generic.List{Kostka})
+  parent: Assets.Skrypty.Plansza
+  langs:
+  - csharp
+  - vb
+  name: DodajLubModyfikujCiag(List<Kostka>)
+  nameWithType: Plansza.DodajLubModyfikujCiag(List<Kostka>)
+  fullName: Assets.Skrypty.Plansza.DodajLubModyfikujCiag(System.Collections.Generic.List<Kostka>)
+  type: Method
+  source:
+    remote:
+      path: Assets/Skrypty/Plansza.cs
+      branch: main
+      repo: https://github.com/feledyniza/Rummy.git
+    id: DodajLubModyfikujCiag
+    path: Assets/Skrypty/Plansza.cs
+    startLine: 134
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  summary: Metoda dodajaca nowy ciag kostek do zbioru wszystkich istniejacych ciagow.
+  example: []
+  syntax:
+    content: public void DodajLubModyfikujCiag(List<Kostka> nowyCiag)
+    parameters:
+    - id: nowyCiag
+      type: System.Collections.Generic.List{Kostka}
+      description: ''
+    content.vb: Public Sub DodajLubModyfikujCiag(nowyCiag As List(Of Kostka))
+  overload: Assets.Skrypty.Plansza.DodajLubModyfikujCiag*
+  nameWithType.vb: Plansza.DodajLubModyfikujCiag(List(Of Kostka))
+  fullName.vb: Assets.Skrypty.Plansza.DodajLubModyfikujCiag(System.Collections.Generic.List(Of Kostka))
+  name.vb: DodajLubModyfikujCiag(List(Of Kostka))
+- uid: Assets.Skrypty.Plansza.CzyPoprawnyRuch(System.Collections.Generic.List{Kostka})
+  commentId: M:Assets.Skrypty.Plansza.CzyPoprawnyRuch(System.Collections.Generic.List{Kostka})
+  id: CzyPoprawnyRuch(System.Collections.Generic.List{Kostka})
+  parent: Assets.Skrypty.Plansza
+  langs:
+  - csharp
+  - vb
+  name: CzyPoprawnyRuch(List<Kostka>)
+  nameWithType: Plansza.CzyPoprawnyRuch(List<Kostka>)
+  fullName: Assets.Skrypty.Plansza.CzyPoprawnyRuch(System.Collections.Generic.List<Kostka>)
+  type: Method
+  source:
+    remote:
+      path: Assets/Skrypty/Plansza.cs
+      branch: main
+      repo: https://github.com/feledyniza/Rummy.git
+    id: CzyPoprawnyRuch
+    path: Assets/Skrypty/Plansza.cs
+    startLine: 143
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  summary: Metoda weryfikujaca poprawnosc wprowadzanego ciagu.
+  example: []
+  syntax:
+    content: public bool CzyPoprawnyRuch(List<Kostka> nowyCiag)
+    parameters:
+    - id: nowyCiag
+      type: System.Collections.Generic.List{Kostka}
+      description: ''
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: Public Function CzyPoprawnyRuch(nowyCiag As List(Of Kostka)) As Boolean
+  overload: Assets.Skrypty.Plansza.CzyPoprawnyRuch*
+  nameWithType.vb: Plansza.CzyPoprawnyRuch(List(Of Kostka))
+  fullName.vb: Assets.Skrypty.Plansza.CzyPoprawnyRuch(System.Collections.Generic.List(Of Kostka))
+  name.vb: CzyPoprawnyRuch(List(Of Kostka))
+- uid: Assets.Skrypty.Plansza.CzyWszystkieUkladyPoprawne(System.Collections.Generic.List{System.Collections.Generic.List{Kostka}})
+  commentId: M:Assets.Skrypty.Plansza.CzyWszystkieUkladyPoprawne(System.Collections.Generic.List{System.Collections.Generic.List{Kostka}})
+  id: CzyWszystkieUkladyPoprawne(System.Collections.Generic.List{System.Collections.Generic.List{Kostka}})
+  parent: Assets.Skrypty.Plansza
+  langs:
+  - csharp
+  - vb
+  name: CzyWszystkieUkladyPoprawne(List<List<Kostka>>)
+  nameWithType: Plansza.CzyWszystkieUkladyPoprawne(List<List<Kostka>>)
+  fullName: Assets.Skrypty.Plansza.CzyWszystkieUkladyPoprawne(System.Collections.Generic.List<System.Collections.Generic.List<Kostka>>)
+  type: Method
+  source:
+    remote:
+      path: Assets/Skrypty/Plansza.cs
+      branch: main
+      repo: https://github.com/feledyniza/Rummy.git
+    id: CzyWszystkieUkladyPoprawne
+    path: Assets/Skrypty/Plansza.cs
+    startLine: 158
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  summary: >-
+    Sprawdza globalną poprawność wszytskich kostek leżących na stole. 
+
+    Przeszukuje listę układów kostek i weryfikuje czy każda z nich spełnia warunki dotyczące serii lub grupy.
+  example: []
+  syntax:
+    content: public bool CzyWszystkieUkladyPoprawne(List<List<Kostka>> stanStolu)
+    parameters:
+    - id: stanStolu
+      type: System.Collections.Generic.List{System.Collections.Generic.List{Kostka}}
+      description: ''
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: Public Function CzyWszystkieUkladyPoprawne(stanStolu As List(Of List(Of Kostka))) As Boolean
+  overload: Assets.Skrypty.Plansza.CzyWszystkieUkladyPoprawne*
+  nameWithType.vb: Plansza.CzyWszystkieUkladyPoprawne(List(Of List(Of Kostka)))
+  fullName.vb: Assets.Skrypty.Plansza.CzyWszystkieUkladyPoprawne(System.Collections.Generic.List(Of System.Collections.Generic.List(Of Kostka)))
+  name.vb: CzyWszystkieUkladyPoprawne(List(Of List(Of Kostka)))
+- uid: Assets.Skrypty.Plansza.WydajLosowaKostkeZPuli
+  commentId: M:Assets.Skrypty.Plansza.WydajLosowaKostkeZPuli
+  id: WydajLosowaKostkeZPuli
+  parent: Assets.Skrypty.Plansza
+  langs:
+  - csharp
+  - vb
+  name: WydajLosowaKostkeZPuli()
+  nameWithType: Plansza.WydajLosowaKostkeZPuli()
+  fullName: Assets.Skrypty.Plansza.WydajLosowaKostkeZPuli()
+  type: Method
+  source:
+    remote:
+      path: Assets/Skrypty/Plansza.cs
+      branch: main
+      repo: https://github.com/feledyniza/Rummy.git
+    id: WydajLosowaKostkeZPuli
+    path: Assets/Skrypty/Plansza.cs
+    startLine: 180
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  summary: >-
+    Pobiera losową kostkę z puli wszystkich kostek. 
+
+    Metoda jest wykorzystywana przy dobieraniu, na początku gry oraz przy działaniu kół ratunkowych
+  example: []
+  syntax:
+    content: public Kostka WydajLosowaKostkeZPuli()
+    return:
+      type: Kostka
+      description: ''
+    content.vb: Public Function WydajLosowaKostkeZPuli() As Kostka
+  overload: Assets.Skrypty.Plansza.WydajLosowaKostkeZPuli*
+- uid: Assets.Skrypty.Plansza.NastepnyGracz
+  commentId: M:Assets.Skrypty.Plansza.NastepnyGracz
+  id: NastepnyGracz
+  parent: Assets.Skrypty.Plansza
+  langs:
+  - csharp
+  - vb
+  name: NastepnyGracz()
+  nameWithType: Plansza.NastepnyGracz()
+  fullName: Assets.Skrypty.Plansza.NastepnyGracz()
+  type: Method
+  source:
+    remote:
+      path: Assets/Skrypty/Plansza.cs
+      branch: main
+      repo: https://github.com/feledyniza/Rummy.git
+    id: NastepnyGracz
+    path: Assets/Skrypty/Plansza.cs
+    startLine: 198
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  summary: Metoda zwracajaca indeks nastepnego gracza - metoda pomocnicza.
+  example: []
+  syntax:
+    content: public int NastepnyGracz()
+    return:
+      type: System.Int32
+      description: ''
+    content.vb: Public Function NastepnyGracz() As Integer
+  overload: Assets.Skrypty.Plansza.NastepnyGracz*
+- uid: Assets.Skrypty.Plansza.AktualnyGracz
+  commentId: M:Assets.Skrypty.Plansza.AktualnyGracz
+  id: AktualnyGracz
+  parent: Assets.Skrypty.Plansza
+  langs:
+  - csharp
+  - vb
+  name: AktualnyGracz()
+  nameWithType: Plansza.AktualnyGracz()
+  fullName: Assets.Skrypty.Plansza.AktualnyGracz()
+  type: Method
+  source:
+    remote:
+      path: Assets/Skrypty/Plansza.cs
+      branch: main
+      repo: https://github.com/feledyniza/Rummy.git
+    id: AktualnyGracz
+    path: Assets/Skrypty/Plansza.cs
+    startLine: 207
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  summary: Metoda zwracajaca aktualnego gracza - metoda pomocnicza.
+  example: []
+  syntax:
+    content: public Gracz AktualnyGracz()
+    return:
+      type: Assets.Skrypty.Gracz
+      description: ''
+    content.vb: Public Function AktualnyGracz() As Gracz
+  overload: Assets.Skrypty.Plansza.AktualnyGracz*
+references:
+- uid: Assets.Skrypty
+  commentId: N:Assets.Skrypty
+  href: Assets.html
+  name: Assets.Skrypty
+  nameWithType: Assets.Skrypty
+  fullName: Assets.Skrypty
+  spec.csharp:
+  - uid: Assets
+    name: Assets
+    href: Assets.html
+  - name: .
+  - uid: Assets.Skrypty
+    name: Skrypty
+    href: Assets.Skrypty.html
+  spec.vb:
+  - uid: Assets
+    name: Assets
+    href: Assets.html
+  - name: .
+  - uid: Assets.Skrypty
+    name: Skrypty
+    href: Assets.Skrypty.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Collections.Generic.List{Assets.Skrypty.Gracz}
+  commentId: T:System.Collections.Generic.List{Assets.Skrypty.Gracz}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<Gracz>
+  nameWithType: List<Gracz>
+  fullName: System.Collections.Generic.List<Assets.Skrypty.Gracz>
+  nameWithType.vb: List(Of Gracz)
+  fullName.vb: System.Collections.Generic.List(Of Assets.Skrypty.Gracz)
+  name.vb: List(Of Gracz)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: Assets.Skrypty.Gracz
+    name: Gracz
+    href: Assets.Skrypty.Gracz.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Assets.Skrypty.Gracz
+    name: Gracz
+    href: Assets.Skrypty.Gracz.html
+  - name: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: System.Collections.Generic.List{Kostka}
+  commentId: T:System.Collections.Generic.List{Kostka}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<Kostka>
+  nameWithType: List<Kostka>
+  fullName: System.Collections.Generic.List<Kostka>
+  nameWithType.vb: List(Of Kostka)
+  fullName.vb: System.Collections.Generic.List(Of Kostka)
+  name.vb: List(Of Kostka)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: Kostka
+    name: Kostka
+    href: Kostka.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Kostka
+    name: Kostka
+    href: Kostka.html
+  - name: )
+- uid: System.Collections.Generic.List{System.Collections.Generic.List{Kostka}}
+  commentId: T:System.Collections.Generic.List{System.Collections.Generic.List{Kostka}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<List<Kostka>>
+  nameWithType: List<List<Kostka>>
+  fullName: System.Collections.Generic.List<System.Collections.Generic.List<Kostka>>
+  nameWithType.vb: List(Of List(Of Kostka))
+  fullName.vb: System.Collections.Generic.List(Of System.Collections.Generic.List(Of Kostka))
+  name.vb: List(Of List(Of Kostka))
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: Kostka
+    name: Kostka
+    href: Kostka.html
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Kostka
+    name: Kostka
+    href: Kostka.html
+  - name: )
+  - name: )
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Assets.Skrypty.Plansza.#ctor*
+  commentId: Overload:Assets.Skrypty.Plansza.#ctor
+  href: Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza__ctor
+  name: Plansza
+  nameWithType: Plansza.Plansza
+  fullName: Assets.Skrypty.Plansza.Plansza
+  nameWithType.vb: Plansza.New
+  fullName.vb: Assets.Skrypty.Plansza.New
+  name.vb: New
+- uid: Assets.Skrypty.Plansza.PrzygotujGre*
+  commentId: Overload:Assets.Skrypty.Plansza.PrzygotujGre
+  href: Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_PrzygotujGre_System_Collections_Generic_List_Kostka__
+  name: PrzygotujGre
+  nameWithType: Plansza.PrzygotujGre
+  fullName: Assets.Skrypty.Plansza.PrzygotujGre
+- uid: Assets.Skrypty.Plansza.WyliczJokera*
+  commentId: Overload:Assets.Skrypty.Plansza.WyliczJokera
+  href: Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_WyliczJokera_Kostka_System_Collections_Generic_List_Kostka__
+  name: WyliczJokera
+  nameWithType: Plansza.WyliczJokera
+  fullName: Assets.Skrypty.Plansza.WyliczJokera
+- uid: Kostka
+  commentId: T:Kostka
+  href: Kostka.html
+  name: Kostka
+  nameWithType: Kostka
+  fullName: Kostka
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Assets.Skrypty.Plansza.DodajLubModyfikujCiag*
+  commentId: Overload:Assets.Skrypty.Plansza.DodajLubModyfikujCiag
+  href: Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_DodajLubModyfikujCiag_System_Collections_Generic_List_Kostka__
+  name: DodajLubModyfikujCiag
+  nameWithType: Plansza.DodajLubModyfikujCiag
+  fullName: Assets.Skrypty.Plansza.DodajLubModyfikujCiag
+- uid: Assets.Skrypty.Plansza.CzyPoprawnyRuch*
+  commentId: Overload:Assets.Skrypty.Plansza.CzyPoprawnyRuch
+  href: Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_CzyPoprawnyRuch_System_Collections_Generic_List_Kostka__
+  name: CzyPoprawnyRuch
+  nameWithType: Plansza.CzyPoprawnyRuch
+  fullName: Assets.Skrypty.Plansza.CzyPoprawnyRuch
+- uid: Assets.Skrypty.Plansza.CzyWszystkieUkladyPoprawne*
+  commentId: Overload:Assets.Skrypty.Plansza.CzyWszystkieUkladyPoprawne
+  href: Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_CzyWszystkieUkladyPoprawne_System_Collections_Generic_List_System_Collections_Generic_List_Kostka___
+  name: CzyWszystkieUkladyPoprawne
+  nameWithType: Plansza.CzyWszystkieUkladyPoprawne
+  fullName: Assets.Skrypty.Plansza.CzyWszystkieUkladyPoprawne
+- uid: Assets.Skrypty.Plansza.WydajLosowaKostkeZPuli*
+  commentId: Overload:Assets.Skrypty.Plansza.WydajLosowaKostkeZPuli
+  href: Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_WydajLosowaKostkeZPuli
+  name: WydajLosowaKostkeZPuli
+  nameWithType: Plansza.WydajLosowaKostkeZPuli
+  fullName: Assets.Skrypty.Plansza.WydajLosowaKostkeZPuli
+- uid: Assets.Skrypty.Plansza.NastepnyGracz*
+  commentId: Overload:Assets.Skrypty.Plansza.NastepnyGracz
+  href: Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_NastepnyGracz
+  name: NastepnyGracz
+  nameWithType: Plansza.NastepnyGracz
+  fullName: Assets.Skrypty.Plansza.NastepnyGracz
+- uid: Assets.Skrypty.Plansza.AktualnyGracz*
+  commentId: Overload:Assets.Skrypty.Plansza.AktualnyGracz
+  href: Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_AktualnyGracz
+  name: AktualnyGracz
+  nameWithType: Plansza.AktualnyGracz
+  fullName: Assets.Skrypty.Plansza.AktualnyGracz
+- uid: Assets.Skrypty.Gracz
+  commentId: T:Assets.Skrypty.Gracz
+  parent: Assets.Skrypty
+  href: Assets.Skrypty.Gracz.html
+  name: Gracz
+  nameWithType: Gracz
+  fullName: Assets.Skrypty.Gracz

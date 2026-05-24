@@ -1,0 +1,40 @@
+### YamlMime:TableOfContent
+items:
+- uid: Assets.Skrypty
+  name: Assets.Skrypty
+  type: Namespace
+  items:
+  - uid: Assets.Skrypty.DaneUzytkownika
+    name: DaneUzytkownika
+    type: Class
+  - uid: Assets.Skrypty.Gracz
+    name: Gracz
+    type: Class
+  - uid: Assets.Skrypty.ListR
+    name: ListR
+    type: Class
+  - uid: Assets.Skrypty.ListS
+    name: ListS
+    type: Class
+  - uid: Assets.Skrypty.ListU
+    name: ListU
+    type: Class
+  - uid: Assets.Skrypty.MenedzerKont
+    name: MenedzerKont
+    type: Class
+  - uid: Assets.Skrypty.Plansza
+    name: Plansza
+    type: Class
+  - uid: Assets.Skrypty.Uzytkownik
+    name: Uzytkownik
+    type: Class
+  - uid: Assets.Skrypty.WpisRanking
+    name: WpisRanking
+    type: Class
+  - uid: Assets.Skrypty.WpisStatystyki
+    name: WpisStatystyki
+    type: Class
+  - uid: Assets.Skrypty.WpisUzytkownik
+    name: WpisUzytkownik
+    type: Class
+memberLayout: SamePage

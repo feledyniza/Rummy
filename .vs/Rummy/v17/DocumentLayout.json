@@ -1,0 +1,148 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{85FDFEDD-312F-1B55-8E5F-2AF27644B109}|Assembly-CSharp.csproj|c:\\users\\izafe\\onedrive\\pulpit\\rummy\\assets\\skrypty\\menuui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85FDFEDD-312F-1B55-8E5F-2AF27644B109}|Assembly-CSharp.csproj|solutionrelative:assets\\skrypty\\menuui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85FDFEDD-312F-1B55-8E5F-2AF27644B109}|Assembly-CSharp.csproj|C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\assets\\skrypty\\menedzerkont.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85FDFEDD-312F-1B55-8E5F-2AF27644B109}|Assembly-CSharp.csproj|solutionrelative:assets\\skrypty\\menedzerkont.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85FDFEDD-312F-1B55-8E5F-2AF27644B109}|Assembly-CSharp.csproj|C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\assets\\skrypty\\kostka.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85FDFEDD-312F-1B55-8E5F-2AF27644B109}|Assembly-CSharp.csproj|solutionrelative:assets\\skrypty\\kostka.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85FDFEDD-312F-1B55-8E5F-2AF27644B109}|Assembly-CSharp.csproj|C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\assets\\skrypty\\gracz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85FDFEDD-312F-1B55-8E5F-2AF27644B109}|Assembly-CSharp.csproj|solutionrelative:assets\\skrypty\\gracz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85FDFEDD-312F-1B55-8E5F-2AF27644B109}|Assembly-CSharp.csproj|C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\assets\\skrypty\\planszaui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85FDFEDD-312F-1B55-8E5F-2AF27644B109}|Assembly-CSharp.csproj|solutionrelative:assets\\skrypty\\planszaui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85FDFEDD-312F-1B55-8E5F-2AF27644B109}|Assembly-CSharp.csproj|C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\assets\\skrypty\\classdiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|",
+      "RelativeMoniker": "D:0:0:{85FDFEDD-312F-1B55-8E5F-2AF27644B109}|Assembly-CSharp.csproj|solutionrelative:assets\\skrypty\\classdiagram.cd||{59B0B277-7DDF-4E36-A3ED-02DAC5B9E2FA}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85FDFEDD-312F-1B55-8E5F-2AF27644B109}|Assembly-CSharp.csproj|C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\assets\\skrypty\\daneuzytkownika.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85FDFEDD-312F-1B55-8E5F-2AF27644B109}|Assembly-CSharp.csproj|solutionrelative:assets\\skrypty\\daneuzytkownika.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85FDFEDD-312F-1B55-8E5F-2AF27644B109}|Assembly-CSharp.csproj|C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\assets\\skrypty\\plansza.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85FDFEDD-312F-1B55-8E5F-2AF27644B109}|Assembly-CSharp.csproj|solutionrelative:assets\\skrypty\\plansza.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 161,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MenedzerKont.cs",
+              "DocumentMoniker": "C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\Assets\\Skrypty\\MenedzerKont.cs",
+              "RelativeDocumentMoniker": "Assets\\Skrypty\\MenedzerKont.cs",
+              "ToolTip": "C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\Assets\\Skrypty\\MenedzerKont.cs",
+              "RelativeToolTip": "Assets\\Skrypty\\MenedzerKont.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAkAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-25T10:28:42.071Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DaneUzytkownika.cs",
+              "DocumentMoniker": "C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\Assets\\Skrypty\\DaneUzytkownika.cs",
+              "RelativeDocumentMoniker": "Assets\\Skrypty\\DaneUzytkownika.cs",
+              "ToolTip": "C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\Assets\\Skrypty\\DaneUzytkownika.cs",
+              "RelativeToolTip": "Assets\\Skrypty\\DaneUzytkownika.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBMAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-25T10:27:24.161Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ClassDiagram.cd",
+              "DocumentMoniker": "C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\Assets\\Skrypty\\ClassDiagram.cd",
+              "RelativeDocumentMoniker": "Assets\\Skrypty\\ClassDiagram.cd",
+              "ToolTip": "C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\Assets\\Skrypty\\ClassDiagram.cd",
+              "RelativeToolTip": "Assets\\Skrypty\\ClassDiagram.cd",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000463|",
+              "WhenOpened": "2026-04-13T18:54:46.838Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Gracz.cs",
+              "DocumentMoniker": "C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\Assets\\Skrypty\\Gracz.cs",
+              "RelativeDocumentMoniker": "Assets\\Skrypty\\Gracz.cs",
+              "ToolTip": "C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\Assets\\Skrypty\\Gracz.cs",
+              "RelativeToolTip": "Assets\\Skrypty\\Gracz.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T12:20:44.391Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PlanszaUI.cs",
+              "DocumentMoniker": "C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\Assets\\Skrypty\\PlanszaUI.cs",
+              "RelativeDocumentMoniker": "Assets\\Skrypty\\PlanszaUI.cs",
+              "ToolTip": "C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\Assets\\Skrypty\\PlanszaUI.cs",
+              "RelativeToolTip": "Assets\\Skrypty\\PlanszaUI.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAcwI0CAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T15:22:55.185Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MenuUI.cs",
+              "DocumentMoniker": "C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\Assets\\Skrypty\\MenuUI.cs",
+              "RelativeDocumentMoniker": "Assets\\Skrypty\\MenuUI.cs",
+              "ToolTip": "C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\Assets\\Skrypty\\MenuUI.cs",
+              "RelativeToolTip": "Assets\\Skrypty\\MenuUI.cs",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAkwOcAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T15:22:48.293Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Plansza.cs",
+              "DocumentMoniker": "C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\Assets\\Skrypty\\Plansza.cs",
+              "RelativeDocumentMoniker": "Assets\\Skrypty\\Plansza.cs",
+              "ToolTip": "C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\Assets\\Skrypty\\Plansza.cs",
+              "RelativeToolTip": "Assets\\Skrypty\\Plansza.cs",
+              "ViewState": "AgIAAKMAAAAAAAAAAADwv7IAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T14:11:39.826Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Kostka.cs",
+              "DocumentMoniker": "C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\Assets\\Skrypty\\Kostka.cs",
+              "RelativeDocumentMoniker": "Assets\\Skrypty\\Kostka.cs",
+              "ToolTip": "C:\\Users\\izafe\\OneDrive\\Pulpit\\Rummy\\Assets\\Skrypty\\Kostka.cs",
+              "RelativeToolTip": "Assets\\Skrypty\\Kostka.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAqwDAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-03T11:04:33.662Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

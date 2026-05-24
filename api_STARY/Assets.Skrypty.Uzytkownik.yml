@@ -1,0 +1,632 @@
+### YamlMime:ManagedReference
+items:
+- uid: Assets.Skrypty.Uzytkownik
+  commentId: T:Assets.Skrypty.Uzytkownik
+  id: Uzytkownik
+  parent: Assets.Skrypty
+  children:
+  - Assets.Skrypty.Uzytkownik.#ctor
+  - Assets.Skrypty.Uzytkownik.UzupelnijCiag
+  - Assets.Skrypty.Uzytkownik.UzyjAsystenta
+  - Assets.Skrypty.Uzytkownik.UzyjKola
+  - Assets.Skrypty.Uzytkownik.WykonajRuch
+  - Assets.Skrypty.Uzytkownik.kolaRatunkowe
+  langs:
+  - csharp
+  - vb
+  name: Uzytkownik
+  nameWithType: Uzytkownik
+  fullName: Assets.Skrypty.Uzytkownik
+  type: Class
+  source:
+    id: Uzytkownik
+    path: C:\Users\izafe\OneDrive\Pulpit\Rummy\Assets\Skrypty\Gracz.cs
+    startLine: 35
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  summary: >-
+    Klasa reprezentująca gracza sterowanego przez użytkownika.
+
+    Dziedziczy po klasie Gracz i rozszerza ją o dodatkowe mechaniki pomocnicze.
+  example: []
+  syntax:
+    content: 'public class Uzytkownik : Gracz'
+    content.vb: Public Class Uzytkownik Inherits Gracz
+  inheritance:
+  - System.Object
+  - Assets.Skrypty.Gracz
+  inheritedMembers:
+  - Assets.Skrypty.Gracz.nick
+  - Assets.Skrypty.Gracz.kostkiGracza
+  - Assets.Skrypty.Gracz.iloscPunktow
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Assets.Skrypty.Uzytkownik.kolaRatunkowe
+  commentId: F:Assets.Skrypty.Uzytkownik.kolaRatunkowe
+  id: kolaRatunkowe
+  parent: Assets.Skrypty.Uzytkownik
+  langs:
+  - csharp
+  - vb
+  name: kolaRatunkowe
+  nameWithType: Uzytkownik.kolaRatunkowe
+  fullName: Assets.Skrypty.Uzytkownik.kolaRatunkowe
+  type: Field
+  source:
+    id: kolaRatunkowe
+    path: C:\Users\izafe\OneDrive\Pulpit\Rummy\Assets\Skrypty\Gracz.cs
+    startLine: 37
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  syntax:
+    content: public List<KoloRatunkowe> kolaRatunkowe
+    return:
+      type: System.Collections.Generic.List{KoloRatunkowe}
+    content.vb: Public kolaRatunkowe As List(Of KoloRatunkowe)
+- uid: Assets.Skrypty.Uzytkownik.#ctor
+  commentId: M:Assets.Skrypty.Uzytkownik.#ctor
+  id: '#ctor'
+  parent: Assets.Skrypty.Uzytkownik
+  langs:
+  - csharp
+  - vb
+  name: Uzytkownik()
+  nameWithType: Uzytkownik.Uzytkownik()
+  fullName: Assets.Skrypty.Uzytkownik.Uzytkownik()
+  type: Constructor
+  source:
+    id: .ctor
+    path: C:\Users\izafe\OneDrive\Pulpit\Rummy\Assets\Skrypty\Gracz.cs
+    startLine: 38
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  syntax:
+    content: public Uzytkownik()
+    content.vb: Public Sub New()
+  overload: Assets.Skrypty.Uzytkownik.#ctor*
+  nameWithType.vb: Uzytkownik.New()
+  fullName.vb: Assets.Skrypty.Uzytkownik.New()
+  name.vb: New()
+- uid: Assets.Skrypty.Uzytkownik.WykonajRuch
+  commentId: M:Assets.Skrypty.Uzytkownik.WykonajRuch
+  id: WykonajRuch
+  parent: Assets.Skrypty.Uzytkownik
+  langs:
+  - csharp
+  - vb
+  name: WykonajRuch()
+  nameWithType: Uzytkownik.WykonajRuch()
+  fullName: Assets.Skrypty.Uzytkownik.WykonajRuch()
+  type: Method
+  source:
+    id: WykonajRuch
+    path: C:\Users\izafe\OneDrive\Pulpit\Rummy\Assets\Skrypty\Gracz.cs
+    startLine: 46
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  summary: Wykonuje ruch gracza (implementacja dla użytkownika).
+  example: []
+  syntax:
+    content: public override void WykonajRuch()
+    content.vb: Public Overrides Sub WykonajRuch()
+  overridden: Assets.Skrypty.Gracz.WykonajRuch
+  overload: Assets.Skrypty.Uzytkownik.WykonajRuch*
+- uid: Assets.Skrypty.Uzytkownik.UzyjKola
+  commentId: M:Assets.Skrypty.Uzytkownik.UzyjKola
+  id: UzyjKola
+  parent: Assets.Skrypty.Uzytkownik
+  langs:
+  - csharp
+  - vb
+  name: UzyjKola()
+  nameWithType: Uzytkownik.UzyjKola()
+  fullName: Assets.Skrypty.Uzytkownik.UzyjKola()
+  type: Method
+  source:
+    id: UzyjKola
+    path: C:\Users\izafe\OneDrive\Pulpit\Rummy\Assets\Skrypty\Gracz.cs
+    startLine: 50
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  summary: Używa koła ratunkowego.
+  example: []
+  syntax:
+    content: public void UzyjKola()
+    content.vb: Public Sub UzyjKola()
+  overload: Assets.Skrypty.Uzytkownik.UzyjKola*
+- uid: Assets.Skrypty.Uzytkownik.UzyjAsystenta
+  commentId: M:Assets.Skrypty.Uzytkownik.UzyjAsystenta
+  id: UzyjAsystenta
+  parent: Assets.Skrypty.Uzytkownik
+  langs:
+  - csharp
+  - vb
+  name: UzyjAsystenta()
+  nameWithType: Uzytkownik.UzyjAsystenta()
+  fullName: Assets.Skrypty.Uzytkownik.UzyjAsystenta()
+  type: Method
+  source:
+    id: UzyjAsystenta
+    path: C:\Users\izafe\OneDrive\Pulpit\Rummy\Assets\Skrypty\Gracz.cs
+    startLine: 54
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  summary: Uruchamia asystenta wspomagającego grę.
+  example: []
+  syntax:
+    content: public void UzyjAsystenta()
+    content.vb: Public Sub UzyjAsystenta()
+  overload: Assets.Skrypty.Uzytkownik.UzyjAsystenta*
+- uid: Assets.Skrypty.Uzytkownik.UzupelnijCiag
+  commentId: M:Assets.Skrypty.Uzytkownik.UzupelnijCiag
+  id: UzupelnijCiag
+  parent: Assets.Skrypty.Uzytkownik
+  langs:
+  - csharp
+  - vb
+  name: UzupelnijCiag()
+  nameWithType: Uzytkownik.UzupelnijCiag()
+  fullName: Assets.Skrypty.Uzytkownik.UzupelnijCiag()
+  type: Method
+  source:
+    id: UzupelnijCiag
+    path: C:\Users\izafe\OneDrive\Pulpit\Rummy\Assets\Skrypty\Gracz.cs
+    startLine: 58
+  assemblies:
+  - Assembly-CSharp
+  namespace: Assets.Skrypty
+  summary: Uzupełnia istniejący ciąg kostek.
+  example: []
+  syntax:
+    content: public void UzupelnijCiag()
+    content.vb: Public Sub UzupelnijCiag()
+  overload: Assets.Skrypty.Uzytkownik.UzupelnijCiag*
+references:
+- uid: Assets.Skrypty
+  commentId: N:Assets.Skrypty
+  href: Assets.html
+  name: Assets.Skrypty
+  nameWithType: Assets.Skrypty
+  fullName: Assets.Skrypty
+  spec.csharp:
+  - uid: Assets
+    name: Assets
+    href: Assets.html
+  - name: .
+  - uid: Assets.Skrypty
+    name: Skrypty
+    href: Assets.Skrypty.html
+  spec.vb:
+  - uid: Assets
+    name: Assets
+    href: Assets.html
+  - name: .
+  - uid: Assets.Skrypty
+    name: Skrypty
+    href: Assets.Skrypty.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Assets.Skrypty.Gracz
+  commentId: T:Assets.Skrypty.Gracz
+  parent: Assets.Skrypty
+  href: Assets.Skrypty.Gracz.html
+  name: Gracz
+  nameWithType: Gracz
+  fullName: Assets.Skrypty.Gracz
+- uid: Assets.Skrypty.Gracz.nick
+  commentId: F:Assets.Skrypty.Gracz.nick
+  parent: Assets.Skrypty.Gracz
+  href: Assets.Skrypty.Gracz.html#Assets_Skrypty_Gracz_nick
+  name: nick
+  nameWithType: Gracz.nick
+  fullName: Assets.Skrypty.Gracz.nick
+- uid: Assets.Skrypty.Gracz.kostkiGracza
+  commentId: F:Assets.Skrypty.Gracz.kostkiGracza
+  parent: Assets.Skrypty.Gracz
+  href: Assets.Skrypty.Gracz.html#Assets_Skrypty_Gracz_kostkiGracza
+  name: kostkiGracza
+  nameWithType: Gracz.kostkiGracza
+  fullName: Assets.Skrypty.Gracz.kostkiGracza
+- uid: Assets.Skrypty.Gracz.iloscPunktow
+  commentId: F:Assets.Skrypty.Gracz.iloscPunktow
+  parent: Assets.Skrypty.Gracz
+  href: Assets.Skrypty.Gracz.html#Assets_Skrypty_Gracz_iloscPunktow
+  name: iloscPunktow
+  nameWithType: Gracz.iloscPunktow
+  fullName: Assets.Skrypty.Gracz.iloscPunktow
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Collections.Generic.List{KoloRatunkowe}
+  commentId: T:System.Collections.Generic.List{KoloRatunkowe}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<KoloRatunkowe>
+  nameWithType: List<KoloRatunkowe>
+  fullName: System.Collections.Generic.List<KoloRatunkowe>
+  nameWithType.vb: List(Of KoloRatunkowe)
+  fullName.vb: System.Collections.Generic.List(Of KoloRatunkowe)
+  name.vb: List(Of KoloRatunkowe)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: KoloRatunkowe
+    name: KoloRatunkowe
+    href: KoloRatunkowe.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: KoloRatunkowe
+    name: KoloRatunkowe
+    href: KoloRatunkowe.html
+  - name: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Assets.Skrypty.Uzytkownik.#ctor*
+  commentId: Overload:Assets.Skrypty.Uzytkownik.#ctor
+  href: Assets.Skrypty.Uzytkownik.html#Assets_Skrypty_Uzytkownik__ctor
+  name: Uzytkownik
+  nameWithType: Uzytkownik.Uzytkownik
+  fullName: Assets.Skrypty.Uzytkownik.Uzytkownik
+  nameWithType.vb: Uzytkownik.New
+  fullName.vb: Assets.Skrypty.Uzytkownik.New
+  name.vb: New
+- uid: Assets.Skrypty.Gracz.WykonajRuch
+  commentId: M:Assets.Skrypty.Gracz.WykonajRuch
+  parent: Assets.Skrypty.Gracz
+  href: Assets.Skrypty.Gracz.html#Assets_Skrypty_Gracz_WykonajRuch
+  name: WykonajRuch()
+  nameWithType: Gracz.WykonajRuch()
+  fullName: Assets.Skrypty.Gracz.WykonajRuch()
+  spec.csharp:
+  - uid: Assets.Skrypty.Gracz.WykonajRuch
+    name: WykonajRuch
+    href: Assets.Skrypty.Gracz.html#Assets_Skrypty_Gracz_WykonajRuch
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Assets.Skrypty.Gracz.WykonajRuch
+    name: WykonajRuch
+    href: Assets.Skrypty.Gracz.html#Assets_Skrypty_Gracz_WykonajRuch
+  - name: (
+  - name: )
+- uid: Assets.Skrypty.Uzytkownik.WykonajRuch*
+  commentId: Overload:Assets.Skrypty.Uzytkownik.WykonajRuch
+  href: Assets.Skrypty.Uzytkownik.html#Assets_Skrypty_Uzytkownik_WykonajRuch
+  name: WykonajRuch
+  nameWithType: Uzytkownik.WykonajRuch
+  fullName: Assets.Skrypty.Uzytkownik.WykonajRuch
+- uid: Assets.Skrypty.Uzytkownik.UzyjKola*
+  commentId: Overload:Assets.Skrypty.Uzytkownik.UzyjKola
+  href: Assets.Skrypty.Uzytkownik.html#Assets_Skrypty_Uzytkownik_UzyjKola
+  name: UzyjKola
+  nameWithType: Uzytkownik.UzyjKola
+  fullName: Assets.Skrypty.Uzytkownik.UzyjKola
+- uid: Assets.Skrypty.Uzytkownik.UzyjAsystenta*
+  commentId: Overload:Assets.Skrypty.Uzytkownik.UzyjAsystenta
+  href: Assets.Skrypty.Uzytkownik.html#Assets_Skrypty_Uzytkownik_UzyjAsystenta
+  name: UzyjAsystenta
+  nameWithType: Uzytkownik.UzyjAsystenta
+  fullName: Assets.Skrypty.Uzytkownik.UzyjAsystenta
+- uid: Assets.Skrypty.Uzytkownik.UzupelnijCiag*
+  commentId: Overload:Assets.Skrypty.Uzytkownik.UzupelnijCiag
+  href: Assets.Skrypty.Uzytkownik.html#Assets_Skrypty_Uzytkownik_UzupelnijCiag
+  name: UzupelnijCiag
+  nameWithType: Uzytkownik.UzupelnijCiag
+  fullName: Assets.Skrypty.Uzytkownik.UzupelnijCiag

@@ -1,0 +1,561 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: 2d-sprite-api-index
+  name: 2D Sprite package scripting API
+  href: Library/PackageCache/com.unity.2d.sprite%40929df5adbb1f/Documentation~/api_index.html
+- uid: 2d-tilemap-api-index
+  name: 2D Tilemap Editor package scripting API
+  href: Library/PackageCache/com.unity.2d.tilemap%40c457c5249013/Documentation~/api_index.html
+- uid: Assets.Skrypty
+  name: Assets.Skrypty
+  href: api/Assets.Skrypty.html
+  commentId: N:Assets.Skrypty
+  fullName: Assets.Skrypty
+  nameWithType: Assets.Skrypty
+- uid: Assets.Skrypty.Bot
+  name: Bot
+  href: api/Assets.Skrypty.Bot.html
+  commentId: T:Assets.Skrypty.Bot
+  fullName: Assets.Skrypty.Bot
+  nameWithType: Bot
+- uid: Assets.Skrypty.Bot.#ctor
+  name: Bot()
+  href: api/Assets.Skrypty.Bot.html#Assets_Skrypty_Bot__ctor
+  commentId: M:Assets.Skrypty.Bot.#ctor
+  name.vb: New()
+  fullName: Assets.Skrypty.Bot.Bot()
+  fullName.vb: Assets.Skrypty.Bot.New()
+  nameWithType: Bot.Bot()
+  nameWithType.vb: Bot.New()
+- uid: Assets.Skrypty.Bot.#ctor*
+  name: Bot
+  href: api/Assets.Skrypty.Bot.html#Assets_Skrypty_Bot__ctor_
+  commentId: Overload:Assets.Skrypty.Bot.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Assets.Skrypty.Bot.Bot
+  fullName.vb: Assets.Skrypty.Bot.New
+  nameWithType: Bot.Bot
+  nameWithType.vb: Bot.New
+- uid: Assets.Skrypty.Bot.WykonajRuch
+  name: WykonajRuch()
+  href: api/Assets.Skrypty.Bot.html#Assets_Skrypty_Bot_WykonajRuch
+  commentId: M:Assets.Skrypty.Bot.WykonajRuch
+  fullName: Assets.Skrypty.Bot.WykonajRuch()
+  nameWithType: Bot.WykonajRuch()
+- uid: Assets.Skrypty.Bot.WykonajRuch*
+  name: WykonajRuch
+  href: api/Assets.Skrypty.Bot.html#Assets_Skrypty_Bot_WykonajRuch_
+  commentId: Overload:Assets.Skrypty.Bot.WykonajRuch
+  isSpec: "True"
+  fullName: Assets.Skrypty.Bot.WykonajRuch
+  nameWithType: Bot.WykonajRuch
+- uid: Assets.Skrypty.Gracz
+  name: Gracz
+  href: api/Assets.Skrypty.Gracz.html
+  commentId: T:Assets.Skrypty.Gracz
+  fullName: Assets.Skrypty.Gracz
+  nameWithType: Gracz
+- uid: Assets.Skrypty.Gracz.#ctor
+  name: Gracz()
+  href: api/Assets.Skrypty.Gracz.html#Assets_Skrypty_Gracz__ctor
+  commentId: M:Assets.Skrypty.Gracz.#ctor
+  name.vb: New()
+  fullName: Assets.Skrypty.Gracz.Gracz()
+  fullName.vb: Assets.Skrypty.Gracz.New()
+  nameWithType: Gracz.Gracz()
+  nameWithType.vb: Gracz.New()
+- uid: Assets.Skrypty.Gracz.#ctor*
+  name: Gracz
+  href: api/Assets.Skrypty.Gracz.html#Assets_Skrypty_Gracz__ctor_
+  commentId: Overload:Assets.Skrypty.Gracz.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Assets.Skrypty.Gracz.Gracz
+  fullName.vb: Assets.Skrypty.Gracz.New
+  nameWithType: Gracz.Gracz
+  nameWithType.vb: Gracz.New
+- uid: Assets.Skrypty.Gracz.WykonajRuch
+  name: WykonajRuch()
+  href: api/Assets.Skrypty.Gracz.html#Assets_Skrypty_Gracz_WykonajRuch
+  commentId: M:Assets.Skrypty.Gracz.WykonajRuch
+  fullName: Assets.Skrypty.Gracz.WykonajRuch()
+  nameWithType: Gracz.WykonajRuch()
+- uid: Assets.Skrypty.Gracz.WykonajRuch*
+  name: WykonajRuch
+  href: api/Assets.Skrypty.Gracz.html#Assets_Skrypty_Gracz_WykonajRuch_
+  commentId: Overload:Assets.Skrypty.Gracz.WykonajRuch
+  isSpec: "True"
+  fullName: Assets.Skrypty.Gracz.WykonajRuch
+  nameWithType: Gracz.WykonajRuch
+- uid: Assets.Skrypty.Gracz.iloscPunktow
+  name: iloscPunktow
+  href: api/Assets.Skrypty.Gracz.html#Assets_Skrypty_Gracz_iloscPunktow
+  commentId: F:Assets.Skrypty.Gracz.iloscPunktow
+  fullName: Assets.Skrypty.Gracz.iloscPunktow
+  nameWithType: Gracz.iloscPunktow
+- uid: Assets.Skrypty.Gracz.kostkiGracza
+  name: kostkiGracza
+  href: api/Assets.Skrypty.Gracz.html#Assets_Skrypty_Gracz_kostkiGracza
+  commentId: F:Assets.Skrypty.Gracz.kostkiGracza
+  fullName: Assets.Skrypty.Gracz.kostkiGracza
+  nameWithType: Gracz.kostkiGracza
+- uid: Assets.Skrypty.Gracz.nick
+  name: nick
+  href: api/Assets.Skrypty.Gracz.html#Assets_Skrypty_Gracz_nick
+  commentId: F:Assets.Skrypty.Gracz.nick
+  fullName: Assets.Skrypty.Gracz.nick
+  nameWithType: Gracz.nick
+- uid: Assets.Skrypty.Plansza
+  name: Plansza
+  href: api/Assets.Skrypty.Plansza.html
+  commentId: T:Assets.Skrypty.Plansza
+  fullName: Assets.Skrypty.Plansza
+  nameWithType: Plansza
+- uid: Assets.Skrypty.Plansza.#ctor
+  name: Plansza()
+  href: api/Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza__ctor
+  commentId: M:Assets.Skrypty.Plansza.#ctor
+  name.vb: New()
+  fullName: Assets.Skrypty.Plansza.Plansza()
+  fullName.vb: Assets.Skrypty.Plansza.New()
+  nameWithType: Plansza.Plansza()
+  nameWithType.vb: Plansza.New()
+- uid: Assets.Skrypty.Plansza.#ctor*
+  name: Plansza
+  href: api/Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza__ctor_
+  commentId: Overload:Assets.Skrypty.Plansza.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Assets.Skrypty.Plansza.Plansza
+  fullName.vb: Assets.Skrypty.Plansza.New
+  nameWithType: Plansza.Plansza
+  nameWithType.vb: Plansza.New
+- uid: Assets.Skrypty.Plansza.AktualnyGracz
+  name: AktualnyGracz()
+  href: api/Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_AktualnyGracz
+  commentId: M:Assets.Skrypty.Plansza.AktualnyGracz
+  fullName: Assets.Skrypty.Plansza.AktualnyGracz()
+  nameWithType: Plansza.AktualnyGracz()
+- uid: Assets.Skrypty.Plansza.AktualnyGracz*
+  name: AktualnyGracz
+  href: api/Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_AktualnyGracz_
+  commentId: Overload:Assets.Skrypty.Plansza.AktualnyGracz
+  isSpec: "True"
+  fullName: Assets.Skrypty.Plansza.AktualnyGracz
+  nameWithType: Plansza.AktualnyGracz
+- uid: Assets.Skrypty.Plansza.CzyPoprawnyRuch(System.Collections.Generic.List{Kostka})
+  name: CzyPoprawnyRuch(List<Kostka>)
+  href: api/Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_CzyPoprawnyRuch_System_Collections_Generic_List_Kostka__
+  commentId: M:Assets.Skrypty.Plansza.CzyPoprawnyRuch(System.Collections.Generic.List{Kostka})
+  name.vb: CzyPoprawnyRuch(List(Of Kostka))
+  fullName: Assets.Skrypty.Plansza.CzyPoprawnyRuch(System.Collections.Generic.List<Kostka>)
+  fullName.vb: Assets.Skrypty.Plansza.CzyPoprawnyRuch(System.Collections.Generic.List(Of Kostka))
+  nameWithType: Plansza.CzyPoprawnyRuch(List<Kostka>)
+  nameWithType.vb: Plansza.CzyPoprawnyRuch(List(Of Kostka))
+- uid: Assets.Skrypty.Plansza.CzyPoprawnyRuch*
+  name: CzyPoprawnyRuch
+  href: api/Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_CzyPoprawnyRuch_
+  commentId: Overload:Assets.Skrypty.Plansza.CzyPoprawnyRuch
+  isSpec: "True"
+  fullName: Assets.Skrypty.Plansza.CzyPoprawnyRuch
+  nameWithType: Plansza.CzyPoprawnyRuch
+- uid: Assets.Skrypty.Plansza.DodajLubModyfikujCiag(System.Collections.Generic.List{Kostka})
+  name: DodajLubModyfikujCiag(List<Kostka>)
+  href: api/Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_DodajLubModyfikujCiag_System_Collections_Generic_List_Kostka__
+  commentId: M:Assets.Skrypty.Plansza.DodajLubModyfikujCiag(System.Collections.Generic.List{Kostka})
+  name.vb: DodajLubModyfikujCiag(List(Of Kostka))
+  fullName: Assets.Skrypty.Plansza.DodajLubModyfikujCiag(System.Collections.Generic.List<Kostka>)
+  fullName.vb: Assets.Skrypty.Plansza.DodajLubModyfikujCiag(System.Collections.Generic.List(Of Kostka))
+  nameWithType: Plansza.DodajLubModyfikujCiag(List<Kostka>)
+  nameWithType.vb: Plansza.DodajLubModyfikujCiag(List(Of Kostka))
+- uid: Assets.Skrypty.Plansza.DodajLubModyfikujCiag*
+  name: DodajLubModyfikujCiag
+  href: api/Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_DodajLubModyfikujCiag_
+  commentId: Overload:Assets.Skrypty.Plansza.DodajLubModyfikujCiag
+  isSpec: "True"
+  fullName: Assets.Skrypty.Plansza.DodajLubModyfikujCiag
+  nameWithType: Plansza.DodajLubModyfikujCiag
+- uid: Assets.Skrypty.Plansza.NastepnyGracz
+  name: NastepnyGracz()
+  href: api/Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_NastepnyGracz
+  commentId: M:Assets.Skrypty.Plansza.NastepnyGracz
+  fullName: Assets.Skrypty.Plansza.NastepnyGracz()
+  nameWithType: Plansza.NastepnyGracz()
+- uid: Assets.Skrypty.Plansza.NastepnyGracz*
+  name: NastepnyGracz
+  href: api/Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_NastepnyGracz_
+  commentId: Overload:Assets.Skrypty.Plansza.NastepnyGracz
+  isSpec: "True"
+  fullName: Assets.Skrypty.Plansza.NastepnyGracz
+  nameWithType: Plansza.NastepnyGracz
+- uid: Assets.Skrypty.Plansza.PrzygotujGre(System.Collections.Generic.List{Kostka})
+  name: PrzygotujGre(List<Kostka>)
+  href: api/Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_PrzygotujGre_System_Collections_Generic_List_Kostka__
+  commentId: M:Assets.Skrypty.Plansza.PrzygotujGre(System.Collections.Generic.List{Kostka})
+  name.vb: PrzygotujGre(List(Of Kostka))
+  fullName: Assets.Skrypty.Plansza.PrzygotujGre(System.Collections.Generic.List<Kostka>)
+  fullName.vb: Assets.Skrypty.Plansza.PrzygotujGre(System.Collections.Generic.List(Of Kostka))
+  nameWithType: Plansza.PrzygotujGre(List<Kostka>)
+  nameWithType.vb: Plansza.PrzygotujGre(List(Of Kostka))
+- uid: Assets.Skrypty.Plansza.PrzygotujGre*
+  name: PrzygotujGre
+  href: api/Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_PrzygotujGre_
+  commentId: Overload:Assets.Skrypty.Plansza.PrzygotujGre
+  isSpec: "True"
+  fullName: Assets.Skrypty.Plansza.PrzygotujGre
+  nameWithType: Plansza.PrzygotujGre
+- uid: Assets.Skrypty.Plansza.ciagiKostek
+  name: ciagiKostek
+  href: api/Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_ciagiKostek
+  commentId: F:Assets.Skrypty.Plansza.ciagiKostek
+  fullName: Assets.Skrypty.Plansza.ciagiKostek
+  nameWithType: Plansza.ciagiKostek
+- uid: Assets.Skrypty.Plansza.gracze
+  name: gracze
+  href: api/Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_gracze
+  commentId: F:Assets.Skrypty.Plansza.gracze
+  fullName: Assets.Skrypty.Plansza.gracze
+  nameWithType: Plansza.gracze
+- uid: Assets.Skrypty.Plansza.pulaKostek
+  name: pulaKostek
+  href: api/Assets.Skrypty.Plansza.html#Assets_Skrypty_Plansza_pulaKostek
+  commentId: F:Assets.Skrypty.Plansza.pulaKostek
+  fullName: Assets.Skrypty.Plansza.pulaKostek
+  nameWithType: Plansza.pulaKostek
+- uid: Assets.Skrypty.Uzytkownik
+  name: Uzytkownik
+  href: api/Assets.Skrypty.Uzytkownik.html
+  commentId: T:Assets.Skrypty.Uzytkownik
+  fullName: Assets.Skrypty.Uzytkownik
+  nameWithType: Uzytkownik
+- uid: Assets.Skrypty.Uzytkownik.#ctor
+  name: Uzytkownik()
+  href: api/Assets.Skrypty.Uzytkownik.html#Assets_Skrypty_Uzytkownik__ctor
+  commentId: M:Assets.Skrypty.Uzytkownik.#ctor
+  name.vb: New()
+  fullName: Assets.Skrypty.Uzytkownik.Uzytkownik()
+  fullName.vb: Assets.Skrypty.Uzytkownik.New()
+  nameWithType: Uzytkownik.Uzytkownik()
+  nameWithType.vb: Uzytkownik.New()
+- uid: Assets.Skrypty.Uzytkownik.#ctor*
+  name: Uzytkownik
+  href: api/Assets.Skrypty.Uzytkownik.html#Assets_Skrypty_Uzytkownik__ctor_
+  commentId: Overload:Assets.Skrypty.Uzytkownik.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Assets.Skrypty.Uzytkownik.Uzytkownik
+  fullName.vb: Assets.Skrypty.Uzytkownik.New
+  nameWithType: Uzytkownik.Uzytkownik
+  nameWithType.vb: Uzytkownik.New
+- uid: Assets.Skrypty.Uzytkownik.UzupelnijCiag
+  name: UzupelnijCiag()
+  href: api/Assets.Skrypty.Uzytkownik.html#Assets_Skrypty_Uzytkownik_UzupelnijCiag
+  commentId: M:Assets.Skrypty.Uzytkownik.UzupelnijCiag
+  fullName: Assets.Skrypty.Uzytkownik.UzupelnijCiag()
+  nameWithType: Uzytkownik.UzupelnijCiag()
+- uid: Assets.Skrypty.Uzytkownik.UzupelnijCiag*
+  name: UzupelnijCiag
+  href: api/Assets.Skrypty.Uzytkownik.html#Assets_Skrypty_Uzytkownik_UzupelnijCiag_
+  commentId: Overload:Assets.Skrypty.Uzytkownik.UzupelnijCiag
+  isSpec: "True"
+  fullName: Assets.Skrypty.Uzytkownik.UzupelnijCiag
+  nameWithType: Uzytkownik.UzupelnijCiag
+- uid: Assets.Skrypty.Uzytkownik.UzyjAsystenta
+  name: UzyjAsystenta()
+  href: api/Assets.Skrypty.Uzytkownik.html#Assets_Skrypty_Uzytkownik_UzyjAsystenta
+  commentId: M:Assets.Skrypty.Uzytkownik.UzyjAsystenta
+  fullName: Assets.Skrypty.Uzytkownik.UzyjAsystenta()
+  nameWithType: Uzytkownik.UzyjAsystenta()
+- uid: Assets.Skrypty.Uzytkownik.UzyjAsystenta*
+  name: UzyjAsystenta
+  href: api/Assets.Skrypty.Uzytkownik.html#Assets_Skrypty_Uzytkownik_UzyjAsystenta_
+  commentId: Overload:Assets.Skrypty.Uzytkownik.UzyjAsystenta
+  isSpec: "True"
+  fullName: Assets.Skrypty.Uzytkownik.UzyjAsystenta
+  nameWithType: Uzytkownik.UzyjAsystenta
+- uid: Assets.Skrypty.Uzytkownik.UzyjKola
+  name: UzyjKola()
+  href: api/Assets.Skrypty.Uzytkownik.html#Assets_Skrypty_Uzytkownik_UzyjKola
+  commentId: M:Assets.Skrypty.Uzytkownik.UzyjKola
+  fullName: Assets.Skrypty.Uzytkownik.UzyjKola()
+  nameWithType: Uzytkownik.UzyjKola()
+- uid: Assets.Skrypty.Uzytkownik.UzyjKola*
+  name: UzyjKola
+  href: api/Assets.Skrypty.Uzytkownik.html#Assets_Skrypty_Uzytkownik_UzyjKola_
+  commentId: Overload:Assets.Skrypty.Uzytkownik.UzyjKola
+  isSpec: "True"
+  fullName: Assets.Skrypty.Uzytkownik.UzyjKola
+  nameWithType: Uzytkownik.UzyjKola
+- uid: Assets.Skrypty.Uzytkownik.WykonajRuch
+  name: WykonajRuch()
+  href: api/Assets.Skrypty.Uzytkownik.html#Assets_Skrypty_Uzytkownik_WykonajRuch
+  commentId: M:Assets.Skrypty.Uzytkownik.WykonajRuch
+  fullName: Assets.Skrypty.Uzytkownik.WykonajRuch()
+  nameWithType: Uzytkownik.WykonajRuch()
+- uid: Assets.Skrypty.Uzytkownik.WykonajRuch*
+  name: WykonajRuch
+  href: api/Assets.Skrypty.Uzytkownik.html#Assets_Skrypty_Uzytkownik_WykonajRuch_
+  commentId: Overload:Assets.Skrypty.Uzytkownik.WykonajRuch
+  isSpec: "True"
+  fullName: Assets.Skrypty.Uzytkownik.WykonajRuch
+  nameWithType: Uzytkownik.WykonajRuch
+- uid: Assets.Skrypty.Uzytkownik.kolaRatunkowe
+  name: kolaRatunkowe
+  href: api/Assets.Skrypty.Uzytkownik.html#Assets_Skrypty_Uzytkownik_kolaRatunkowe
+  commentId: F:Assets.Skrypty.Uzytkownik.kolaRatunkowe
+  fullName: Assets.Skrypty.Uzytkownik.kolaRatunkowe
+  nameWithType: Uzytkownik.kolaRatunkowe
+- uid: basic-concepts
+  name: Basic Concepts
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Concepts.html
+- uid: collections-allocation
+  name: Use allocators to control unmanaged memory
+  href: Library/PackageCache/com.unity.collections%40538ace9075bc/Documentation~/allocation.html
+- uid: collections-known-issues
+  name: Known issues
+  href: Library/PackageCache/com.unity.collections%40538ace9075bc/Documentation~/issues.html
+- uid: collections-overview
+  name: Collections package
+  href: Library/PackageCache/com.unity.collections%40538ace9075bc/Documentation~/index.html
+- uid: com.unity.ugui.api_index
+  name: Scripting API reference for Unity UI and TextMesh Pro
+  href: Library/PackageCache/com.unity.ugui%40d8a2716f3013/Documentation~/api_index.html
+- uid: default-bitmap-text-node
+  name: Default Bitmap Text node
+  href: Library/PackageCache/com.unity.shadergraph%406ab0d236faac/Documentation~/default-bitmap-text-node.html
+- uid: default-gradient-node
+  name: Default Gradient node
+  href: Library/PackageCache/com.unity.shadergraph%406ab0d236faac/Documentation~/default-gradient-node.html
+- uid: default-sdf-text-node
+  name: Default SDF Text node
+  href: Library/PackageCache/com.unity.shadergraph%406ab0d236faac/Documentation~/default-sdf-text-node.html
+- uid: default-solid-node
+  name: Default Solid node
+  href: Library/PackageCache/com.unity.shadergraph%406ab0d236faac/Documentation~/default-solid-node.html
+- uid: default-texture-node
+  name: Default Texture node
+  href: Library/PackageCache/com.unity.shadergraph%406ab0d236faac/Documentation~/default-texture-node.html
+- uid: element-layout-uv-node
+  name: Element Layout UV node
+  href: Library/PackageCache/com.unity.shadergraph%406ab0d236faac/Documentation~/element-layout-uv-node.html
+- uid: element-texture-size-node
+  name: Element Texture Size node
+  href: Library/PackageCache/com.unity.shadergraph%406ab0d236faac/Documentation~/element-texture-size-node.html
+- uid: element-texture-uv-node
+  name: Element Texture UV node
+  href: Library/PackageCache/com.unity.shadergraph%406ab0d236faac/Documentation~/element-texture-uv-node.html
+- uid: input-system-action-assets
+  name: Input action assets
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/ActionAssets.html
+- uid: input-system-action-bindings
+  name: Input bindings
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/ActionBindings.html
+- uid: input-system-actions
+  name: Actions
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Actions.html
+- uid: input-system-architecture
+  name: Architecture
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Architecture.html
+- uid: input-system-configuring-input
+  name: Configuring input
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/ActionsEditor.html
+- uid: input-system-contributing
+  name: Contributing
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Contributing.html
+- uid: input-system-controls
+  name: Controls
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Controls.html
+- uid: input-system-debugging
+  name: Debugging
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Debugging.html
+- uid: input-system-devices
+  name: Devices
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Devices.html
+- uid: input-system-editor-features
+  name: Input System Editor Features
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/EditorFeatures.html
+- uid: input-system-events
+  name: Input events
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Events.html
+- uid: input-system-gamepad
+  name: Gamepad Support
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Gamepad.html
+- uid: input-system-hid
+  name: HID Support
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/HID.html
+- uid: input-system-how-do-i
+  name: How do I…?
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/HowDoI.html
+- uid: input-system-index
+  name: Input System
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/index.html
+- uid: input-system-installation
+  name: Installation guide
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Installation.html
+- uid: input-system-interactions
+  name: Interactions
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Interactions.html
+- uid: input-system-joystick
+  name: Joystick support
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Joystick.html
+- uid: input-system-keyboard
+  name: Keyboard support
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Keyboard.html
+- uid: input-system-known-limitations
+  name: Known Limitations
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/KnownLimitations.html
+- uid: input-system-layouts
+  name: Layouts
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Layouts.html
+- uid: input-system-migration
+  name: Migrating from the old Input Manager
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Migration.html
+- uid: input-system-mouse
+  name: Mouse support
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Mouse.html
+- uid: input-system-on-screen
+  name: On-screen Controls
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/OnScreen.html
+- uid: input-system-pen
+  name: Pen, tablet, and stylus support
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Pen.html
+- uid: input-system-player-input
+  name: The Player Input component
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/PlayerInput.html
+- uid: input-system-player-input-manager
+  name: The Player Input Manager component
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/PlayerInputManager.html
+- uid: input-system-pointers
+  name: Pointers
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Pointers.html
+- uid: input-system-processors
+  name: Apply Processors
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/HowToApplyProcessors.html
+- uid: input-system-quickstart
+  name: Quickstart Guide
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/QuickStartGuide.html
+- uid: input-system-responding
+  name: Responding to Actions
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/RespondingToActions.html
+- uid: input-system-sensors
+  name: Sensor support
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Sensors.html
+- uid: input-system-settings
+  name: Input settings
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Settings.html
+- uid: input-system-supported-devices
+  name: Supported Input Devices
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/SupportedDevices.html
+- uid: input-system-testing
+  name: Input testing
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Testing.html
+- uid: input-system-timing-missed
+  name: Avoid missed or duplicate discrete events
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/timing-missed-duplicate-events.html
+- uid: input-system-timing-mixed
+  name: Mixed timing scenarios with fixed and dynamic input
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/timing-mixed-scenarios.html
+- uid: input-system-timing-optimize-dynamic
+  name: Optimize for dynamic update (non-physics) scenarios
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/timing-optimize-dynamic-update.html
+- uid: input-system-timing-optimize-fixed
+  name: Optimize for fixed-timestep or physics-based scenarios
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/timing-optimize-fixed-update.html
+- uid: input-system-timing-queue
+  name: The input events queue
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/timing-input-events-queue.html
+- uid: input-system-timing-select
+  name: Select an appropriate input processing mode
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/timing-select-mode.html
+- uid: input-system-touch
+  name: Touch support
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Touch.html
+- uid: input-system-tracked-input-devices
+  name: Tracked Input Devices
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/TrackedInputDevices.html
+- uid: input-system-ui-support
+  name: UI support
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/UISupport.html
+- uid: input-system-use-in-editor
+  name: Using Input in the Editor
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/UseInEditor.html
+- uid: input-system-user-management
+  name: User Management
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/UserManagement.html
+- uid: input-system-videos
+  name: Videos
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Videos.html
+- uid: input-system-workflow-direct
+  name: Workflow Overview - Directly Reading Device States
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Workflow-Direct.html
+- uid: input-system-workflow-player-input
+  name: Workflow Overview - Actions and the PlayerInput Component
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Workflow-PlayerInput.html
+- uid: input-system-workflow-project-wide-actions
+  name: Workflow Overview - Actions
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Workflow-Actions.html
+- uid: input-system-workflows
+  name: Input System Workflows
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/Workflows.html
+- uid: neon-intrinsics
+  name: Burst Arm Neon intrinsics reference
+  href: Library/PackageCache/com.unity.burst%4007790c2d06d9/Documentation~/csharp-burst-intrinsics-neon.html
+- uid: project-wide-actions
+  name: Project-Wide Actions
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/ProjectWideActions.html
+- uid: render-type-branch-node
+  name: Render Type Branch node
+  href: Library/PackageCache/com.unity.shadergraph%406ab0d236faac/Documentation~/render-type-branch-node.html
+- uid: render-type-node
+  name: Render Type node
+  href: Library/PackageCache/com.unity.shadergraph%406ab0d236faac/Documentation~/render-type-node.html
+- uid: sample-element-texture-node
+  name: Sample Element Texture node
+  href: Library/PackageCache/com.unity.shadergraph%406ab0d236faac/Documentation~/sample-element-texture-node.html
+- uid: shadergraph-api-index
+  name: Shader Graph scripting API
+  href: Library/PackageCache/com.unity.shadergraph%406ab0d236faac/Documentation~/api_index.html
+- uid: srp-core-api-index
+  name: Scriptable Render Pipeline Core scripting API
+  href: Library/PackageCache/com.unity.render-pipelines.core%40e6c93b445dd3/Documentation~/api_index.html
+- uid: timing-latency
+  name: Timing and Latency
+  href: Library/PackageCache/com.unity.inputsystem%4021a28c3a6c83/Documentation~/timing-and-latency.html
+- uid: ui-nodes
+  name: UI nodes
+  href: Library/PackageCache/com.unity.shadergraph%406ab0d236faac/Documentation~/ui-nodes.html
+- uid: um-profiler-ui
+  name: UI (Canvas) and UI Details (Canvas) Profiler module reference
+  href: Library/PackageCache/com.unity.ugui%40d8a2716f3013/Documentation~/ProfilerUI.html
+- uid: um-srp-advanced-properties
+  name: Advanced Properties
+  href: Library/PackageCache/com.unity.render-pipelines.core%40e6c93b445dd3/Documentation~/advanced-properties.html
+- uid: um-srp-creating-render-pipeline-asset-and-render-pipeline-instance
+  name: Create a Render Pipeline Asset and Render Pipeline Instance in a custom render pipeline
+  href: Library/PackageCache/com.unity.render-pipelines.core%40e6c93b445dd3/Documentation~/srp-creating-render-pipeline-asset-and-render-pipeline-instance.html
+- uid: um-srp-creating-simple-render-loop
+  name: Create a simple render loop in a custom render pipeline
+  href: Library/PackageCache/com.unity.render-pipelines.core%40e6c93b445dd3/Documentation~/srp-creating-simple-render-loop.html
+- uid: um-srp-custom
+  name: Creating a custom render pipeline
+  href: Library/PackageCache/com.unity.render-pipelines.core%40e6c93b445dd3/Documentation~/srp-custom.html
+- uid: um-srp-custom-getting-started
+  name: Create a custom render pipeline
+  href: Library/PackageCache/com.unity.render-pipelines.core%40e6c93b445dd3/Documentation~/srp-custom-getting-started.html
+- uid: um-srp-using-scriptable-render-context
+  name: Execute rendering commands in a custom render pipeline
+  href: Library/PackageCache/com.unity.render-pipelines.core%40e6c93b445dd3/Documentation~/srp-using-scriptable-render-context.html
+- uid: urp-api-index
+  name: Universal Render Pipeline scripting API
+  href: Library/PackageCache/com.unity.render-pipelines.universal%40580a03820d50/Documentation~/api_index.html
+- uid: urp-changelog
+  name: Changelog
+  href: Library/PackageCache/com.unity.render-pipelines.universal%40580a03820d50/CHANGELOG.html
+- uid: urp-config-api-index
+  name: Universal Render Pipeline Configuration package scripting API
+  href: Library/PackageCache/com.unity.render-pipelines.universal-config%400db4263b9e6b/Documentation~/api_index.html
+- uid: urp-index
+  name: Universal Render Pipeline (URP)
+  href: Library/PackageCache/com.unity.render-pipelines.universal%40580a03820d50/Documentation~/index.html

@@ -1,0 +1,7 @@
+PROJECT_NAME           = "Rummy"
+OUTPUT_DIRECTORY       = html
+INPUT                  = Assets/Skrypty
+RECURSIVE              = YES
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+OPTIMIZE_OUTPUT_FOR_C  = YES
